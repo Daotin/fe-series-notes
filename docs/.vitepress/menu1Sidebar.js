@@ -6,11 +6,18 @@ export default [
     collapsible: true,
     collapsed: false,
     items: [
-      // This shows `/guide/index.md` page.
+      {
+        text: "try...catch",
+        link: `${commonPath}/try.md`,
+      },
+      {
+        text: "dev和prod环境",
+        link: `${commonPath}/dev.md`,
+      },
       {
         text: "函数式弹框组件warnDialog实现",
         link: `${commonPath}/warnDialog.md`,
-      }, // /guide/one.md
+      },
     ],
   },
   {
