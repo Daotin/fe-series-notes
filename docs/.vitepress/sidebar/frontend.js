@@ -1,18 +1,20 @@
 const commonPath = "/frontend";
+const filePath = `./docs${commonPath}/`;
 
 // const mdFiles = import.meta.globEager("../../frontend/*.md");
 
 const fs = require("fs");
-const mdFiles = fs.readdirSync("./docs/frontend/");
+const mdFiles = fs.readdirSync(filePath);
 const mdNames = []; // 文件名
 const mdNamesObj = {}; // 年份对应文件名
+let excludeFileName = ["index", "images"];
 
 // 获取文件名
 Object.values(mdFiles).forEach((item) => {
   try {
     let name = item.split(".")[0];
     // 过滤分组首页index.md
-    if (name !== "index") {
+    if (!excludeFileName.includes(name)) {
       mdNames.push(name);
     }
   } catch (error) {
@@ -25,16 +27,11 @@ Object.values(mdFiles).forEach((item) => {
 if (mdNames.length) {
   mdNames.forEach((name) => {
     const year = name.split("-")[0];
-    const realnameArr = name.split("-").filter((item, i) => i !== 0);
-    console.log("⭐==>", name.split("-"), realnameArr);
-    const realname = realnameArr.join("-");
-
     if (year && year.match(/^\d+$/)) {
       if (mdNamesObj[year] && mdNamesObj[year].length) {
-        console.log("⭐mdNamesObj[year]==>", mdNamesObj[year]);
-        mdNamesObj[year].push(realname);
+        mdNamesObj[year].push(name);
       } else {
-        mdNamesObj[year] = [realname];
+        mdNamesObj[year] = [name];
       }
     }
   });
@@ -49,15 +46,28 @@ if (Object.keys(mdNamesObj).length) {
   sideBars = [];
   for (const year in mdNamesObj) {
     const names = mdNamesObj[year];
+
     const obj = {
       text: year,
       collapsible: true,
       collapsed: true,
       items: names.map((name) => {
-        let a = name.split("-").splice(0, 1, "a");
+        // name格式：// 2022-08-10-git-commit规范
+        let days = [];
+        let realName = [];
+        name.split("-").forEach((item, idx) => {
+          if (idx < 3) {
+            days.push(item);
+          } else {
+            realName.push(item);
+          }
+        });
+
+        let link = `${commonPath}/${name}.md`;
+        // appendData(name, days.join("-"));
         return {
-          text: name,
-          link: `${commonPath}/${year}-${name}.md`,
+          text: realName.join("-"),
+          link: link,
         };
       }),
     };
@@ -66,6 +76,26 @@ if (Object.keys(mdNamesObj).length) {
 }
 
 console.log("⭐sideBars==>", sideBars);
+
+// 在文件最后追加更新日期
+function appendData(name, day) {
+  fs.readFile(`${filePath}/${name}.md`, (error, data) => {
+    if (error) throw new Error(error);
+    else {
+      const text = data.toString();
+      if (!text.match(/update in \d{4}-\d{1,2}-\d{1,2}/)) {
+        fs.appendFileSync(
+          `${filePath}/${name}.md`,
+          `\n
+::: warning 更新日期
+update in  ${day}
+:::
+`
+        );
+      }
+    }
+  });
+}
 
 export default sideBars;
 
