@@ -1,4 +1,4 @@
-import menu1Sidebar from "./menu1Sidebar";
+import frontendSidebar from "./sidebar/frontend.js";
 
 export default {
   base: "/blog/",
@@ -17,10 +17,10 @@ export default {
     // 启动页面丝滑滚动
     smoothScroll: true,
 
-    nav: [{ text: "前端文章", link: "/menu1/", activeMatch: "/menu1/" }],
+    nav: [{ text: "前端文章", link: "/frontend/", activeMatch: "/frontend/" }],
 
     sidebar: {
-      "/menu1/": menu1Sidebar,
+      "/frontend/": frontendSidebar,
     },
 
     socialLinks: [{ icon: "github", link: "https://github.com/daotin" }],
