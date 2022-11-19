@@ -6,23 +6,46 @@ titleTemplate: 写一些技术
 
 hero:
   name: Fe Captain
-  text: Write some front-end articles
-  tagline: Welcome.
+  text: Write some frontend articles
+  tagline: Welcome~
+  image:
+    src: https://vitejs.dev/logo-with-shadow.png
+    alt: VitePress
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/getting-started
+      link: /frontend/index
     - theme: alt
       text: View on GitHub
-      link: https://github.com/daotin
+      link: https://github.com/daotin/blog
 
 features:
-  - title: 111
-    details: Feel the speed of Vite. Instant server start and lightning fast HMR that stays fast regardless of the app size.
-  - title: 222
-    details: With Markdown-centered content, it's built to help you focus on writing and deployed with minimum configuration.
-  - title: Power of Vue meets Markdown
-    details: Enhance your content with all the features of Vue in Markdown, while being able to customize your site with Vue.
-  - title: Fully static yet still dynamic
-    details: Go wild with true SSG + SPA architecture. Static on page load, but engage users with 100% interactivity from there.
+  - icon: 👨🏻‍💻
+    title: 前端文章
+    details: 分享一些前端的学习心得
+  - icon: ✒️
+    title: 随笔
+    details: 其他的文章，比如读书笔记
+  - icon: 👀
+    title: 嗯~
+    details: 还没想好...
 ---
+
+<style lang="less">
+
+  h1.name span {
+    background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .image-container image {
+    /* filter: drop-shadow(30px 10px 40px #4444dd); */
+  }
+
+  .image-bg {
+    background-image: -webkit-linear-gradient( -45deg, #bd34fe 50%, #47caff 50%) !important;
+    filter: blur(72px) !important;
+    transform: translate(-50%,-50%) !important;
+  }
+</style>
