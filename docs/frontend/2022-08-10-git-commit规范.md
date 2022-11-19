@@ -77,7 +77,7 @@ commitizen init cz-conventional-changelog --save-dev --save-exact
 
 示例如下：（可以看出这些提交信息都是有固定格式的）
 
-![Untitled](./images/commit-0.png)
+![Untitled](./image/commit-0.png)
 
 ### 标准格式
 
@@ -253,17 +253,17 @@ commitizen init cz-conventional-changelog --save-dev --save-exact
 
 在命令行输入`cz`，或者`git cz` ，系统会提示您填写一些必填字段，并且您的提交消息进行格式化。
 
-![Untitled](./images/commit-1.png)
+![Untitled](./image/commit-1.png)
 
 它会引导你一步步填下去，然后自动提交该 commit。
 
-![Untitled](./images/commit-2.png)
+![Untitled](./image/commit-2.png)
 
 > 遇到的问题：
 >
 > 在输入 cz 的是提示，cz-conventional-changelog 找不到，看了路径是默认找的.git 下面的 node_modules，因为我们项目是项目集的形式，所以要修改路径。正常的单个项目不需要修改。
 
-![Untitled](./images/commit-3.png)
+![Untitled](./image/commit-3.png)
 
 ```jsx
 "config": {
@@ -285,7 +285,7 @@ commitizen init cz-conventional-changelog --save-dev --save-exact
 
 最后可以配置成中文的，甚至可以跳过其中的某些步骤：
 
-![Untitled](./images/commit-4.png)
+![Untitled](./image/commit-4.png)
 
 ### 可视化工具
 
@@ -295,25 +295,25 @@ commitizen init cz-conventional-changelog --save-dev --save-exact
 
 插件一：Commit Message Editor
 
-![Untitled](./images/commit-5.png)
+![Untitled](./image/commit-5.png)
 
-![Untitled](./images/commit-6.png)
+![Untitled](./image/commit-6.png)
 
-![Untitled](./images/commit-7.png)
+![Untitled](./image/commit-7.png)
 
 插件二：Conventional Commits
 
-![Untitled](./images/commit-8.png)
+![Untitled](./image/commit-8.png)
 
-![Untitled](./images/commit-9.png)
+![Untitled](./image/commit-9.png)
 
 缺点：没有对`BREAKING CHANGE` 的选择提示，需要自己手写。
 
 #### webstorm
 
-![Untitled](./images/commit-10.png)
+![Untitled](./image/commit-10.png)
 
-![Untitled](./images/commit-11.png)
+![Untitled](./image/commit-11.png)
 
 ## 如何校验 commit message
 
@@ -399,7 +399,7 @@ exit 0
 
 例如，如果每个提交都应该引用 Jira 问题（如 Fix: JIRA-123），则正则表达式将为 `JIRA\-\d+`。
 
-![](./images/commit-18.png)
+![](./image/commit-18.png)
 
 然后在 push 的时候，如果不符合规范就会报错：
 
@@ -436,7 +436,7 @@ master -> master (pre-receive hook declined)
 > 客户端的 hook，由于没有平台的限制，且配置方便，因而更加常用。我们需要在`.git/hooks`文件夹下修改相关的 hook 文件，但是.git 文件夹下的文件不能同步到项目仓库中，因而需要每个开发者在自己本地手动配置，比较麻烦，而且写法可能也不熟悉。
 > 所以我们需要一个工具方便我们配置客户端 hook，并且可以同步到代码仓库，它就是 Husky。
 >
-> ![](./images/commit-19.png)
+> ![](./image/commit-19.png)
 
 ### Husky
 
@@ -460,7 +460,7 @@ npx husky-init && npm install
 
 > 错误提示：还是因为我们是项目集的形式，每个项目下没有`.git`文件夹。所以我们需要在仓库根目录下，执行该命令。（可以参考最后的[补充说明](#补充说明)）
 
-![Untitled](./images/commit-12.png)
+![Untitled](./image/commit-12.png)
 
 > 注意事项：由于它默认创建的 pre-commit 中会执行 npm test 指令，但是我们项目中没有对应的指令，所以后续在 commit 的时候会报错，所以需要在生成的 pre-commit 文件中，把 npm test 指令删除。
 
@@ -472,11 +472,11 @@ npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 
 错误提示：
 
-![Untitled](./images/commit-13.png)
+![Untitled](./image/commit-13.png)
 
 解决方案：**升级 npm**
 
-![Untitled](./images/commit-14.png)
+![Untitled](./image/commit-14.png)
 
 ### commitlint
 
@@ -516,11 +516,11 @@ module.exports = {
 
 - 命令行提交
 
-![Untitled](./images/commit-15.png)
+![Untitled](./image/commit-15.png)
 
 - vscode 可视化提交
 
-![Untitled](./images/commit-16.png)
+![Untitled](./image/commit-16.png)
 
 **4、自定义校验规则**
 
@@ -827,7 +827,7 @@ module.exports = {
 
 然后就可以生成下面的样子
 
-![Untitled](./images/commit-17.png)
+![Untitled](./image/commit-17.png)
 
 参考文档：
 
@@ -840,7 +840,7 @@ module.exports = {
 
 （以喻支付仓库为例）
 
-![](./images/commit-20.png)
+![](./image/commit-20.png)
 
 就需要在**仓库根目录下**，新增`package.json`文件，然后 npm install 安装 commitizen，husky 和 commitlint 等操作（就是把上面所有的操作放到仓库根目录），才能够校验 commit。
 

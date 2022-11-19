@@ -1,4 +1,6 @@
-import frontendSidebar from "./sidebar/frontend.js";
+// import frontendSidebar from "./sidebar/frontend";
+// import essaySidebar from "./sidebar/essay";
+import { createSideBar } from "./utils/sidebar";
 
 export default {
   base: "/blog/",
@@ -17,10 +19,14 @@ export default {
     // 启动页面丝滑滚动
     smoothScroll: true,
 
-    nav: [{ text: "前端文章", link: "/frontend/", activeMatch: "/frontend/" }],
+    nav: [
+      { text: "前端文章", link: "/frontend/", activeMatch: "/frontend/" },
+      { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
+    ],
 
     sidebar: {
-      "/frontend/": frontendSidebar,
+      "/frontend/": createSideBar("frontend"),
+      "/essay/": createSideBar("essay"),
     },
 
     socialLinks: [{ icon: "github", link: "https://github.com/daotin" }],
