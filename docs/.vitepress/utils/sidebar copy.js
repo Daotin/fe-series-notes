@@ -21,6 +21,22 @@ export function createSideBar(commonPath) {
     }
   });
 
+  // 对mdNames排序，按照标题时间降序
+  if (mdNames.length) {
+    mdNames = mdNames.sort((prev, next) => {
+      let a = prev
+        .split("-")
+        .filter((item, i) => i < 3)
+        .join("");
+      let b = next
+        .split("-")
+        .filter((item, i) => i < 3)
+        .join("");
+      console.log("⭐a==>", a, b);
+      return b - a;
+    });
+  }
+
   console.log("⭐mdNames==>", mdNames);
 
   // 获取年份对应的文件名

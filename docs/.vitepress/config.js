@@ -27,12 +27,56 @@ export default defineConfig({
     smoothScroll: true,
 
     nav: [
-      { text: "前端文章", link: "/frontend/", activeMatch: "/frontend/" },
+      { text: "前端工程化", link: "/engineer/", activeMatch: "/engineer/" },
       { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
     ],
 
     sidebar: {
-      "/frontend/": createSideBar("frontend"),
+      "/engineer/": [
+        {
+          text: "从零搭建Vue3项目",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "开发工具推荐",
+              link: "/engineer/develop-tool",
+            },
+            {
+              text: "创建项目",
+              link: "/engineer/create-project",
+            },
+            {
+              text: "目录结构",
+              link: "/engineer/structure",
+            },
+            {
+              text: "vite工程化配置",
+              link: "/engineer/vite-config",
+            },
+            {
+              text: "代码规范",
+              link: "/engineer/format",
+            },
+            {
+              text: "git提交规范",
+              link: "https://daotin.github.io/posts/2022/08/10/git-commit%E8%A7%84%E8%8C%83.html",
+            },
+            {
+              text: "引入ElementPlus组件库",
+              link: "/engineer/element-plus",
+            },
+            {
+              text: "引入TailWindCSS",
+              link: "/engineer/tailwind",
+            },
+            {
+              text: "配置vue-router",
+              link: "/engineer/vue-router",
+            },
+          ],
+        },
+      ],
       "/essay/": createSideBar("essay"),
     },
 
