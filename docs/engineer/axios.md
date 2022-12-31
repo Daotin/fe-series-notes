@@ -11,16 +11,10 @@ npm i axios
 2、新增 utils/request.ts 文件
 
 ```ts
-import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
-import { baseURL } from "@/config/domain";
-import { TokenName } from "@/config/const";
-import { useAppStoreWithOut } from "@/store";
-import { usePermission } from "@/hooks";
-import router from "@/router";
+import axios, { type AxiosRequestConfig, type AxiosInstance } from "axios";
+import { baseURL } from "@/configs/domain";
+import { TokenName } from "@/configs/const";
 import { localMng } from "@/utils/storage-mng";
-import md5 from "md5";
-
-const appStore = useAppStoreWithOut();
 
 class Request {
   private baseConfig: AxiosRequestConfig = {
@@ -32,9 +26,7 @@ class Request {
   private instance: AxiosInstance = axios.create(this.baseConfig);
 
   public constructor() {
-    console.log("==>=========Request constructor==============");
     const token = localMng.getItem(TokenName);
-    console.log("token==>", token);
     if (token) {
       this.setHeader({
         Authorization: token,
@@ -55,29 +47,12 @@ class Request {
     this.instance.interceptors.request.use(
       (config) => {
         // const { checkApiPermission } = usePermission()
-        // config.cancelToken = new axios.CancelToken(function executor(c) {
-        // if (!checkApiPermission(config.url)) {
-        //   c(config.url + '没有权限')
-        //   router.push('/error/forbidden')
-        // }
-        // });
-        const controller = new AbortController(); // 每个请求时都新生成一个AbortController实例
-
-        config.signal = controller.signal;
-
-        // 计算当前请求key值
-        const key = this.getRequestKey(config);
-
-        if (this.checkPending(key)) {
-          // 重复请求则取消当前请求
-          appStore.requests(key).abort();
-        } else {
-          appStore.addRequest(key, controller);
-        }
-
-        // console.log(`%c++++++ 开始请求：${config.url} ++++++`, "color:green");
-        // console.log(config.data);
-        // console.log(`%c++++++ end ++++++`, "color:green");
+        config.cancelToken = new axios.CancelToken(function executor(c) {
+          // if (!checkApiPermission(config.url)) {
+          //   c(config.url + '没有权限')
+          //   router.push('/error/forbidden')
+          // }
+        });
         return config;
       },
       (err) => {
@@ -94,14 +69,9 @@ class Request {
         const { code = 200, body, message } = res.data;
         switch (code) {
           case 200:
-            // 请求完成，删除请求中状态
-            const key = this.getRequestKey(res.config);
-            this.removePending(key);
-
             return Promise.resolve(body || res.data);
           case 401:
             window.$message.warning(message || "无权限");
-            appStore.logout(false);
             return Promise.reject(res.data);
           default:
             window.$message.error(message || "响应失败");
@@ -109,7 +79,9 @@ class Request {
         }
       },
       (err) => {
-        if (!axios.isCancel(err)) {
+        if (axios.isCancel(err)) {
+          window.$message.error("响应取消");
+        } else {
           window.$message.error("响应失败");
         }
         return Promise.reject(err);
@@ -121,27 +93,6 @@ class Request {
   public setHeader = (headers: any) => {
     this.baseConfig.headers = { ...this.baseConfig.headers, ...headers };
     this.initInstance();
-  };
-
-  // 检查key值
-  private checkPending = (key) => !!appStore.requests[key];
-
-  // 删除key值
-  private removePending = (key) => {
-    delete appStore.requests[key];
-  };
-
-  // 可以根据请求的地址，方式，参数，统一计算出当前请求的md5值作为key
-  private getRequestKey = (config) => {
-    if (!config) {
-      // 如果没有获取到请求的相关配置信息，根据时间戳生成
-      return md5(+new Date());
-    }
-    const data =
-      typeof config.data === "string"
-        ? config.data
-        : JSON.stringify(config.data);
-    return md5(config.url + "&" + config.method + "&" + data);
   };
 
   // get请求
@@ -159,20 +110,6 @@ class Request {
     config: AxiosRequestConfig<any> = {}
   ): Promise<any> => this.instance({ url, method: "post", data, ...config });
 
-  // 不经过统一的axios实例的get请求
-  public postOnly = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> =>
-    axios({
-      ...this.baseConfig,
-      url,
-      method: "post",
-      data,
-      ...config,
-    });
-
   // 不经过统一的axios实例的post请求
   public getOnly = (
     url: string,
@@ -184,6 +121,20 @@ class Request {
       url,
       method: "get",
       params: data,
+      ...config,
+    });
+
+  // 不经过统一的axios实例的get请求
+  public postOnly = (
+    url: string,
+    data = {},
+    config: AxiosRequestConfig<any> = {}
+  ): Promise<any> =>
+    axios({
+      ...this.baseConfig,
+      url,
+      method: "post",
+      data,
       ...config,
     });
 
