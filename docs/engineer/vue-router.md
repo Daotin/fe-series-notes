@@ -230,7 +230,8 @@ export default router;
 
 - `title`：路由对应的中文名称，可以显示在面包屑上，或者标签页中
 - `hiddenInBreadcrumb`：是否在面包屑上隐藏
-- `activePath`：父组件 url。一般详情页面会指定该属性，用于确定该详情页面的父页面是谁。目的有 2 个作用：
+- `hiddenInMenu`：是否在菜单上隐藏
+- `parentPath`：父组件 url。一般详情页面会指定该属性，用于确定该详情页面的父页面是谁。目的有 2 个作用：
   - 菜单激活。当进入详情页是，左侧导航应该激活哪个菜单
   - 作为 keepAlive 判断使用
 - `keepAlive`：是否需要开启 keepAlive，一般用于菜单的列表型界面
@@ -297,7 +298,7 @@ const route: RouteRecordRaw = {
       component: () => import("@/views/shop/list.vue"),
       meta: {
         title: "门店信息",
-        activePath: "/shop/list",
+        parentPath: "/shop",
         hiddenInBreadcrumb: false,
         hiddenInMenu: false,
       },
