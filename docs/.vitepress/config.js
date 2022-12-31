@@ -82,6 +82,10 @@ export default defineConfig({
               text: "封装axios",
               link: "/engineer/axios",
             },
+            {
+              text: "配置mock",
+              link: "/engineer/mock",
+            },
           ],
         },
       ],
