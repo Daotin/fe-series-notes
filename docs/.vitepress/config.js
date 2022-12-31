@@ -86,6 +86,10 @@ export default defineConfig({
               text: "配置mock",
               link: "/engineer/mock",
             },
+            {
+              text: "静态资源管理",
+              link: "/engineer/assets",
+            },
           ],
         },
       ],
