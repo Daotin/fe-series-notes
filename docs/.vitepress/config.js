@@ -78,6 +78,10 @@ export default defineConfig({
               text: "配置Pinia",
               link: "/engineer/pinia",
             },
+            {
+              text: "封装axios",
+              link: "/engineer/axios",
+            },
           ],
         },
       ],
