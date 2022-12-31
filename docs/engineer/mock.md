@@ -88,7 +88,7 @@ import "./mocks";
 ### 目录结构
 
 ```ts
-├── mock
+├── mocks
 │   ├── modules           // 各模块mock
 │   │   ├── common.ts        // 全局共用的mock
 │   |   └── xxx.ts        // 其他模块的mock
