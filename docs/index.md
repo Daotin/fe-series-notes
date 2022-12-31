@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /frontend/index
+      link: /engineer/index
     - theme: alt
       text: View on GitHub
       link: https://github.com/daotin/blog
