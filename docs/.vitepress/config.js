@@ -108,17 +108,17 @@ export default defineConfig({
             },
           ],
         },
-        // {
-        //   text: "业务模块",
-        //   collapsible: true,
-        //   collapsed: false,
-        //   items: [
-        //     {
-        //       text: "登录注册",
-        //       link: "/engineer/login",
-        //     },
-        //   ],
-        // },
+        {
+          text: "业务模块",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "登录注册",
+              link: "/engineer/login",
+            },
+          ],
+        },
       ],
       "/essay/": createSideBar("essay"),
     },
