@@ -90,6 +90,10 @@ export default defineConfig({
               text: "静态资源管理",
               link: "/engineer/assets",
             },
+            {
+              text: "界面布局layouts",
+              link: "/engineer/layouts",
+            },
           ],
         },
       ],
