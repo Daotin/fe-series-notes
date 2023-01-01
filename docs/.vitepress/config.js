@@ -102,10 +102,10 @@ export default defineConfig({
             //   text: "配置环境变量",
             //   link: "/engineer/env",
             // },
-            // {
-            //   text: "权限控制",
-            //   link: "/engineer/auth",
-            // },
+            {
+              text: "权限控制",
+              link: "/engineer/auth",
+            },
           ],
         },
         // {
