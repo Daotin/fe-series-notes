@@ -34,6 +34,11 @@ const handleLogin = async () => {
 };
 ```
 
+::: warning
+验证码功能需要后端生成，而不应该是前端生成。
+参考：https://v2ex.com/t/729665
+:::
+
 在 stores 中登录会调用登录接口，登陆完后：
 
 1. 设置请求 header，每次都携带 token 信息
