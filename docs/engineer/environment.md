@@ -1,3 +1,93 @@
+## 在 webpack 中的配置
+
+在 webpack 中，这样设置之后，我们可以在**脚本**中使用 `process.env.NODE_ENV` 了，但是不能在**模块**中使用，要想在模块当中直接使用，我们还需要一些配置。
+
+在 webpack 4+ 中，你可以使用 mode 选项：
+
+```js
+module.exports = {
+  mode: "production",
+};
+```
+
+但是在 webpack 3 及其更低版本中，你需要使用 `DefinePlugin`：
+
+DefinePlugin 官网的解释是：DefinePlugin 允许我们创建全局变量，可以在编译时进行设置。
+
+因此可以使用该属性来设置全局变量来区分开发环境和正式环境，这就是 DefinePlugin 的基本功能。
+
+```js
+var webpack = require("webpack");
+
+module.exports = {
+  plugins: [
+    // 设置环境变量信息
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      VERSION: JSON.stringify("5fa3b9"),
+      BROWSER_SUPPORTS_HTML5: true,
+      TWO: "1+1",
+      "typeof window": JSON.stringify("object"),
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
+  ],
+};
+```
+
+## 在 vite 中的配置
+
+**在 vite 启动后，会在 vite 内部通过 `mode` 属性，设置 `process.env.NODE_ENV`，所以我们才能在项目中使用**。
+
+之前，我们在 scripts 命令中使用 `cross-env` 来设置 `NODE_ENV`，但是如果需要配置的环境变量太多，全部设置在 scripts 命令中既不美观也不容易维护，所以我们可以将环境变量配置在`.env` 文件中。
+
+### `import.meta.env`
+
+Vite 在一个特殊的 `import.meta.env` 对象上暴露环境变量。比如`import.meta.env.MODE`表示应用运行的模式。但是只有几个内置变量可用：
+
+- `import.meta.env.MODE`: string 应用运行的模式。
+- `import.meta.env.BASE_URL`: string 部署应用时的基本 URL。他由 base 配置项决定。
+- `import.meta.env.PROD`: boolean 应用是否运行在生产环境。
+- `import.meta.env.DEV`: boolean 应用是否运行在开发环境 (永远与 `import.meta.env.PROD` 相反)。
+- `import.meta.env.SSR`: boolean 应用是否运行在 server 上。
+
+:::tip
+当我们设定 `.env` 环境变量文件后，`VITE_`开头的变量就会出现在 `import.meta.env` 中，我们就可以在项目中使用。
+:::
+
+### `.env`文件
+
+Vite 使用 `dotenv` 从你的 环境目录 中的下列文件加载额外的环境变量：
+
+```
+.env                # 所有情况下都会加载
+.env.local          # 所有情况下都会加载，但会被 git 忽略
+.env.[mode]         # 只在指定模式下加载
+.env.[mode].local   # 只在指定模式下加载，但会被 git 忽略
+
+```
+
+加载的环境变量也会通过 `import.meta.env` 以字符串形式暴露给客户端源码。
+
+为了防止意外地将一些环境变量泄漏到客户端，只有以 `VITE_` 为前缀的变量才会暴露给经过 vite 处理的代码（**也就是说只有 `VITE_`开头的自定义变量会出现在 `import.meta.env` 中**）。
+
+例如下面这些环境变量：
+
+```
+VITE_SOME_KEY=123
+DB_PASSWORD=foobar
+```
+
+只有 `VITE_SOME_KEY` 会被暴露为 `import.meta.env.VITE_SOME_KEY` 提供给客户端源码，而 `DB_PASSWORD` 则不会。
+
+```js
+console.log(import.meta.env.VITE_SOME_KEY); // 123
+console.log(import.meta.env.DB_PASSWORD); // undefined
+```
+
+当然，我们可以自定义 env 变量的前缀，请参阅 [envPrefix](https://cn.vitejs.dev/config/shared-options.html#envprefix)（不过，也没必要修改）。
+
 ## 实际测试和配置
 
 ### 测试结果
