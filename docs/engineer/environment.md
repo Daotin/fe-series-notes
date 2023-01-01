@@ -61,26 +61,6 @@ NODE_ENV 通常为“production”（生产环境）和“development”（开�
 
 :::
 
-## 在 vite 中的配置
-
-**在 vite 启动后，会在 vite 内部通过 `mode` 属性，设置 `process.env.NODE_ENV`，所以我们才能在项目中使用**。
-
-之前，我们在 scripts 命令中使用 `cross-env` 来设置 `NODE_ENV`，但是如果需要配置的环境变量太多，全部设置在 scripts 命令中既不美观也不容易维护，所以我们可以将环境变量配置在`.env` 文件中。
-
-### `import.meta.env`
-
-Vite 在一个特殊的 `import.meta.env` 对象上暴露环境变量。比如`import.meta.env.MODE`表示应用运行的模式。但是只有几个内置变量可用：
-
-- `import.meta.env.MODE`: string 应用运行的模式。
-- `import.meta.env.BASE_URL`: string 部署应用时的基本 URL。他由 base 配置项决定。
-- `import.meta.env.PROD`: boolean 应用是否运行在生产环境。
-- `import.meta.env.DEV`: boolean 应用是否运行在开发环境 (永远与 `import.meta.env.PROD` 相反)。
-- `import.meta.env.SSR`: boolean 应用是否运行在 server 上。
-
-:::tip
-当我们设定 `.env` 环境变量文件后，`VITE_`开头的变量就会出现在 `import.meta.env` 中，我们就可以在项目中使用。
-:::
-
 ### `.env`文件
 
 Vite 使用 `dotenv` 从你的 环境目录 中的下列文件加载额外的环境变量：
