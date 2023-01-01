@@ -17,7 +17,7 @@ hero:
       link: /engineer/index
     - theme: alt
       text: View on GitHub
-      link: https://github.com/daotin/blog
+      link: https://github.com/daotin/create-vue3-template-docs/
 
 features:
   - icon: 👨🏻‍💻

@@ -27,14 +27,18 @@ export default defineConfig({
     smoothScroll: true,
 
     nav: [
-      { text: "前端工程化", link: "/engineer/", activeMatch: "/engineer/" },
-      { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
+      {
+        text: "从零搭建Vue3项目",
+        link: "/engineer/",
+        activeMatch: "/engineer/",
+      },
+      // { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
     ],
 
     sidebar: {
       "/engineer/": [
         {
-          text: "从零搭建Vue3项目",
+          text: "基础设施",
           collapsible: true,
           collapsed: false,
           items: [
@@ -101,6 +105,17 @@ export default defineConfig({
             {
               text: "权限控制",
               link: "/engineer/auth",
+            },
+          ],
+        },
+        {
+          text: "业务模块",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "登录注册",
+              link: "/engineer/login",
             },
           ],
         },
