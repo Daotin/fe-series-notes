@@ -94,6 +94,10 @@ export default defineConfig({
               text: "界面布局layouts",
               link: "/engineer/layouts",
             },
+            {
+              text: "配置环境变量",
+              link: "/engineer/env",
+            },
           ],
         },
       ],
