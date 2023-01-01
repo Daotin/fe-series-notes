@@ -32,7 +32,7 @@ export default defineConfig({
         link: "/engineer/",
         activeMatch: "/engineer/",
       },
-      // { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
+      { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
     ],
 
     sidebar: {
