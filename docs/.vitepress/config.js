@@ -98,10 +98,10 @@ export default defineConfig({
               text: "界面布局layouts",
               link: "/engineer/layouts",
             },
-            // {
-            //   text: "配置环境变量",
-            //   link: "/engineer/env",
-            // },
+            {
+              text: "配置环境变量",
+              link: "/engineer/environment",
+            },
             {
               text: "权限控制",
               link: "/engineer/auth",
