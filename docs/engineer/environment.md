@@ -61,11 +61,43 @@ NODE_ENV 通常为“production”（生产环境）和“development”（开�
 
 :::
 
-## 在 vite 中的配置
+## 在 webpack 中的配置
 
-**在 vite 启动后，会在 vite 内部通过 `mode` 属性，设置 `process.env.NODE_ENV`，所以我们才能在项目中使用**。
+在 webpack 中，这样设置之后，我们可以在**脚本**中使用 `process.env.NODE_ENV` 了，但是不能在**模块**中使用，要想在模块当中直接使用，我们还需要一些配置。
 
-之前，我们在 `scripts` 命令中使用 `cross-env` 来设置 `NODE_ENV`，但是如果需要配置的环境变量太多，全部设置在 `scripts` 命令中既不美观也不容易维护，所以我们可以将环境变量配置在 `.env` 文件中。
+在 webpack 4+ 中，你可以使用 mode 选项：
+
+```js
+module.exports = {
+  mode: "production",
+};
+```
+
+但是在 webpack 3 及其更低版本中，你需要使用 `DefinePlugin`：
+
+DefinePlugin 官网的解释是：DefinePlugin 允许我们创建全局变量，可以在编译时进行设置。
+
+因此可以使用该属性来设置全局变量来区分开发环境和正式环境，这就是 DefinePlugin 的基本功能。
+
+```js
+var webpack = require("webpack");
+
+module.exports = {
+  plugins: [
+    // 设置环境变量信息
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      VERSION: JSON.stringify("5fa3b9"),
+      BROWSER_SUPPORTS_HTML5: true,
+      TWO: "1+1",
+      "typeof window": JSON.stringify("object"),
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
+  ],
+};
+```
 
 ### `import.meta.env`
 
