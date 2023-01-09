@@ -21,7 +21,7 @@ export function createSideBar(commonPath) {
     }
   });
 
-  console.log("⭐mdNames==>", mdNames);
+  // console.log("⭐mdNames==>", mdNames);
 
   // 获取年份对应的文件名
   if (mdNames.length) {
@@ -37,7 +37,7 @@ export function createSideBar(commonPath) {
     });
   }
 
-  console.log("⭐mdNamesObj==>", mdNamesObj);
+  // console.log("⭐mdNamesObj==>", mdNamesObj);
 
   // 得到最后的sidebar
   let sideBars = [];

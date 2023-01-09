@@ -39,7 +39,7 @@ if (mdNames.length) {
   });
 }
 
-console.log("⭐mdNames==>", mdNames);
+// console.log("⭐mdNames==>", mdNames);
 
 // 获取年份对应的文件名
 if (mdNames.length) {
