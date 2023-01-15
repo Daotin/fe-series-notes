@@ -119,6 +119,17 @@ export default defineConfig({
             },
           ],
         },
+        {
+          text: "性能优化",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "首屏优化",
+              link: "/engineer/first-screen",
+            },
+          ],
+        },
       ],
       "/essay/": createSideBar("essay"),
     },

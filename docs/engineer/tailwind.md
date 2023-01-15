@@ -1,4 +1,4 @@
-# 引入 TailWindCSS
+# ~~引入 TailWindCSS~~
 
 1、安装插件
 
@@ -46,3 +46,14 @@ module.exports = {
   plugins: [],
 };
 ```
+
+## 使用 WindiCSS 替换 TailwindCSS
+
+如果你已经熟悉了 Tailwind CSS，可以把 Windi CSS 看作是按需供应的 Tailwind 替代方案，它为你提供了更快的加载体验，完美兼容 Tailwind v2.0，并且拥有很多额外的酷炫功能。
+
+> **⚡️ Windi CSS 在 Vite 中比 Tailwind 快 20~100 倍**
+
+1、[安装 WindiCSS](https://cn.windicss.org/integrations/vite.html#install)
+
+2、[从 Tailwind CSS 迁移](https://cn.windicss.org/guide/migration.html)
+
