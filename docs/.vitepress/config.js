@@ -3,7 +3,7 @@ import { createSideBar } from "./utils/sidebar";
 
 // defineConfig可以给config配置增加类型提示
 export default defineConfig({
-  base: "/create-vue3-template-docs/",
+  base: "/fe-series-notes/",
 
   title: "前端队长小冯", // 所有文档的浏览器标签title
   description: "前端，JavaScript，Vue", // 会渲染成<meta>标签，SEO用

@@ -17,7 +17,7 @@ hero:
       link: /engineer/index
     - theme: alt
       text: View on GitHub
-      link: https://github.com/daotin/create-vue3-template-docs/
+      link: https://github.com/daotin/fe-series-notes/
 
 features:
   - icon: 👨🏻‍💻
