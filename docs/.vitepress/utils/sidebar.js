@@ -1,10 +1,23 @@
+/**
+ *
+ * @param {*} commonPath 专栏路径
+ * @returns
+ * 其他：
+ * 文件名规则：xxx-yyy[-zzz].md
+ * xxx:序号
+ * yyy:sidebar显示的文件名
+ * zzz(可选)：表示分组，未填会显示默认分组
+ */
+
+const DefaultGroupName = "默认分组";
+
 export function createSideBar(commonPath) {
   const filePath = `./docs/${commonPath}/`;
 
   const fs = require("fs");
   const mdFiles = fs.readdirSync(filePath);
   let mdNames = []; // 文件名
-  const mdNamesObj = {}; // 年份对应文件名
+  const mdNamesObj = {}; // 分组对应文件名
   let excludeFileName = ["index", "image", "images"];
 
   // 获取文件名
@@ -21,53 +34,59 @@ export function createSideBar(commonPath) {
     }
   });
 
-  // console.log("⭐mdNames==>", mdNames);
+  // console.log("⭐mdNames==>", mdNames); // [ '10-测试1', '2-测试2', '300-测试3', '6-测试6-分组1' ]
 
-  // 获取年份对应的文件名
+  // 获取分组对应的文件名
   if (mdNames.length) {
     mdNames.forEach((name) => {
-      const year = name.split("-")[0];
-      if (year && year.match(/^\d+$/)) {
-        if (mdNamesObj[year] && mdNamesObj[year].length) {
-          mdNamesObj[year].push(name);
-        } else {
-          mdNamesObj[year] = [name];
-        }
+      const order = name.split("-")[0];
+      const title = name.split("-")[1];
+      const group = name.split("-")[2] || DefaultGroupName;
+
+      if (mdNamesObj[group]) {
+        mdNamesObj[group].push(order + "-" + title);
+      } else {
+        mdNamesObj[group] = [order + "-" + title];
       }
     });
   }
 
-  // console.log("⭐mdNamesObj==>", mdNamesObj);
+  // mdNamesObj: {'默认分组': [ '10-测试1', '2-测试2', '300-测试3', '6-测试6' ] }
+
+  // 排序
+  for (const key in mdNamesObj) {
+    const titleList = mdNamesObj[key];
+
+    mdNamesObj[key] = titleList.sort(
+      (a, b) => a.split("-")[0] - b.split("-")[0]
+    );
+  }
+
+  console.log("⭐mdNamesObj==>", mdNamesObj); // { '默认分组': [ '2-测试2', '6-测试6', '10-测试1', '300-测试3' ] }
 
   // 得到最后的sidebar
   let sideBars = [];
-  let yearKeys = Object.keys(mdNamesObj); // 年份数组
+  let groupKeys = Object.keys(mdNamesObj); // 年份数组
 
-  if (yearKeys.length) {
+  if (groupKeys.length) {
     sideBars = [];
-    for (const year in mdNamesObj) {
-      const names = mdNamesObj[year];
+    for (const group in mdNamesObj) {
+      const names = mdNamesObj[group];
 
       const obj = {
-        text: year,
+        text: group,
         collapsible: true,
-        collapsed: year !== yearKeys[0], // 第一个分组默认展开
+        collapsed: group !== groupKeys[0], // 第一个分组默认展开
         items: names.map((name) => {
-          // name格式：// 2022-08-10-git-commit规范
-          let days = [];
-          let realName = [];
-          name.split("-").forEach((item, idx) => {
-            if (idx < 3) {
-              days.push(item);
-            } else {
-              realName.push(item);
-            }
-          });
-
-          let link = `/${commonPath}/${name}.md`;
+          // name格式：// 2-测试2
+          let text = name.split("-")[1];
+          let link =
+            group === DefaultGroupName
+              ? `/${commonPath}/${name}.md`
+              : `/${commonPath}/${name}-${group}.md`;
           // appendData(name, days.join("-"));
           return {
-            text: realName.join("-"),
+            text: text,
             link: link,
           };
         }),
@@ -75,7 +94,7 @@ export function createSideBar(commonPath) {
       sideBars.push(obj);
     }
   }
-
+  console.log("⭐sideBars==>", sideBars);
   return sideBars;
 }
 
