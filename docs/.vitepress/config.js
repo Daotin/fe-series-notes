@@ -8,6 +8,7 @@ export default defineConfig({
   title: "前端队长小冯", // 所有文档的浏览器标签title
   description: "前端，JavaScript，Vue", // 会渲染成<meta>标签，SEO用
 
+  // 最后更新时间
   lastUpdated: true,
 
   markdown: {
@@ -22,7 +23,7 @@ export default defineConfig({
     siteTitle: "Daotin's Blog",
 
     // 获取每个文件最后一次 git 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部
-    // lastUpdated: 'Last Updated', // string | boolean
+    lastUpdated: "更新日期", // string | boolean
     // 启动页面丝滑滚动
     smoothScroll: true,
 
@@ -32,7 +33,7 @@ export default defineConfig({
         link: "/engineer/",
         activeMatch: "/engineer/",
       },
-      { text: "随笔", link: "/essay/", activeMatch: "/essay/" },
+      { text: "效率工具", link: "/tools/", activeMatch: "/tools/" },
     ],
 
     sidebar: {
@@ -131,7 +132,7 @@ export default defineConfig({
           ],
         },
       ],
-      "/essay/": createSideBar("essay"),
+      "/tools/": createSideBar("tools"),
     },
 
     // 目录显示
