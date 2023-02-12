@@ -34,6 +34,7 @@ export default defineConfig({
         activeMatch: "/engineer/",
       },
       { text: "效率工具", link: "/tools/", activeMatch: "/tools/" },
+      { text: "构建部署", link: "/deploy/", activeMatch: "/deploy/" },
     ],
 
     sidebar: {
@@ -133,6 +134,7 @@ export default defineConfig({
         },
       ],
       "/tools/": createSideBar("tools"),
+      "/deploy/": createSideBar("deploy"),
     },
 
     // 目录显示
