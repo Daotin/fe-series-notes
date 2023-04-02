@@ -12,23 +12,23 @@ nginx (engine x) 是一个 HTTP 和反向代理服务器，一个邮件代理服
 
 Nginx 的三个主要应用场景：
 
-1、静态资源服务
+**1、静态资源服务**
 
 静态资源直接可以由 nginx 提供服务，降低对后台应用访问。
 
-2、反向代理
+**2、反向代理**
 
 - 通过反向代理访问后端接口
 - 后端应用服务构成集群后，需要动态扩容，有的应用出问题了需要做容灾，那么需要 nginx 负载均衡功能
 - 通过缓存功能，加快资源访问。
 
-3、API 服务
+**3、API 服务**
 
 数据库服务的性能，远高于后端应用服务，所以可以衍生出直接使用 nginx 访问数据库或者 redis，利用 nginx 的高并发性能，实现如 web 防火墙等复杂的业务功能。如 OpenResty 工具。
 
 ### nginx 历史背景
 
-C10K 问题是 Nginx 抢占舞台的主要原因。
+`C10K` 问题是 Nginx 抢占舞台的主要原因。
 
 随着互联网数据的快速增长，对我们的硬件设备和性能提出了很高的要求。根据摩尔定义，硬件性能得到很大提升，但是低效的 Apache 拖累了性能，导致硬件的性能没有得到最大的发挥。因为 Apache 的一个进程在同一时间只能处理一个连接，导致高并发的时候，进程间切换会消耗大量的性能。
 
@@ -48,9 +48,13 @@ C10K 问题是 Nginx 抢占舞台的主要原因。
 
 ### 安装 Nginx
 
-> 相信你每天都在使用`npm`，npm 是一个包管理工具，可在本地环境中轻松操作各种包应用。当然`CentOS`也有一个相当 npm 那样的包管理工具，可在服务器环境中轻松管理各种 npm 模块。
+> 相信你每天都在使用 `npm`，npm 是一个包管理工具，可在本地环境中轻松操作各种包应用。当然 `CentOS`也有一个相当 npm 那样的包管理工具，可在服务器环境中轻松管理各种 npm 模块。
 
-> `yum`是一个在`Fedora`、`RedHat`和`CentOS`中的**Shell 软件包管理器**。其基于`rpm包管理`，可从指定的服务器自动安装`rpm包`，可自动处理依赖关系并一次性地安装所有依赖的软件包，整个过程与`npm`有点像，只需掌握以下命令就能操作`yum`。
+> `yum`是一个在 `Fedora`、`RedHat`和 `CentOS`中的**Shell 软件包管理器**。其基于 `rpm包管理`，可从指定的服务器自动安装 `rpm包`，可自动处理依赖关系并一次性地安装所有依赖的软件包，整个过程与 `npm`有点像，只需掌握以下命令就能操作 `yum`。
+
+> 注意：在 ubuntu 里面就不是 `yum`了，在 Ubuntu 中，类似于 yum 的包管理器是 `apt`（Advanced Package Tool）。
+
+下面以 `CentOS`环境为例：
 
 首先检测 yum 源中有无 nginx
 
@@ -60,13 +64,13 @@ yum list | grep nginx
 
 如果存在，在安装 nginx：
 
-```
+```nginx
 yum install nginx
 ```
 
-再执行`nginx -v`，输出版本表示安装成功。
+再执行 `nginx -v`，输出版本表示安装成功。
 
-如果不存在，或者不是你需要的版本，需要[**自行配置 yum 源**](https://jspang.com/article/39#toc2 "自行配置yum源")。
+如果不存在，或者不是你需要的版本，需要**[自行配置 yum 源](https://jspang.com/article/39?spm=wolai.workspace.0.0.139b27a46cog40#toc2)**。
 
 ### 启动 nginx
 
@@ -74,13 +78,13 @@ yum install nginx
 nginx
 ```
 
-启动`Nginx`后，在浏览器打开公网 IP，就可以看到 nginx 启动页面。
+启动 `Nginx`后，在浏览器打开公网 IP，就可以看到 nginx 启动页面。
 
 > 注意需要在阿里云配置 80 端口安全组。
 
 ### 常用命令
 
-得益其安全稳定的特性，若未遇到特殊情况几乎都不会再重启，只需掌握以下命令就能操作`nginx`：
+得益其安全稳定的特性，若未遇到特殊情况几乎都不会再重启，只需掌握以下命令就能操作 `nginx`：
 
 | 命令                   | 功能     |
 | ---------------------- | -------- |
@@ -98,63 +102,97 @@ nginx
 ### **文件结构**
 
 ```nginx
-...              #全局块
+...    # 全局配置，对全局生效
+events  # 配置影响 Nginx 服务器或与用户的网络连接
+http    # 配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置
+  ├── upstream # 配置后端服务器具体地址，负载均衡配置不可或缺的部分
+  ├── server   # 配置虚拟主机的相关参数，一个 http 块中可以有多个 server 块
+  ├── server
+  │   ├── location  # server 块可以包含多个 location 块，location 指令用于匹配 uri
+  │   ├── location
+  │   └── ...
+  └── ...
 
-events {         #events块
-   ...
-}
-
-http      #http块
-{
-    ...   #http全局块
-    server        #server块
-    {
-        ...       #server全局块
-        location [PATTERN]   #location块
-        {
-            ...
-        }
-        location [PATTERN]
-        {
-            ...
-        }
-    }
-    server
-    {
-      ...
-    }
-    ...     #http全局块
-}
 ```
 
-- 1、**全局块**：「影响 nginx 服务器整体配置的指令」。一般有运行 nginx 服务器的用户组，nginx 进程 pid 存放路径，日志存放路径，配置文件引入，允许生成 worker process 数等。
-- 2、**events 块**：影响「Nginx 服务器与用户的网络连接」。有每个进程的最大连接数，选取哪种事件驱动模型处理连接请求，是否允许同时接受多个网路连接，开启多个网络连接序列化等。
-- 3、**http 块**：代理、缓存、日志等绝大多数功能和第三方模块的配置功能（可以嵌套多个 server）。如文件引入，mime-type 定义，日志自定义，是否使用 sendfile 传输文件，连接超时时间，单连接请求数等。
-- 4、**server 块**：主要用于制定虚拟主机域名、IP 和端口号，一个 http 中可以有多个 server。
-- 5、**location 块**：配置请求资源的路径，以及各种页面的处理情况。
+- 1、 **全局块** ：「影响 nginx 服务器整体配置的指令」。一般有运行 nginx 服务器的用户组，nginx 进程 pid 存放路径，日志存放路径，配置文件引入，允许生成 worker process 数等。
+- 2、 **events 块** ：影响「Nginx 服务器与用户的网络连接」。有每个进程的最大连接数，选取哪种事件驱动模型处理连接请求，是否允许同时接受多个网路连接，开启多个网络连接序列化等。
+- 3、 **http 块** ：代理、缓存、日志等绝大多数功能和第三方模块的配置功能（可以嵌套多个 server）。如文件引入，mime-type 定义，日志自定义，是否使用 sendfile 传输文件，连接超时时间，单连接请求数等。
+- 4、 **server 块** ：主要用于制定虚拟主机域名、IP 和端口号，一个 http 中可以有多个 server。
+- 5、 **location 块** ：配置请求的路由，以及各种页面的处理情况。
 
 > 他们之间的关系：server 继承 main，location 继承 server；upstream 既不会继承指令也不会被继承。
 
 ### 语法说明
 
-- 配置文件由`指令`与`指令块`组成
-- 指令以`分号`结尾，指令与参数以`空格`分隔
-- 指令块以`大括号`将多条指令组织在一起
-- 使用`$`表示变量，提高复用性
-- 使用`#`加入注释，提高可读性
+- 配置文件由 `指令`与 `指令块`组成
+- 指令以 `分号`结尾，指令与参数以 `空格`分隔
+- 指令块以 `大括号`将多条指令组织在一起
+- 使用 `$`表示变量，提高复用性
+- 使用 `#`加入注释，提高可读性
 - 部分指令的参数支持正则表达式
 - `include`语句允许组合多个配置文件以提升配置的可维护性
 
+一个简单的 nginx 配置示例：
+
+```nginx
+user  nginx;                        # 运行用户，默认即是nginx，可以不进行设置
+worker_processes  1;                # Nginx 进程数，一般设置为和 CPU 核数一样
+error_log  /var/log/nginx/error.log warn;   # Nginx 的错误日志存放目录
+pid        /var/run/nginx.pid;      # Nginx 服务启动时的 pid 存放位置
+
+events {
+    use epoll;     # 使用epoll的I/O模型(如果你不知道Nginx该使用哪种轮询方法，会自动选择一个最适合你操作系统的)
+    worker_connections 1024;   # 每个进程允许最大并发数
+}
+
+http {   # 配置使用最频繁的部分，代理、缓存、日志定义等绝大多数功能和第三方模块的配置都在这里设置
+    # 设置日志模式
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;   # Nginx访问日志存放位置
+
+    sendfile            on;   # 开启高效传输模式
+    tcp_nopush          on;   # 减少网络报文段的数量
+    tcp_nodelay         on;
+    keepalive_timeout   65;   # 保持连接的时间，也叫超时时间，单位秒
+    types_hash_max_size 2048;
+    gzip  on;                 #开启gzip压缩
+
+    include             /etc/nginx/mime.types;      # 文件扩展名与类型映射表
+    default_type        application/octet-stream;   # 默认文件类型
+
+    include /etc/nginx/conf.d/*.conf;   # 包含的子配置项位置和文件
+
+    server {
+      listen       80;       # 配置监听的端口
+      server_name  localhost;    # 配置的域名
+
+      location / {
+        root   /usr/share/nginx/html;  # 网站根目录
+        index  index.html index.htm;   # 默认首页文件
+        deny 172.168.22.11;   # 禁止访问的ip地址，可以为all
+        allow 172.168.33.44； # 允许访问的ip地址，可以为all
+      }
+
+      error_page 500 502 503 504 /50x.html;  # 默认50x对应的访问页面
+      error_page 400 404 error.html;   # 同上
+    }
+}
+```
+
 ### location 匹配规则
 
-> location 匹配的不是 url 地址，而是对于服务器中的目录或者文件。
+> **注意：location 匹配的不是 url 路由地址，而是对于服务器中的目录或者文件。**
 
-- `=` 进行普通字符匹配。也就是完全匹配。
-- `^~`   前缀匹配。如果匹配成功，则不再匹配其他 location。
-- `~`       表示执行一个正则匹配，区分大小写
-- `~*`     表示执行一个正则匹配，不区分大小写
-- `/xxx/`   常规字符串路径匹配
-- `/` 通用匹配，任何内容请求都会匹配到
+- `/`：通用匹配，任何内容请求都会匹配到
+- `=`：进行普通字符匹配。也就是完全匹配。
+- `^~`：前缀匹配。如果匹配成功，则不再匹配其他 location。
+- `~`：表示执行一个正则匹配，区分大小写
+- `~*`：表示执行一个正则匹配，不区分大小写
+- `/xxx/`：常规字符串路径匹配
 
 更多参考：[https://z.itpub.net/article/detail/03489CAF30DD7EB79B9E239E941FA82D](https://z.itpub.net/article/detail/03489CAF30DD7EB79B9E239E941FA82D)
 
@@ -196,7 +234,7 @@ $server_protocol  请求使用的协议，通常是HTTP/1.0或HTTP/1.1。
 $uri  请求中的当前URI(不带请求参数，参数位于args，不同于浏览器传递的args)，不同于浏览器传递的request_uri的值，它可以通过内部重定向，或者使用index指令进行修改。不包括协议和主机名，例如/foo/bar.html
 ```
 
-关于 \$http_origin
+关于 `$http_origin`
 
 ````javascript
 $http_origin并不是nginx的内置参数，nginx支持取自定义的参数值，$http_XXX这个格式是nginx取请求中header的XXX的值的。
@@ -219,7 +257,24 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko)
 
 ````
 
-### 虚拟主机配置
+### 一个示例
+
+使用 nginx 部署静态网页：
+
+```nginx
+server {
+  listen 80;
+  server_name 101.200.146.230; # 指定IP或域名
+
+  location / {
+    root /www/client/daotin; # 静态文件存放在/www/client/daotin目录下
+    index index.html;
+  }
+}
+
+```
+
+### server 虚拟主机配置
 
 基于端口号来配置虚拟主机，算是 Nginx 中最简单的一种方式了。原理就是 Nginx 监听多个端口，根据不同的端口号，来区分不同的网站。
 
@@ -232,7 +287,7 @@ server{
 }
 ```
 
-然后重启 nginx，我们就可以在浏览器中访问`http://localhost:8001`了。
+然后重启 nginx，我们就可以在浏览器中访问 `http://localhost:8001`了。
 
 ### 缓存配置
 
@@ -244,8 +299,8 @@ Nginx 缓存类型：
 
 Nginx 设置缓存有两种方式：
 
-- proxy_cache_path 和 proxy_cache
-- Cache-Control 和 Pragma
+- `proxy_cache_path` 和 `proxy_cache`
+- `Cache-Control` 和 `Pragma`
 
 **一般来说，由服务器设置缓存即可，nginx 代理缓存可以不设置。**
 
@@ -253,61 +308,63 @@ Nginx 设置缓存有两种方式：
 
 ### 跨域配置
 
-```javascript
- <script>
-    let myHeaders = new Headers({
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
+```html
+<script>
+  let myHeaders = new Headers({
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
   });
 
-    fetch('http://101.200.146.230:4444/test.json', {
-        method: 'GET',
-        headers: myHeaders,
-        mode: 'cors'
-      })
-    .then(response => {
-        console.log('response.json==>',response.json());
-        return response.json();
-      })
-    .then(data => console.log('test.json ==>',data))
-    .catch(err => console.log('fetch失败', err));
-
-  </script>
+  fetch("http://101.200.146.230:4444/test.json", {
+    method: "GET",
+    headers: myHeaders,
+    mode: "cors",
+  })
+    .then((response) => {
+      console.log("response.json==>", response.json());
+      return response.json();
+    })
+    .then((data) => console.log("test.json ==>", data))
+    .catch((err) => console.log("fetch失败", err));
+</script>
 ```
 
-![](images/image_DbK8iAuosp.png)
-
-<https://www.imqianduan.com/nginx/preflight-options.html>
+![img](images/image_DbK8iAuosp.png)
 
 #### preflight request 预检请求
 
-客户端仅发送了一个 OPTIONS 方法的请求，被服务器 403 状态码给拒绝了，查阅了有关 OPTIONS 方法和预检请求的博客和文档，梳理了大概关系
+客户端仅发送了一个 OPTIONS 方法的请求，被服务器 403 状态码给拒绝了，查阅了有关 OPTIONS 方法和预检请求的博客和文档，梳理了大概关系。
 
-1.  HTTP 请求分为简单请求 与 复杂请求，两种请求的区别主要在于简单请求不会触发 CORS 预检请求，而复杂请求会触发 CORS 预检请求
-2.  满足简单请求的条件(两个条件需要都满足)
-    - 方法为 GET、HEAD、POST 之一
-    - 无自定义请求头，且 Content-Type 为 text/plain, mutipart/form-data application/x-www-form-urlencoded 之一
-3.  不满足简单请求的一切请求都是复杂请求
-4.  预检请求(一般是浏览器自动发起的 OPTIONS 方法的请求) 中
-    - Access-Control-Request-Method 字段告诉服务器实际请求会使用的 HTTP 方法；
-    - Access-Control-Request-Headers 字段告知服务器实际情况所携带的自定义首部字段。服务器基于预检请求获得的信息来判断，是否接受接下来的实际请求。服务器端返回的 Access-Control-Allow-Methods 字段 将服务器允许的请求方法告诉客户端。该首部字段与 Allow 类似，但只能用户设计到 CORS 的场景中。
+**什么是预检请求？**
+
+1. HTTP 请求分为简单请求 与 复杂请求，两种请求的区别主要在于简单请求不会触发 CORS 预检请求，而复杂请求会触发 CORS 预检请求
+2. 满足简单请求的条件(两个条件需要都满足)
+   - 方法为 GET、HEAD、POST 之一
+   - 无自定义请求头，且 Content-Type 为 text/plain, mutipart/form-data application/x-www-form-urlencoded 之一
+3. 不满足简单请求的一切请求都是复杂请求
+4. 预检请求(一般是浏览器自动发起的 OPTIONS 方法的请求) 中
+   - Access-Control-Request-Method 字段告诉服务器实际请求会使用的 HTTP 方法；
+   - Access-Control-Request-Headers 字段告知服务器实际情况所携带的自定义首部字段。服务器基于预检请求获得的信息来判断，是否接受接下来的实际请求。服务器端返回的 Access-Control-Allow-Methods 字段 将服务器允许的请求方法告诉客户端。该首部字段与 Allow 类似，但只能用户设计到 CORS 的场景中。
 
 **为什么要发起预检请求 ？**
 
 [《关于 preflight request》](https://blog.csdn.net/mym940725/article/details/79506994 "《关于preflight request》") 解释的比较清楚，目前浏览器限制跨域的方式主要有两种
 
-1.  浏览器限制发起跨域请求
-2.  跨域请求可以正常发起，但是返回的结果被浏览器拦截
+1. 浏览器限制发起跨域请求
+2. 跨域请求可以正常发起，但是返回的结果被浏览器拦截
 
 一般浏览器都是采用第二种方式限制跨域请求，也就是说请求已经到达了服务器，如果是复杂请求，对服务器数据库的数据进行了操作，但返回给浏览器的结果却被拦截，被识别为一次失败的请求，这时候可能对数据库里数据已经产生了影响。为了防止这种情况发生，这种可能对服务器数据产生操作的 HTTP 请求，浏览器必须先试用 OPTIONS 方法发起预检请求，从而获知服务器是否允许该跨域请求。
 
-参考资料：[https://blog.csdn.net/zimuKobby/article/details/108389410](https://blog.csdn.net/zimuKobby/article/details/108389410 "https://blog.csdn.net/zimuKobby/article/details/108389410")
+参考资料：
 
-#### 如何配置
+- [https://blog.csdn.net/zimuKobby/article/details/108389410](https://blog.csdn.net/zimuKobby/article/details/108389410 "https://blog.csdn.net/zimuKobby/article/details/108389410")
+- [nginx 优化跨域的 OPTIONS 请求](https://www.imqianduan.com/nginx/preflight-options.html)
 
-> 如果是 A 访问 B 出现跨域，则需要在 B 上进行跨域设置，而不是在 A 上。
+#### 如何配置跨域
 
-比如 A 的地址是`101.200.146.230:80`，然后访问 B 的地址`101.200.146.230:4444` 中的一个`test.json`文件，因为端口不同，所以会报跨域错误。
+> **注意：如果是 A 访问 B 出现跨域，则需要在 B 上进行跨域设置，而不是在 A 上。**
+
+比如 A 的地址是 `101.200.146.230:80`，然后访问 B 的地址 `101.200.146.230:4444` 中的一个 `test.json`文件，因为端口不同，所以会报跨域错误。
 
 需要在 B 服务设置跨域：
 
@@ -335,13 +392,35 @@ server {
   }
 
   location / {
-    root /www/static;
+    root /www/static; #资源存放位置
     index index.html;
   }
 }
 ```
 
+**除了访问别人服务器上的文件是跨域外，接口访问也是跨域。因为接口也是文件，接口实际上跟服务器上的文件是有一个映射关系的，因此，接口也可以使用 nginx 来进行跨域配置。**
+
 ### 反向代理
+
+**什么是反向代理？**
+
+反向代理（Reverse Proxy）方式是指以代理服务器来接受 internet 上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给 internet 上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。
+
+**正向代理：** 一般的访问流程是客户端直接向目标服务器发送请求并获取内容，使用正向代理后，客户端改为向代理服务器发送请求，并指定目标服务器（原始服务器），然后由代理服务器和原始服务器通信，转交请求并获得的内容，再返回给客户端。正向代理隐藏了真实的客户端，为客户端收发请求，使真实客户端对服务器不可见；
+
+举个具体的例子 🌰，你的浏览器无法直接访问谷哥，这时候可以通过一个代理服务器来帮助你访问谷哥，那么这个服务器就叫正向代理。
+
+![1680416377724](images/1680416377724.png)
+
+**反向代理：** 与一般访问流程相比，使用反向代理后，直接收到请求的服务器是代理服务器，然后将请求转发给内部网络上真正进行处理的服务器，得到的结果返回给客户端。反向代理隐藏了真实的服务器，为服务器收发请求，使真实服务器对客户端不可见。一般在处理跨域请求的时候比较常用。现在基本上所有的大型网站都设置了反向代理。
+
+举个具体的例子 🌰，去饭店吃饭，可以点川菜、粤菜、江浙菜，饭店也分别有三个菜系的厨师 👨‍🍳，但是你作为顾客不用管哪个厨师给你做的菜，只用点菜即可，小二将你菜单中的菜分配给不同的厨师来具体处理，那么这个小二就是反向代理服务器。
+
+![1680416395702](images/1680416395702.png)
+
+简单的说，一般给客户端做代理的都是正向代理，给服务器做代理的就是反向代理。
+
+总结：
 
 正向代理与反向代理：[https://juejin.cn/post/7095321237122990116](https://juejin.cn/post/7095321237122990116 "https://juejin.cn/post/7095321237122990116")
 
@@ -353,7 +432,7 @@ server {
 
 用途：负载均衡，提供安全保障。
 
-nginx 反向代理主要通过`proxy_pass`来配置，将你项目的开发机地址填写到 proxy_pass 后面，正常的格式为 proxy_pass URL 即可。
+nginx 反向代理主要通过 `proxy_pass`来配置，将你项目的开发机地址填写到 proxy_pass 后面，正常的格式为 proxy_pass URL 即可。
 
 ```nginx
 server {
@@ -374,14 +453,20 @@ server {
 
 ### 负载均衡
 
-`负载均衡`是把负载均匀合理地分发到多个服务器中，实现压力分流的作用。
+一般情况下，客户端发送多个请求到服务器，服务器处理请求，其中一部分可能要操作一些资源比如数据库、静态资源等，服务器处理完毕后，再将结果返回给客户端。
 
-`Nginx`提供以下`负载均衡`方式，默认为`轮询`。
+这种模式对于早期的系统来说，功能要求不复杂，且并发请求相对较少的情况下还能胜任，成本也低。随着信息数量不断增长，访问量和数据量飞速增长，以及系统业务复杂度持续增加，这种做法已无法满足要求，并发量特别大时，服务器容易崩。
+
+很明显这是由于服务器性能的瓶颈造成的问题，除了堆机器之外，最重要的做法就是负载均衡。
+
+请求爆发式增长的情况下，单个机器性能再强劲也无法满足要求了，这个时候集群的概念产生了，单个服务器解决不了的问题，可以使用多个服务器，然后将请求分发到各个服务器上，将负载分发到不同的服务器，这就是 **负载均衡** ，核心是「分摊压力」。
+
+`Nginx`提供以下 `负载均衡`方式，默认为 `轮询`。
 
 - **轮询**：无需配置，每个请求根据时间顺序逐一分配到不同服务器，若其中一个服务挂了会自动被剔除
 - **weight**：根据权重分配，指定每个服务器的轮询几率，权重越高其被访问的概率越大，可解决服务器性能不均的问题
-- **ip_hash**：根据访问`IP`的`Hash结果`分配，每个访客固定访问一个服务器，可解决动态网页`Session共享`的问题
-- **fair**：根据服务器响应时间分配，响应时间短的服务器会优先分配，需安装`nginx-upstream-fair`
+- **ip_hash**：根据访问 `IP`的 `Hash结果`分配，每个访客固定访问一个服务器，可解决动态网页 `Session共享`的问题
+- **fair**：根据服务器响应时间分配，响应时间短的服务器会优先分配，需安装 `nginx-upstream-fair`
 
 ```nginx
 http {
@@ -425,12 +510,18 @@ http {
 
 ### 动静分离
 
+> **动静分离分离的是后端的动态资源和静态资源，而不是前端的资源。前端的都是静态资源。。。**
+
+动静分离就是根据一定规则静态资源的请求全部请求 Nginx 服务器，后台数据请求转发到 Web 应用服务器上。从而达到动静分离的目的。目前比较流行的做法是将静态资源部署在 Nginx 上，而 Web 应用服务器只处理动态数据请求。这样减少 Web 应用服务器的并发压力。
+
 动静分离，说白了，就是将网站静态资源（HTML，JavaScript，CSS，img 等文件）与后台应用分开部署，静态资源的请求全部请求 Nginx 服务器，后台数据请求转发到 Web 应用服务器上。提高用户访问静态代码的速度，降低对后台应用服务器的请求。后台应用服务器只负责动态数据请求。
+
+动静分离可通过 location 对请求 url 进行匹配，将网站静态资源（HTML，JavaScript，CSS，img 等文件）与后台应用分开部署，提高用户访问静态代码的速度，降低对后台应用访问。通常将静态资源放到 nginx 中，动态资源转发到 tomcat 服务器中。
 
 目前动静分离的方式有两种解决方案。
 
 - 将静态资源单独部署到一个域名。
-- 将静态资源放在项目之外的某个文件夹，通过`Nginx`配置区分。（比如上述在`www`文件夹中创建的`client`文件夹用于存放`Web`应用源码，创建的`static`文件夹用于存放静态资源。）
+- 将静态资源放在项目之外的某个文件夹，通过 `Nginx`配置区分。（比如上述在 `www`文件夹中创建的 `client`文件夹用于存放 `Web`应用源码，创建的 `static`文件夹用于存放静态资源。）
 
 ```nginx
 server {
@@ -452,7 +543,7 @@ server {
 
 示例：
 
-比如当我们代码中访问资源文件的时候，就会自动去`/www/static`目录寻找对应的文件。
+比如当我们代码中访问资源文件的时候，就会自动去 `/www/static`目录寻找对应的文件。
 
 ```html
 <el-image src="/touxiang.jpg"></el-image>
@@ -464,7 +555,7 @@ server {
 <el-image src="/static/touxiang.jpg"></el-image>
 ```
 
-当我们使用路径匹配代理到/www/static 后，它其实访问的是`/www/static/static/touxiang.jpg`，而不是`/www/static/touxiang.jpg`，这个千万要注意了。
+当我们使用路径匹配代理到 `/www/static` 后，它其实访问的是 `/www/static/static/touxiang.jpg `，而不是 `/www/static/touxiang.jpg`，这个千万要注意了。
 
 ```nginx
 location /static/ {
@@ -488,7 +579,7 @@ location /static/ {
 
 除了自适应之外，很多大型网站使用分开制作的方式来呈现 PC 和 H5 站点内容。
 
-Nginx 通过内置变量`$http_user_agent`，可以获取到请求客户端的 userAgent，就可以用户目前处于移动端还是 PC 端，进而展示不同的页面给用户。
+Nginx 通过内置变量 `$http_user_agent`，可以获取到请求客户端的 userAgent，就可以用户目前处于移动端还是 PC 端，进而展示不同的页面给用户。
 
 ```nginx
 server{
@@ -503,6 +594,8 @@ server{
      }
 }
 ```
+
+当然，对于单页面应用，入口都是 index.html，PC 和移动端会使用组件来区分，所以不会用到上面的配置。
 
 ### Gzip 压缩
 
@@ -529,7 +622,90 @@ http {
 }
 ```
 
-### 详细配置说明
+#### **如果 Nginx 已经做了 gzip，那么 Vue 还需要做吗？**
+
+1、其实 Vue 本身不能做压缩打包之类的功能，他是靠 webpack 进行打包，而 webpack 有插件可以生产 gz 类型的文件。
+
+2、当你把一个包含 gz 的静态资源放到 nginx 上，有 web 请求过来时，nginx 如果开启了 gzip，那么它会检测你的静态资源文件夹里面有没有 gz 文件，如果有的话，nginx 会直接返回 gz 文件，如果没有，nginx 会动态的压缩成 gz 返回到浏览器。
+
+因此，当服务器配置了 gzip，那么前端可以不用做 gzip，但是你做好了 gz 文件放到服务器上， 可以为服务器省下实时压缩成 gz 文件的计算资源，所以推荐还是前端做好 gzip 然后放到服务器上。
+
+> Tips： nginx 检测 gz 文件需要手动配置开启，也可以不检测，每次都实时压缩为 gzip
+
+#### [Nginx 静态压缩和动态压缩](https://www.cnblogs.com/hahaha111122222/p/16277891.html)
+
+Nginx 中配置前端的 gzip 压缩，有两种思路：
+
+- Nginx 动态压缩，静态文件还是普通文件，请求来了再压缩，然后返回给前端。
+- Nginx 静态压缩，提前把文件压缩成 .gz 格式，请求来了，直接返回即可。
+
+Nginx 静态压缩需要设置：
+
+```Bash
+gzip_static  on;
+```
+
+> 如何判断 gzip_static 是否生效？
+
+在请求的 response headers 里面的 Etag 里面，没有 `W/`就表明使用的是我们自己的 .gz 文件。
+
+### 图片防盗链
+
+防盗链的原理其实很简单，目前比较流行的做法就是通过 Referer 来进行判断和限制，Referer 的解释说明如下：
+
+> HTTP Referer 是 header 的一部分，当浏览器向 web 服务器发送请求的时候，一般会带上 Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。——引用自百度百科
+
+简单来说，[假如我博客域名是 devler.cn](http://xn--devler-vy0j03sbubo1swtetzhynxzfn.cn)，我在 nginx 中设置，只允许 Referer 为\*.devler.cn 的来源请求图片，其它网站来的一律禁止。这里我们需要用到 ngx_http_referer_module 模块和$invalid_referer 变量，请看下面进一步解释。
+
+#### ngx_http_referer_module 模块
+
+ngx_http_referer_module 模块用于阻止对“Referer”头字段中具有无效值的请求访问站点。应该记住，使用适当的“Referer”字段值来构造请求非常容易，因此本模块的预期目的不是要彻底阻止此类请求，而是阻止常规浏览器发送的请求的大量流量。还应该考虑到，即使对于有效请求，常规浏览器也可能不发送“Referer”字段。
+
+语法：valid_referers none | blocked | server_names | string ...;
+
+可用于：server,location
+
+可以看到 valid_referers 指令中存在一些参数，比如 none|blocked，含义如下：
+
+- none：请求标头中缺少“Referer”字段，也就是说 Referer 为空，浏览器直接访问的时候 Referer 一般为空。
+- blocked： Referer”字段出现在请求标头中，但其值已被防火墙或代理服务器删除; 这些值是不以“[http://”](http://xn--ivg/) 或 “[https://”](https://xn--ivg/) 开头的字符串;
+- server_names： 服务器名称，也就是域名列表。
+
+`$invalid_referer`变量
+
+我们设置 valid_referers 指令后，会将其结果传递给一个变量 invalid_referer，其值为 0 或 1，可以使用这个指令来实现防盗链功能，如果 `$valid_referers`列表中没有包含 Referer 头的值，`$invalid_referer`将被设置为 1。
+
+#### 设置防盗链白名单
+
+白名单就是只允许白名单内的域名访问，其余一律禁止。
+
+```nginx
+location ~ .*.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico|webp)$ {
+  valid_referers none blocked *.devler.cn;
+  if ($invalid_referer) {
+    return 403;
+  }
+}
+```
+
+上面的配置含义是先用 location 匹配出需要的格式（图片和视频），然后用 valid_referers 指令设置允许的域名，其它域名没有包含在 valid_referers 列表中，$invalid_referer 变量返回的值为 1，最终返回 403，禁止访问。以上就是防盗链白名单的设置。
+
+#### 防盗链黑名单
+
+黑名单与白名单正好相反，就是只禁止黑名单中的域名请求，其余一律放行，相比白名单，黑名单的限制更加宽松。网上大部分教程只提到了防盗链白名单的设置，了解原理后黑名单的设置方法也差不多。
+
+```nginx
+location ~ .*.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico|webp)$ {
+  valid_referers *.baidu.com;
+  if ($invalid_referer = 0) {
+    return 403;
+  }
+}
+```
+
+上面的配置中我们用 valid_referers 指令设置黑名单域名\*.baidu.com，获取到指定的 Referer 头之后，$invalid_referer 返回值为 0，最终返回 403，禁止百度的域名来访问。
+
+### 配置示例（完整）
 
 ```nginx
 #定义Nginx运行的用户和用户组
@@ -846,15 +1022,12 @@ http {
     }
 ```
 
-&#x20;&#x20;
+#### 参考文档
 
-nginx 中文文档
+- nginx 中文文档：[https://docshome.gitbook.io/nginx-docs/](https://docshome.gitbook.io/nginx-docs/)
+- location 匹配规则：[https://www.cnblogs.com/woshimrf/p/nginx-config-location.html](https://www.cnblogs.com/woshimrf/p/nginx-config-location.html "https://www.cnblogs.com/woshimrf/p/nginx-config-location.html")
 
-<https://docshome.gitbook.io/nginx-docs/>
-
-location 匹配规则：[https://www.cnblogs.com/woshimrf/p/nginx-config-location.html](https://www.cnblogs.com/woshimrf/p/nginx-config-location.html "https://www.cnblogs.com/woshimrf/p/nginx-config-location.html")
-
-### 项目使用示例
+### TY-Store 示例
 
 ```nginx
 user  nginx;
