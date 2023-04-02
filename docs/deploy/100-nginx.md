@@ -655,13 +655,13 @@ gzip_static  on;
 
 > HTTP Referer 是 header 的一部分，当浏览器向 web 服务器发送请求的时候，一般会带上 Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。——引用自百度百科
 
-简单来说，[假如我博客域名是 devler.cn](http://xn--devler-vy0j03sbubo1swtetzhynxzfn.cn)，我在 nginx 中设置，只允许 Referer 为\*.devler.cn 的来源请求图片，其它网站来的一律禁止。这里我们需要用到 ngx_http_referer_module 模块和$invalid_referer 变量，请看下面进一步解释。
+简单来说，假如我博客域名是 [devler.cn](http://xn--devler-vy0j03sbubo1swtetzhynxzfn.cn)，我在 nginx 中设置，只允许 Referer 为 `*.devler.cn` 的来源请求图片，其它网站来的一律禁止。这里我们需要用到 `ngx_http_referer_module` 模块和 `$invalid_referer` 变量，请看下面进一步解释。
 
 #### ngx_http_referer_module 模块
 
-ngx_http_referer_module 模块用于阻止对“Referer”头字段中具有无效值的请求访问站点。应该记住，使用适当的“Referer”字段值来构造请求非常容易，因此本模块的预期目的不是要彻底阻止此类请求，而是阻止常规浏览器发送的请求的大量流量。还应该考虑到，即使对于有效请求，常规浏览器也可能不发送“Referer”字段。
+`ngx_http_referer_module` 模块用于阻止对“Referer”头字段中具有无效值的请求访问站点。应该记住，使用适当的“Referer”字段值来构造请求非常容易，因此本模块的预期目的不是要彻底阻止此类请求，而是阻止常规浏览器发送的请求的大量流量。还应该考虑到，即使对于有效请求，常规浏览器也可能不发送“Referer”字段。
 
-语法：valid_referers none | blocked | server_names | string ...;
+语法：`valid_referers none | blocked | server_names | string ...;`
 
 可用于：server,location
 
@@ -705,7 +705,7 @@ location ~ .*.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico|webp)$ {
 
 上面的配置中我们用 valid_referers 指令设置黑名单域名\*.baidu.com，获取到指定的 Referer 头之后，$invalid_referer 返回值为 0，最终返回 403，禁止百度的域名来访问。
 
-### 配置示例（完整）
+## 完整配置示例
 
 ```nginx
 #定义Nginx运行的用户和用户组
@@ -1178,7 +1178,7 @@ http {
 
 ```
 
-### Nginx 可视化配置
+## Nginx 可视化配置
 
 工具：[https://github.com/digitalocean/nginxconfig.io](https://github.com/digitalocean/nginxconfig.io "https://github.com/digitalocean/nginxconfig.io")
 
