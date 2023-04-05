@@ -1,3 +1,5 @@
+# Docker 从入门到实践
+
 ## Docker 简介
 
 ### Docker 是什么
@@ -37,12 +39,12 @@ Docker 的主要优势在于它可以让你的应用程序在不同的环境中�
 
 Docker 的主要用途，目前有三大类。
 
-1.  **解决部署环境不一致的问题。** 通常, 程序员开发的时候是在开发环境, 提测阶段部署到测试环境. 那么常常会遇到一个现象, 在开发环境运行的好好的, 怎么一部署到测试环境就有问题了呢? 开始各种排查, 最后发现, 可能是机器配置不一样, 导致 tomcat 启动超时等等。
-2.  **解决集群环境, 服务器繁多复杂的问题**。如果使用集群部署的话，在一个集群里, 各种各样的软件, jdk, nginx, mysql, mongodb, redis......有很多. 以前运维老师是怎么干的? 搭建一个新的环境, 一台服务器一台服务器的安装. 像 mysql 还有配置环境, 一个服务器一个服务器的配置, 累的半死，而 docker 的实用场景之一就是一次部署, 到处使用。
-3.  **持续交付和部署。** 对开发和运维（DevOps）人员来说，最希望的就是一次创建或配置，可以在任意地方正常运行。
-4.  **提供弹性的云服务。** 因为 Docker 容器可以随开随关，很适合动态扩容和缩容。
-5.  **多租户环境**：使用 Docker，可以为每一个租户的应用层的多个实例创建隔离的环境。
-6.  **更高效的利用计算机资源**。docker 是内核级别的虚拟化, 可以在一个物理机上运行很多个容器实例, 服务器的性能可以被压榨到极致。通常, 一台主机只能同时运行 2-3 个虚拟机, 但是可以同时运行 20-30 个容器。
+1. **解决部署环境不一致的问题。** 通常, 程序员开发的时候是在开发环境, 提测阶段部署到测试环境. 那么常常会遇到一个现象, 在开发环境运行的好好的, 怎么一部署到测试环境就有问题了呢? 开始各种排查, 最后发现, 可能是机器配置不一样, 导致 tomcat 启动超时等等。
+2. **解决集群环境, 服务器繁多复杂的问题**。如果使用集群部署的话，在一个集群里, 各种各样的软件, jdk, nginx, mysql, mongodb, redis......有很多. 以前运维老师是怎么干的? 搭建一个新的环境, 一台服务器一台服务器的安装. 像 mysql 还有配置环境, 一个服务器一个服务器的配置, 累的半死，而 docker 的实用场景之一就是一次部署, 到处使用。
+3. **持续交付和部署。** 对开发和运维（DevOps）人员来说，最希望的就是一次创建或配置，可以在任意地方正常运行。
+4. **提供弹性的云服务。** 因为 Docker 容器可以随开随关，很适合动态扩容和缩容。
+5. **多租户环境**：使用 Docker，可以为每一个租户的应用层的多个实例创建隔离的环境。
+6. **更高效的利用计算机资源**。docker 是内核级别的虚拟化, 可以在一个物理机上运行很多个容器实例, 服务器的性能可以被压榨到极致。通常, 一台主机只能同时运行 2-3 个虚拟机, 但是可以同时运行 20-30 个容器。
 
 ### Docker 历史背景
 
@@ -153,7 +155,7 @@ sudo docker version # 或者 sudo docker info
 
 重新启动 docker 来让配置生效。
 
-然后通过`docker info` 查看是否生效：
+然后通过 `docker info` 查看是否生效：
 
 ```bash
 ## ......
@@ -205,17 +207,17 @@ Dockerfile 是一个文本文件，它包含了一系列**用于创建 Docker �
 
 在 Dockerfile 中，你需要使用一些特定的指令，例如：
 
-1.  `FROM`：指定基础镜像。这是构建新镜像的起点，通常是一个已经存在的镜像，例如：`FROM ubuntu:18.04`。
-2.  `RUN`：执行命令。在镜像中安装软件或执行其他命令，例如：`RUN apt-get update && apt-get install -y curl`。
-3.  `COPY`：复制文件。从构建上下文（通常是与 Dockerfile 同一目录的文件）复制文件或目录到镜像中，例如：`COPY . /app`。
-4.  `ADD`：添加文件。与 `COPY` 类似，但它还可以解压压缩文件，例如：`ADD app.tar.gz /app`。
-5.  `WORKDIR`：设置工作目录。指定后续指令（如 `RUN`, `CMD`, `ENTRYPOINT` 等）的工作目录，例如：`WORKDIR /app`。
-6.  `ENV`：设置环境变量。在镜像中定义环境变量，例如：`ENV NODE_ENV=production`。
-7.  `EXPOSE`：暴露端口。告诉 Docker 该镜像将在指定端口上运行，例如：`EXPOSE 80`。
-8.  `CMD`：指定容器启动时要运行的命令。如果没有提供命令，将使用基础镜像的默认命令，例如：`CMD ["npm", "start"]`。
-9.  `ENTRYPOINT`：指定容器启动时要运行的可执行文件。与 `CMD` 类似，但它允许在启动容器时提供参数，例如：`ENTRYPOINT ["npm"]`。
+1. `FROM`：指定基础镜像。这是构建新镜像的起点，通常是一个已经存在的镜像，例如：`FROM ubuntu:18.04`。
+2. `RUN`：执行命令。在镜像中安装软件或执行其他命令，例如：`RUN apt-get update && apt-get install -y curl`。
+3. `COPY`：复制文件。从构建上下文（通常是与 Dockerfile 同一目录的文件）复制文件或目录到镜像中，例如：`COPY . /app`。
+4. `ADD`：添加文件。与 `COPY` 类似，但它还可以解压压缩文件，例如：`ADD app.tar.gz /app`。
+5. `WORKDIR`：设置工作目录。指定后续指令（如 `RUN`, `CMD`, `ENTRYPOINT` 等）的工作目录，例如：`WORKDIR /app`。
+6. `ENV`：设置环境变量。在镜像中定义环境变量，例如：`ENV NODE_ENV=production`。
+7. `EXPOSE`：暴露端口。告诉 Docker 该镜像将在指定端口上运行，例如：`EXPOSE 80`。
+8. `CMD`：指定容器启动时要运行的命令。如果没有提供命令，将使用基础镜像的默认命令，例如：`CMD ["npm", "start"]`。
+9. `ENTRYPOINT`：指定容器启动时要运行的可执行文件。与 `CMD` 类似，但它允许在启动容器时提供参数，例如：`ENTRYPOINT ["npm"]`。
 
-当你编写好 Dockerfile 后，可以使用`docker build`命令根据 Dockerfile 创建 Docker 镜像。
+当你编写好 Dockerfile 后，可以使用 `docker build`命令根据 Dockerfile 创建 Docker 镜像。
 
 **根据 Dockerfile 构建镜像**
 
@@ -235,13 +237,13 @@ docker build -t my_app:1.0 -f Dockerfile.custom --build-arg API_KEY=12345 --no-c
 
 现在，让我们逐个解释这个指令中的每个部分：
 
-1.  `docker build`：这是 Docker 的基本命令，用于根据 Dockerfile 构建镜像。
-2.  `-t my_app:1.0`：`-t` 选项用于为构建的镜像指定名称（`my_app`）和标签（`1.0`）。名称和标签用冒号分隔。
-3.  `-f Dockerfile.custom`：`-f` 选项用于指定要用于构建过程的 Dockerfile。在这个例子中，我们使用名为 Dockerfile.custom 的文件。如果省略此选项，Docker 默认会在当前目录中查找名为 Dockerfile 的文件。
-4.  `--build-arg API_KEY=12345`：`--build-arg` 选项用于设置构建时的变量。在这个例子中，我们设置了一个名为 API_KEY 的变量，其值为 12345。这些变量可以在 Dockerfile 的 ARG 指令中使用。
-5.  `--no-cache`：此选项告诉 Docker 在构建过程中不使用缓存。这意味着 Docker 将重新执行 Dockerfile 中的所有指令，即使它们之前已经执行过。这有助于确保镜像包含最新的依赖项和更新。
-6.  `--rm=true`：此选项告诉 Docker 在构建完成后删除所有中间容器。这有助于减少磁盘空间占用。默认情况下，此选项为 true，因此可以省略。
-7.  `.`：最后，这个点表示 Docker 构建上下文的路径，通常是 Dockerfile 所在的路径。构建上下文包含了 Dockerfile 以及与之相关的所有文件和目录，这些文件和目录可能会在构建过程中被复制到镜像中。（请注意，这里的 `.` 并不表示生成的镜像所在的路径。生成的镜像会被存储在 Docker 镜像仓库中，而不是在本地文件系统的某个特定目录）
+1. `docker build`：这是 Docker 的基本命令，用于根据 Dockerfile 构建镜像。
+2. `-t my_app:1.0`：`-t` 选项用于为构建的镜像指定名称（`my_app`）和标签（`1.0`）。名称和标签用冒号分隔。
+3. `-f Dockerfile.custom`：`-f` 选项用于指定要用于构建过程的 Dockerfile。在这个例子中，我们使用名为 Dockerfile.custom 的文件。如果省略此选项，Docker 默认会在当前目录中查找名为 Dockerfile 的文件。
+4. `--build-arg API_KEY=12345`：`--build-arg` 选项用于设置构建时的变量。在这个例子中，我们设置了一个名为 API_KEY 的变量，其值为 12345。这些变量可以在 Dockerfile 的 ARG 指令中使用。
+5. `--no-cache`：此选项告诉 Docker 在构建过程中不使用缓存。这意味着 Docker 将重新执行 Dockerfile 中的所有指令，即使它们之前已经执行过。这有助于确保镜像包含最新的依赖项和更新。
+6. `--rm=true`：此选项告诉 Docker 在构建完成后删除所有中间容器。这有助于减少磁盘空间占用。默认情况下，此选项为 true，因此可以省略。
+7. `.`：最后，这个点表示 Docker 构建上下文的路径，通常是 Dockerfile 所在的路径。构建上下文包含了 Dockerfile 以及与之相关的所有文件和目录，这些文件和目录可能会在构建过程中被复制到镜像中。（请注意，这里的 `.` 并不表示生成的镜像所在的路径。生成的镜像会被存储在 Docker 镜像仓库中，而不是在本地文件系统的某个特定目录）
 
 > **什么是 Docker 构建上下文的路径？能否举个例子说明？**
 
@@ -285,21 +287,21 @@ docker run --name <容器名> -d <镜像名> -p {local_port:image_port}
 
 ## 使用 Docker 部署项目
 
-### Demo 示例
+### Demo 部署示例
 
 当我们完成代码开发工作之后，该如何使用 `Docker` 来完成部署服务呢？
 
 大体分为 3 步：
 
-1.  编写 `Dockfile` 文件
-2.  通过 `Dockerfile` 文件构建镜像
-3.  运行镜像生成容器即可。
+1. 编写 `Dockfile` 文件
+2. 通过 `Dockerfile` 文件构建镜像
+3. 运行镜像生成容器即可。
 
 我们以 nodejs 服务为例：
 
 通过 `nodeJS` 的 `http` 模块监听 `8110` 端口，当我们访问 `http:localhost:8110`时， 就会输出“Hello World”。
 
-1、准备代码文件`server.js`
+1、准备代码文件 `server.js`
 
 ```javascript
 const http = require("http");
@@ -353,7 +355,7 @@ docker run --name docker-test:v0.0.1 -p 8080:8110 docker-test-con # 生成的容
 
 5、然后访问 [http://127.0.0.1:8080/](http://127.0.0.1:8110/ "http://127.0.0.1:8080/") 即可看到界面出现“hello world”。
 
-### Docker+Nginx 部署前端项目
+### Vue 项目部署实战
 
 下面是使用 Docker 和 Nginx 部署 Vue.js 前端项目的一步一步详细说明：
 
@@ -439,12 +441,12 @@ CMD ["nginx", "-g", "daemon off;"]
 - 第一个阶段使用 Node.js 12 作为基础镜像，并将 Vue.js 项目的源代码复制到镜像中。然后，安装依赖并构建应用程序。
 - 第二个阶段使用 Nginx 作为基础镜像，并将构建好的应用程序复制到 Nginx 的默认站点目录中。然后，将 Nginx 配置文件复制到镜像中，并暴露 80 端口并启动 Nginx 服务。
 
-> **关于路径：**
+> **关于路径**
 
 All paths in a Dockerfile, except the first half of COPY and ADD instructions, refer to image filesystem paths。
-Dockerfile 中的所有路径，除了`COPY`和`ADD`指令的前半部分，都是指镜像文件系统路径。
+Dockerfile 中的所有路径，除了 `COPY`和 `ADD`指令的前半部分，都是指镜像文件系统路径。
 
-> **关于**\*\*`daemon off`补充说明：\*\*​
+> **关于 `daemon off`补充说明**
 
 对于正常生产（在服务器上），使用默认的 `daemon on;` 指令，以便 Nginx 服务器将在后台启动。 Nginx 和其他服务以这种方式运行并相互通信。一台服务器运行许多服务。
 对于 Docker 容器（或调试）， `daemon off;` 指令告诉 Nginx 留在前台。对于容器，这很有用，因为最佳实践是一个容器 = 一个进程。一台服务器（容器）只有一项服务。

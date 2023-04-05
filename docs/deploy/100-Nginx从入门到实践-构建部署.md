@@ -1,4 +1,4 @@
-# Nginx
+# Nginx 从入门到实践
 
 ## Nginx 简介
 
