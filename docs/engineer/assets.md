@@ -415,3 +415,57 @@ declare interface Window {
   $getImageSrc: typeof import("@/utils/cdn")["getImageSrc"];
 }
 ```
+
+### 另一种方式
+
+1. 构建时依据环境变量，将 `HTML` 中的静态资源地址加上 `CDN` 域名。
+
+采用 `Webpack-HTML-Plugin` 等插件，将编译好的带 `hash` + `publicPath` 的静态资源插入到 `HTML` 中。
+
+按环境动态构造 `publicPath`，设置webpack配置：
+
+```js
+// webpack.config.js
+const CDN_HOST = process.env.CDN_HOST;// CDN 域名
+const CDN_PATH = process.env.CDN_PATH; // CDN 路径
+const ENV = process.env.ENV; // 当前的环境等等
+const VERSION = process.env.VERSION; // 当前发布的版本
+
+// 这里动态构造的 publicPath 里，严格的将产物按环境 + 发布版本做了隔离 & 收敛。
+const getPublicPath = () => {
+    // Some code here
+    return `${CDN_HOST}/${CDN_PATH}/${ENV}/`;// 依据 ENV 等动态构造 publicPath
+}
+
+const publicPath = process.env.NODE_ENV === 'production' ? getPublicPath() : '.';
+
+module.exports = {
+    output: {
+        filename: 'bundle.[name][contenthash:8].js',
+        publicPath,
+    },
+    plugins: [
+        new HtmlWebpackPlugin()
+    ]
+}
+```
+
+2. 构建完成后将静态资源上传到 CDN 。
+
+前端在Build完成后，可以通过以下几种方式将静态资源上传到CDN服务器：
+
+1. 手动上传：前端可以手动将build好的静态资源通过FTP或者其他方式上传到CDN服务器，但是这种方式比较繁琐，需要耗费大量时间和精力，并且容易出现错误。
+
+2. 自动化上传：前端可以使用一些工具和插件，在构建完成后自动将静态资源上传至CDN服务器，例如webpack插件：cdn-webpack-plugin、upload-to-qiniu-webpack-plugin、oss-webpack-plugin等，这些插件可以同时支持多个CDN商，使得上传操作更加方便快捷。
+
+再比如在vite下，以下是一些可以使用的插件：
+
+- Vite-plugin-ali-oss：阿里云 OSS 的插件，可以将文件上传到 OSS 并根据需要配置 CDN；
+- Vite-plugin-qiniu：七牛云的插件，可以将文件上传到七牛云，并在项目中引用同步更新后的资源；
+- Vite-plugin-qcloud-cos：腾讯云 COS 的插件，可以将文件上传到 COS 并提供一个 URL，访问时会经过 CDN 加速；
+- Vite-plugin-s3：亚马逊 AWS S3 的插件，将文件上传到 S3 存储桶，并提供经过 CDN 加速的 URL。
+
+使用这些插件需要在项目中加入对应的依赖，并按照插件文档进行配置，上传静态资源文件时，插件需要指定文件目录和文件类型等参数，以便于插件自动上传至 CDN 平台。
+
+3. 设置 nginx 反向代理
+将静态资源部署到 CDN 上后，再将 Nginx 上的流量转发到 CDN 上。
