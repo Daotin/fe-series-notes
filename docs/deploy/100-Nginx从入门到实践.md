@@ -1182,6 +1182,7 @@ http {
 
 工具：[https://github.com/digitalocean/nginxconfig.io](https://github.com/digitalocean/nginxconfig.io "https://github.com/digitalocean/nginxconfig.io")
 
-## 深入学习课程
+## 进阶学习资料
 
-极客时间：[Nginx 核心知识 150 讲](https://time.geekbang.org/course/intro/100020301?tab=intro "Nginx 核心知识 150 讲")
+- [一个前端必会的 Nginx免费教程 (共11集)](https://jspang.com/article/39)
+- 极客时间：[Nginx 核心知识 150 讲](https://time.geekbang.org/course/intro/100020301?tab=intro "Nginx 核心知识 150 讲")

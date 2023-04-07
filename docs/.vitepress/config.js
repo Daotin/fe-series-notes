@@ -34,7 +34,7 @@ export default defineConfig({
         activeMatch: "/engineer/",
       },
       { text: "效率工具", link: "/tools/", activeMatch: "/tools/" },
-      { text: "前端工程化", link: "/deploy/", activeMatch: "/deploy/" },
+      { text: "前端部署", link: "/deploy/", activeMatch: "/deploy/" },
     ],
 
     sidebar: {

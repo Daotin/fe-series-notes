@@ -475,8 +475,10 @@ docker run --name my-vue-app-con [-d] -p 8080:80 my-vue-app
 
 [Podman Desktop](https://podman-desktop.io/ "Podman Desktop")：一个跨平台桌面应用，可以使用图形界面进行 Docker 容器管理。
 
-## 参考文档
+## 进阶学习资料
 
-- [https://cavalheiro.cn/frontend/Docker_build_Nginx.html](https://cavalheiro.cn/frontend/Docker_build_Nginx.html "https://cavalheiro.cn/frontend/Docker_build_Nginx.html")
 - [Docker 入门教程-阮一峰](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html "Docker 入门教程-阮一峰")
-- [跟胖哥一起学 Docker](https://jspang.com/article/75#toc2 "跟胖哥一起学Docker")
+- [跟胖哥一起学 Docker](https://jspang.com/article/75 "跟胖哥一起学Docker")
+- [https://cavalheiro.cn/frontend/Docker_build_Nginx.html](https://cavalheiro.cn/frontend/Docker_build_Nginx.html)
+- [开发者必备的 Docker 实践指南](https://juejin.cn/book/6844733746462064654)
+- [Docker — 从入门到实践](https://yeasy.gitbook.io/docker_practice/)
