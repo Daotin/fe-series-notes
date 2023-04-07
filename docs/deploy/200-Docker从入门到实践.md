@@ -245,7 +245,7 @@ docker build -t my_app:1.0 -f Dockerfile.custom --build-arg API_KEY=12345 --no-c
 6. `--rm=true`：此选项告诉 Docker 在构建完成后删除所有中间容器。这有助于减少磁盘空间占用。默认情况下，此选项为 true，因此可以省略。
 7. `.`：最后，这个点表示 Docker 构建上下文的路径，通常是 Dockerfile 所在的路径。构建上下文包含了 Dockerfile 以及与之相关的所有文件和目录，这些文件和目录可能会在构建过程中被复制到镜像中。（请注意，这里的 `.` 并不表示生成的镜像所在的路径。生成的镜像会被存储在 Docker 镜像仓库中，而不是在本地文件系统的某个特定目录）
 
-> **什么是 Docker 构建上下文的路径？能否举个例子说明？**
+::: info 什么是 Docker 构建上下文的路径？能否举个例子说明？
 
 当然可以。Docker 构建上下文是指包含 Dockerfile 及其相关文件和目录的文件系统路径。在构建 Docker 镜像时，Docker 需要访问这些文件和目录，以便在镜像中复制文件、安装依赖项等。构建上下文就是将这些文件和目录打包到一起的一个概念。
 举个例子，假设您有一个项目，目录结构如下：
@@ -272,6 +272,8 @@ docker build -t my_image:latest .
 在这个 `docker build` 命令中，最后的 `.` 表示当前目录，即 `my_project` 目录。这告诉 Docker 使用 `my_project` 目录作为构建上下文，从中获取 Dockerfile 及其相关文件和目录。
 
 简而言之，Docker 构建上下文的路径是包含 Dockerfile 和与之相关的所有文件和目录的文件系统路径。在构建镜像时，Docker 需要知道这个路径，以便正确访问和处理这些文件和目录。
+
+:::
 
 **运行镜像（生成容器）**
 
@@ -441,15 +443,20 @@ CMD ["nginx", "-g", "daemon off;"]
 - 第一个阶段使用 Node.js 12 作为基础镜像，并将 Vue.js 项目的源代码复制到镜像中。然后，安装依赖并构建应用程序。
 - 第二个阶段使用 Nginx 作为基础镜像，并将构建好的应用程序复制到 Nginx 的默认站点目录中。然后，将 Nginx 配置文件复制到镜像中，并暴露 80 端口并启动 Nginx 服务。
 
-> **关于路径**
+::: info 💡 关于路径
 
 All paths in a Dockerfile, except the first half of COPY and ADD instructions, refer to image filesystem paths。
+
 Dockerfile 中的所有路径，除了 `COPY`和 `ADD`指令的前半部分，都是指镜像文件系统路径。
 
-> **关于 `daemon off`补充说明**
+:::
+
+::: info 💡 关于 `daemon off`补充说明
 
 对于正常生产（在服务器上），使用默认的 `daemon on;` 指令，以便 Nginx 服务器将在后台启动。 Nginx 和其他服务以这种方式运行并相互通信。一台服务器运行许多服务。
 对于 Docker 容器（或调试）， `daemon off;` 指令告诉 Nginx 留在前台。对于容器，这很有用，因为最佳实践是一个容器 = 一个进程。一台服务器（容器）只有一项服务。
+
+:::
 
 **4、构建 Docker 镜像**
 

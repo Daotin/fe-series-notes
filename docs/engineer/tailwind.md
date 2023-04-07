@@ -1,5 +1,9 @@
 # ~~引入 TailWindCSS~~
 
+::: danger TailWindCSS 弃用!
+查看下文：[使用 WindiCSS 替换 TailwindCSS](#使用-windicss-替换-tailwindcss)
+:::
+
 1、安装插件
 
 ```
@@ -56,4 +60,3 @@ module.exports = {
 1、[安装 WindiCSS](https://cn.windicss.org/integrations/vite.html#install)
 
 2、[从 Tailwind CSS 迁移](https://cn.windicss.org/guide/migration.html)
-
