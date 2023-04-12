@@ -482,6 +482,25 @@ docker run --name my-vue-app-con [-d] -p 8080:80 my-vue-app
 
 [Podman Desktop](https://podman-desktop.io/ "Podman Desktop")：一个跨平台桌面应用，可以使用图形界面进行 Docker 容器管理。
 
+## Docker Compose
+
+Docker Compose 是一个用于定义和运行多容器 Docker 应用程序的工具。通过使用 Docker Compose，不需要使用 shell 脚本来启动容器，您可以使用 YAML 文件来配置应用程序的服务、网络和卷。然后，通过一个简单的命令，您可以创建并启动所有配置中定义的服务。
+
+Docker Compose 与 Docker 的关系在于它是基于 Docker 引擎的一个扩展工具，它使得在 Docker 环境中管理多个容器变得更加简便。Docker 是一个容器平台，用于将应用程序及其依赖项打包到一个容器中，以便在任何环境中都能够以一致、可重复的方式运行。Docker Compose 则是为了简化在 Docker 中运行多个容器的应用程序的管理和部署。
+
+Docker Compose 的主要作用包括：
+
+1. 简化多容器应用程序的部署和管理：通过使用单个 YAML 文件，您可以定义整个应用程序的结构，包括服务、网络和存储卷。这使得部署和管理多容器应用程序变得更加简单和高效。
+2. 提高开发和测试的效率：Docker Compose 允许您在本地环境中轻松启动、停止和重建服务，从而加快开发和测试过程。
+3. 便于团队协作：通过共享 Docker Compose 文件，团队成员可以轻松地在各自的环境中运行相同的多容器应用程序，确保一致性和避免“在我机器上可以运行”的问题。
+
+### Docker Compose 安装和使用
+
+参考文档：
+
+- https://yeasy.gitbook.io/docker_practice/compose/introduction
+- https://www.cnblogs.com/crazymakercircle/p/15505199.html
+
 ## 进阶学习资料
 
 - [Docker 入门教程-阮一峰](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html "Docker 入门教程-阮一峰")
