@@ -522,11 +522,19 @@ $ sudo curl -L https://github.com/docker/compose/releases/download/v2.17.1/docke
 $ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+检测是否安装成功
+
+```bash
+docker-compose --version
+```
+
 卸载
 
 ```bash
 $ sudo rm /usr/local/bin/docker-compose
 ```
+
+如何安装不了，参考：[浅析 docker-compose 安装及解决遇到的问题](https://www.cnblogs.com/goloving/p/16253880.html)
 
 ### yml 模板文件
 
@@ -552,9 +560,9 @@ services:
 
 - `image`: 指定为镜像名称或镜像 ID。如果镜像在本地不存在，Compose 将会尝试拉取这个镜像。
 - `build`：指定 Dockerfile 所在文件夹的路径（可以是绝对路径，或者相对 docker-compose.yml 文件的路径）。 Compose 将会利用它自动构建这个镜像，然后使用这个镜像。更多用法参考：https://yeasy.gitbook.io/docker_practice/compose/compose_file#build
-- `ports`：暴露端口信息。使用`宿主端口：容器端口 (HOST:CONTAINER)` 格式
+- `ports`：暴露端口信息。使用 `宿主端口：容器端口 (HOST:CONTAINER)` 格式
 - `container_name`: 指定容器名称。默认将会使用 `项目名称_服务名称_序号` 这样的格式。
-- `volumes`: 数据卷所挂载路径设置。可以设置为`宿主机路径(HOST:CONTAINER)`或者`数据卷名称(VOLUME:CONTAINER)`。如果路径为数据卷名称，必须在文件中配置数据卷。
+- `volumes`: 数据卷所挂载路径设置。可以设置为 `宿主机路径(HOST:CONTAINER)`或者 `数据卷名称(VOLUME:CONTAINER)`。如果路径为数据卷名称，必须在文件中配置数据卷。
 - `restart`: 指定容器退出后的重启策略为始终重启。该命令对保持服务始终运行十分有效，在生产环境中推荐配置为 always 或者 unless-stopped。
 
 更多参数：https://yeasy.gitbook.io/docker_practice/compose/compose_file
@@ -605,13 +613,13 @@ COMMAND
 - https://github.com/yeasy/docker_practice
 - https://www.cnblogs.com/crazymakercircle/p/15505199.html
 
-### Vue 项目部署实战
+### Vue 项目部署实战-docker compose 版
 
-项目背景为[Vue 项目部署实战-docker compose 版](#vue-项目部署实战)
+项目背景为[Vue 项目部署实战](#vue-项目部署实战)
 
 项目中已经包含了 nginx.conf 和 Dockerfile 文件。
 
-下面是一个基本的 docker-compose.yml 文件，用于部署您的 Vue 项目：
+下面是一个基本的 `docker-compose.yml` 文件，用于部署您的 Vue 项目：
 
 ```yaml
 version: "3" # 指定了docker-compose文件的版本
@@ -622,7 +630,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     restart: always
@@ -632,7 +640,7 @@ services:
 
 - build: 它指定了如何构建 Docker 镜像。在这个例子中，我们使用当前目录作为构建上下文，使用 Dockerfile 文件进行构建。
 - ports: 它指定了容器的端口映射。在这个例子中，我们将容器的 80 端口映射到主机的 8080 端口上。
-- volumes: 它指定了容器与主机之间的文件映射。在这个例子中，我们将主机的`nginx.conf`文件挂载到容器的`/etc/nginx/nginx.conf`路径上，并设置为只读模式。这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
+- volumes: 它指定了容器与主机之间的文件映射。在这个例子中，我们将主机的 `nginx.conf`文件挂载到容器的 `/etc/nginx/nginx.conf`路径上，并设置为只读模式。这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
 - `restart`: 它指定了容器的重启策略。在这个例子中，我们指定了容器始终重启。
 
 :::warning
@@ -641,9 +649,9 @@ services:
 
 **启动服务**
 
-要启动这些服务，只需在包含 docker-compose.yml 文件的目录中运行 `docker-compose up -d` 命令。
+将 docker-compose.yml 文件放在 Vue 项目根目录中，然后执行 `docker-compose up -d`命令。
 
-当你执行`docker-compose up -d`命令时，Docker 会按照 docker-compose.yml 文件中的定义，启动一个新的 Docker 容器并在后台运行。
+Docker 会按照 docker-compose.yml 文件中的定义，启动一个新的 Docker 容器并在后台运行。
 
 具体的执行步骤如下：
 
@@ -651,6 +659,10 @@ services:
 - Docker 会根据 docker-compose.yml 文件的定义，将容器的 80 端口映射到主机的 8080 端口上，这样我们可以通过浏览器访问应用程序。
 - Docker 会将主机上的 nginx.conf 文件挂载到容器内的/etc/nginx/nginx.conf 路径上，这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
 - 最后，Docker 会启动一个新的容器，并将其设置为在后台运行。
+
+当运行成功后，打开 `http://localhosy:8081` ，即可访问。
+
+![1681393533878](images/1681393533878.png)
 
 如果您需要停止服务，可以运行 `docker-compose down`。
 
