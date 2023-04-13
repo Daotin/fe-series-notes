@@ -534,7 +534,7 @@ $ sudo rm /usr/local/bin/docker-compose
 
 简单示例：
 
-```yml
+```yaml
 version: "3"
 
 services:
@@ -565,7 +565,7 @@ Compose 模板文件支持动态读取主机的系统环境变量和当前目录
 
 例如，下面的 Compose 文件将从运行它的环境中读取变量 `${MONGO_VERSION}` 的值，并写入执行的指令中。
 
-```yml
+```yaml
 version: "3"
 services:
 
@@ -613,7 +613,7 @@ COMMAND
 
 下面是一个基本的 docker-compose.yml 文件，用于部署您的 Vue 项目：
 
-```yml
+```yaml
 version: "3" # 指定了docker-compose文件的版本
 
 services:
