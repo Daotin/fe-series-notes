@@ -484,9 +484,13 @@ docker run --name my-vue-app-con [-d] -p 8080:80 my-vue-app
 
 ## Docker Compose
 
-Docker Compose 是一个用于定义和运行多容器 Docker 应用程序的工具。通过使用 Docker Compose，不需要使用 shell 脚本来启动容器，您可以使用 YAML 文件来配置应用程序的服务、网络和卷。然后，通过一个简单的命令，您可以创建并启动所有配置中定义的服务。
+Docker Compose 是一个用于定义和运行多容器 Docker 应用程序的工具。
 
-Docker Compose 与 Docker 的关系在于它是基于 Docker 引擎的一个扩展工具，它使得在 Docker 环境中管理多个容器变得更加简便。Docker 是一个容器平台，用于将应用程序及其依赖项打包到一个容器中，以便在任何环境中都能够以一致、可重复的方式运行。Docker Compose 则是为了简化在 Docker 中运行多个容器的应用程序的管理和部署。
+通过使用 Docker Compose，您不需要使用 shell 脚本来启动容器，可以使用 YAML 文件来配置应用程序的服务、网络和卷。然后，通过一个简单的命令，您可以创建并启动所有配置中定义的服务。
+
+我们知道使用一个 `Dockerfile` 模板文件，可以让用户很方便的定义一个单独的应用容器。然而，在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况。例如要实现一个 Web 项目，除了 Web 服务容器本身，往往还需要再加上后端的数据库服务容器，甚至还包括负载均衡容器等。
+
+`Compose` 恰好满足了这样的需求。它允许用户通过一个单独的 `docker-compose.yml` 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）。
 
 Docker Compose 的主要作用包括：
 
@@ -496,10 +500,155 @@ Docker Compose 的主要作用包括：
 
 ### Docker Compose 安装和使用
 
+`Compose` 支持 Linux、macOS、Windows 10 三大平台。
+
+Window 安装
+
+`Docker Desktop for Mac/Windows` 自带 `docker-compose` 二进制文件，安装 Docker 之后可以直接使用。
+
+Linux 安装
+
+直接从 [官方 GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。
+
+```bash
+$ sudo curl -L https://github.com/docker/compose/releases/download/v2.17.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+# 或者另一种写法：sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+
+# 国内用户可以使用以下方式加快下载
+# $ sudo curl -L https://get.daocloud.io/docker/compose/releases/download/v2.17.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+# 设置文件执行权限
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+卸载
+
+```bash
+$ sudo rm /usr/local/bin/docker-compose
+```
+
+### yml 模板文件
+
+默认的模板文件名称为 `docker-compose.yml`，格式为 YAML 格式。
+
+简单示例：
+
+```yml
+version: "3"
+
+services:
+  webapp:
+    image: examples/web
+    ports:
+      - "8080:80"
+    volumes:
+      - "/data"
+```
+
+> 注意每个服务都必须通过 image 指令指定镜像或 build 指令（需要 Dockerfile）等来自动构建生成镜像。
+
+参数说明：
+
+- `image`: 指定为镜像名称或镜像 ID。如果镜像在本地不存在，Compose 将会尝试拉取这个镜像。
+- `build`：指定 Dockerfile 所在文件夹的路径（可以是绝对路径，或者相对 docker-compose.yml 文件的路径）。 Compose 将会利用它自动构建这个镜像，然后使用这个镜像。更多用法参考：https://yeasy.gitbook.io/docker_practice/compose/compose_file#build
+- `ports`：暴露端口信息。使用`宿主端口：容器端口 (HOST:CONTAINER)` 格式
+- `container_name`: 指定容器名称。默认将会使用 `项目名称_服务名称_序号` 这样的格式。
+- `volumes`: 数据卷所挂载路径设置。可以设置为`宿主机路径(HOST:CONTAINER)`或者`数据卷名称(VOLUME:CONTAINER)`。如果路径为数据卷名称，必须在文件中配置数据卷。
+- `restart`: 指定容器退出后的重启策略为始终重启。该命令对保持服务始终运行十分有效，在生产环境中推荐配置为 always 或者 unless-stopped。
+
+更多参数：https://yeasy.gitbook.io/docker_practice/compose/compose_file
+
+**读取变量**
+
+Compose 模板文件支持动态读取主机的系统环境变量和当前目录下的 `.env` 文件中的变量。
+
+例如，下面的 Compose 文件将从运行它的环境中读取变量 `${MONGO_VERSION}` 的值，并写入执行的指令中。
+
+```yml
+version: "3"
+services:
+
+db:
+  image: "mongo:${MONGO_VERSION}"
+```
+
+### 命令说明
+
+`docker-compose` 命令的基本的使用格式是：
+
+```bash
+docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
+```
+
+- `-f, --file FILE` 指定使用的 Compose 模板文件，默认为 `docker-compose.yml`，可以多次指定。
+- `-p, --project-name NAME` 指定项目名称，默认将使用所在目录名称作为项目名。
+- `--verbose` 输出更多调试信息。
+- `-v, --version` 打印版本并退出。
+
+COMMAND
+
+> 参考：https://yeasy.gitbook.io/docker_practice/compose/commands
+
+- `build`：构建（重新构建）项目中的服务容器。
+- `up`：该命令十分强大，它将尝试自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作。
+  - `docker-compose up -d`，将会在后台启动并运行所有的容器。一般推荐生产环境下使用该选项。
+  - 默认情况，如果服务容器已经存在，`docker-compose up` 将会尝试停止容器，然后重新创建。
+- `down`：停止 up 命令所启动的容器，并移除网络。
+- `stop`：停止已经处于运行状态的容器，但不删除它。通过 `docker-compose start` 可以再次启动这些容器。
+- `rm`：删除所有（停止状态的）服务容器。
+- `ps`：列出项目中目前的所有容器。
+- `pull`：拉取服务依赖的镜像。
+
 参考文档：
 
-- https://yeasy.gitbook.io/docker_practice/compose/introduction
+- https://github.com/yeasy/docker_practice
 - https://www.cnblogs.com/crazymakercircle/p/15505199.html
+
+### Vue 项目部署实战
+
+项目背景为[Vue 项目部署实战-docker compose 版](#vue-项目部署实战)
+
+项目中已经包含了 nginx.conf 和 Dockerfile 文件。
+
+下面是一个基本的 docker-compose.yml 文件，用于部署您的 Vue 项目：
+
+```yml
+version: "3" # 指定了docker-compose文件的版本
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: always
+```
+
+我们定义一个名为“app”的服务。它包含以下几个子项：
+
+- build: 它指定了如何构建 Docker 镜像。在这个例子中，我们使用当前目录作为构建上下文，使用 Dockerfile 文件进行构建。
+- ports: 它指定了容器的端口映射。在这个例子中，我们将容器的 80 端口映射到主机的 8080 端口上。
+- volumes: 它指定了容器与主机之间的文件映射。在这个例子中，我们将主机的`nginx.conf`文件挂载到容器的`/etc/nginx/nginx.conf`路径上，并设置为只读模式。这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
+- `restart`: 它指定了容器的重启策略。在这个例子中，我们指定了容器始终重启。
+
+**启动服务**
+
+要启动这些服务，只需在包含 docker-compose.yml 文件的目录中运行 `docker-compose up -d` 命令。
+
+当你执行`docker-compose up -d`命令时，Docker 会按照 docker-compose.yml 文件中的定义，启动一个新的 Docker 容器并在后台运行。
+
+具体的执行步骤如下：
+
+- 如果当前目录下不存在与 docker-compose.yml 文件同名的 Docker 容器，Docker 会先构建一个新的 Docker 镜像。该镜像是基于 Dockerfile 文件构建的，其中包含了 Vue 项目的应用程序和 Nginx 服务器。
+- Docker 会根据 docker-compose.yml 文件的定义，将容器的 80 端口映射到主机的 8080 端口上，这样我们可以通过浏览器访问应用程序。
+- Docker 会将主机上的 nginx.conf 文件挂载到容器内的/etc/nginx/nginx.conf 路径上，这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
+- 最后，Docker 会启动一个新的容器，并将其设置为在后台运行。
+
+如果您需要停止服务，可以运行 `docker-compose down`。
 
 ## 进阶学习资料
 
