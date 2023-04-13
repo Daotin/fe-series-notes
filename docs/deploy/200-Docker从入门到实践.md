@@ -635,6 +635,10 @@ services:
 - volumes: 它指定了容器与主机之间的文件映射。在这个例子中，我们将主机的`nginx.conf`文件挂载到容器的`/etc/nginx/nginx.conf`路径上，并设置为只读模式。这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
 - `restart`: 它指定了容器的重启策略。在这个例子中，我们指定了容器始终重启。
 
+:::warning
+在上面的 Dockerfile 中，已经包含了使用 Nginx 作为基础镜像，并将构建好的应用程序复制到 Nginx 的默认站点目录中。因此，在 docker-compose.yml 中，您不需要再单独定义一个 nginx 服务。
+:::
+
 **启动服务**
 
 要启动这些服务，只需在包含 docker-compose.yml 文件的目录中运行 `docker-compose up -d` 命令。
