@@ -534,7 +534,9 @@ docker-compose --version
 $ sudo rm /usr/local/bin/docker-compose
 ```
 
+:::tip
 如何安装不了，参考：[浅析 docker-compose 安装及解决遇到的问题](https://www.cnblogs.com/goloving/p/16253880.html)
+:::
 
 ### yml 模板文件
 
@@ -660,9 +662,13 @@ Docker 会按照 docker-compose.yml 文件中的定义，启动一个新的 Dock
 - Docker 会将主机上的 nginx.conf 文件挂载到容器内的/etc/nginx/nginx.conf 路径上，这样我们可以在不重新构建容器的情况下更改 Nginx 配置。
 - 最后，Docker 会启动一个新的容器，并将其设置为在后台运行。
 
-当运行成功后，打开 `http://localhosy:8081` ，即可访问。
-
 ![1681393533878](images/1681393533878.png)
+
+可以看到已经执行成功，然后使用`docker ps`看一下容器已经执行了：
+
+![](images/2023-04-13-21-57-49.png)
+
+然后打开 `http://localhost:8081` ，发现已经可以正常访问了。
 
 如果您需要停止服务，可以运行 `docker-compose down`。
 
