@@ -538,6 +538,10 @@ $ sudo rm /usr/local/bin/docker-compose
 如何安装不了，参考：[浅析 docker-compose 安装及解决遇到的问题](https://www.cnblogs.com/goloving/p/16253880.html)
 :::
 
+:::warning
+PS：我在 linux 虚拟机测试，最新的 `v2.17.2`，在安装后执行 `docker-compose --version`，可能会报错：`Segmentation fault`。然后又试了 `v2.13.0`，是可以的。
+:::
+
 ### yml 模板文件
 
 默认的模板文件名称为 `docker-compose.yml`，格式为 YAML 格式。
