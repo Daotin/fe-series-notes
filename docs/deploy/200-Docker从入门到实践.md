@@ -141,6 +141,34 @@ sudo systemctl enable docker
 sudo docker version # 或者 sudo docker info
 ```
 
+关闭 Docker：
+
+```bash
+sudo systemctl stop docker
+```
+
+如果提示：
+
+```
+Warning: Stopping docker.service, but it can still be activated by:docker.socket
+```
+
+这个警告通常表示，Docker 仍在通过 docker.socket 进程监听着你的系统，尽管 Docker 服务已被停止。这是因为 docker.socket 是一个用于 Docker 的 socket 实例，它可以让其他进程连接到 Docker 守护进程。当你启动 Docker Socket 后，即使 Docker 服务已经被关闭， docker.socket 仍然会保持激活状态。
+
+如果你想完全停止 Docker，可以使用以下命令来禁用 docker.socket，这将停止 docker.socket 进程并阻止其他进程连接到 Docker 守护进程，从而确保 Docker 完全停止运行。
+
+```
+sudo systemctl stop docker.socket
+
+```
+
+删除镜像
+
+```bash
+# 如果要强制删除正在运行的容器所使用的镜像，则需要加-f
+docker rmi [-f] <IMAGE ID>
+```
+
 ### 配置国内镜像源
 
 编辑（新增）`/etc/docker/daemon.json`文件：
