@@ -324,12 +324,6 @@ export default instance;
 
 我们对每个请求生成一个独一无二的 key 值，在发送请求的时候，将这个 key 值保存起来，当有重复的请求发送时，我们判断当前 key 值的请求正在进行中，就调用 aixos 提供的取消请求的方法取消当前请求，请求返回后，再将 key 值从保存中移除，让下一次请求可以成功发送。
 
-::: danger
-但是需要注意，并不是所有的项目都需要取消重复接口操作，因为比如有的处理是后端处理，然后前端轮询查询，这个时候就是不合适的。
-
-参考链接：[Ajax 怎么取消？要不要取消？](https://ssshooter.com/2022-06-23-cancel-ajax/)
-:::
-
 取消重复请求具体代码如下：
 
 ```ts
@@ -360,7 +354,7 @@ class Request {
 
         if (this.checkPending(key)) {
           // 重复请求则取消当前请求
-          appStore.requests(key).abort();
+          appStore.requests[key].abort();
         } else {
           appStore.addRequest(key, controller);
         }
@@ -435,7 +429,7 @@ export default new Request();
 AbortController 兼容性：Chrome > 66，不支持 IE11
 :::
 
-### 在路由跳转的时候取消所有请求
+#### 在路由跳转的时候取消所有请求
 
 我们还可以进一步将取消请求和路由跳转结合，**在路由跳转的时候取消所有请求**。
 
@@ -505,4 +499,86 @@ router.beforeEach(async (to) => {
 
   //...
 });
+```
+
+#### 前端取消请求有意义吗？
+
+事实上，这个 Ajax 取消只是前端“自说自话”，后端其实依然有可能收到了请求并进行处理。
+
+在前端发起一个请求后，如果在请求还未结束时取消该请求，那么该请求可能已经被发送到后端并且后端已经开始处理该请求。这是因为 HTTP 协议是基于请求-响应模型的，一旦请求被发送到后端，后端就开始处理该请求，即使前端已经取消了该请求。因此，取消请求只是在前端停止等待该请求的响应，并不会影响后端已经开始处理该请求的事实。
+
+不过，在某些情况下，可以通过某些技术手段来实现取消请求。例如：
+
+- 在请求被发送到后端之前，请求被取消了。例如，使用 XMLHttpRequest 对象的 abort() 方法或使用 fetch API 的 AbortController 可以在请求被发送到后端之前终止请求。
+- 在请求被发送到后端之前，网络连接被中断。例如，如果用户在请求还未完成时关闭了浏览器选项卡或断开了网络连接，那么该请求将无法到达后端。
+- 在请求被发送到后端之前，浏览器出现了错误。例如，如果使用 XMLHttpRequest 对象发送请求时发生了网络错误，那么该请求将无法到达后端。
+
+但是我们无法确认，请求是否到达了后端。所以前端的取消重复请求是否真的有必要呢？
+
+虽然前端取消请求不能保证请求不会到达后端，但是在某些情况下取消请求仍然是有意义的操作。
+
+- 首先，取消请求可以减少不必要的网络流量和带宽消耗。例如，在向服务器请求大量数据时，如果用户在请求还未完成时切换到其他页面或关闭浏览器选项卡，那么取消请求可以避免浪费带宽和资源。
+- 其次，取消请求可以提高应用程序的性能和响应速度。例如，在向服务器请求数据时，如果用户在请求还未完成时发出了其他请求，那么取消请求可以避免浪费服务器资源和减少请求的响应时间，从而提高应用程序的性能和用户体验。
+
+上面的回答有一定的意义，我总结一下取消重复请求的场景：
+
+- 当跳转路由的时候，取消全部请求是有意义的。
+- 对于获取的内容很大的情况下，取消全部请求可以节省一部分带宽。
+- 对于第一次需要获取很大的内容，然后第二次获取很少的内容的时候，可能第二次的结果先到，然后第一次的结果才到覆盖了第二次的结果。
+
+参考链接：[Ajax 怎么取消？要不要取消？](https://ssshooter.com/2022-06-23-cancel-ajax/)
+
+#### 重复请求白名单
+
+根据上面的结论，只需要少量的接口需要开启取消重复请求的功能，所以我们添加一个数组来保存需要开启取消重复请求的接口列表。
+
+store 中增加：
+
+```ts
+export const useAppStore = defineStore("app", {
+  state: (): IState => ({
+    abortDupRequest: [], // ['/api/device/page']
+  }),
+});
+```
+
+然后再 `request.ts` 中加入是否取消重复请求功能代码：
+
+```ts
+//...
+
+class Request {
+  // ...
+
+  // 请求拦截器
+  private setReqInterceptors = () => {
+    this.instance.interceptors.request.use(
+      (config) => {
+        // 如果需要开启取消重复请求功能
+        if (appStore.abortDupRequest.includes(config.url)) {
+          const controller = new AbortController(); // 每个请求时都新生成一个AbortController实例
+
+          config.signal = controller.signal;
+
+          // 计算当前请求key值
+          const key = this.getRequestKey(config);
+
+          if (this.checkPending(key)) {
+            // 重复请求则取消当前请求
+            appStore.requests[key].abort();
+          } else {
+            appStore.addRequest(key, controller);
+          }
+        }
+        return config;
+      },
+      (err) => {
+        window.$message.error("请求失败");
+        return Promise.reject(err);
+      }
+    );
+  };
+
+  //...
+}
 ```
