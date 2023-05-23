@@ -34,7 +34,7 @@ export default defineConfig({
         activeMatch: "/engineer/",
       },
       { text: "效率工具", link: "/tools/", activeMatch: "/tools/" },
-      { text: "前端部署", link: "/deploy/", activeMatch: "/deploy/" },
+      { text: "前端工程化", link: "/fe-engine/", activeMatch: "/fe-engine/" },
     ],
 
     sidebar: {
@@ -134,7 +134,46 @@ export default defineConfig({
         },
       ],
       "/tools/": createSideBar("tools"),
-      "/deploy/": createSideBar("deploy"),
+      "/fe-engine/": [
+        {
+          text: "前端部署",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "Nginx从入门到实践",
+              link: "/fe-engine/Nginx从入门到实践",
+            },
+            {
+              text: "Docker从入门到实践",
+              link: "/fe-engine/Docker从入门到实践",
+            },
+            {
+              text: "CICD从入门到实践",
+              link: "/fe-engine/CICD从入门到实践",
+            },
+          ],
+        },
+        {
+          text: "前端监控",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "Sentry入门与实践",
+              link: "/fe-engine/Sentry入门与实践",
+            },
+            // {
+            //   text: "Docker从入门到实践",
+            //   link: "/fe-engine/Docker从入门到实践",
+            // },
+            // {
+            //   text: "CICD从入门到实践",
+            //   link: "/fe-engine/CICD从入门到实践",
+            // },
+          ],
+        },
+      ],
     },
 
     // 目录显示
