@@ -12,11 +12,11 @@ const members = [
     ]
   },
   {
-    avatar: '/xiaoyi.jpg',
-    name: 'YaoYi',
-    title: 'My Lover',
+    avatar: '/ChatGPT.jpg',
+    name: 'ChatGPT',
+    title: 'Personal Assistant',
     links: [
-      { icon: 'github', link: 'https://github.com/daotin' },
+      // { icon: 'github', link: 'https://github.com/daotin' },
       // { icon: 'twitter', link: 'https://twitter.com/youyuxi' }
     ]
   },
