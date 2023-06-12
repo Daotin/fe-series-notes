@@ -34,6 +34,11 @@ export default defineConfig({
         activeMatch: "/engineer/",
       },
       { text: "效率工具", link: "/tools/", activeMatch: "/tools/" },
+      {
+        text: "性能优化",
+        link: "/performance/first-screen",
+        activeMatch: "/performance/",
+      },
       { text: "前端工程化", link: "/fe-engine/", activeMatch: "/fe-engine/" },
     ],
 
@@ -171,6 +176,23 @@ export default defineConfig({
             //   text: "CICD从入门到实践",
             //   link: "/fe-engine/CICD从入门到实践",
             // },
+          ],
+        },
+      ],
+      "/performance": [
+        {
+          text: "性能优化",
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              text: "首屏优化",
+              link: "/performance/first-screen",
+            },
+            {
+              text: "体积优化",
+              link: "/performance/size-optimize",
+            },
           ],
         },
       ],
