@@ -252,6 +252,14 @@ See 'docker run --help'.
     }).$mount("#app");
     ```
 
+    `.env`代码为：
+
+    ```
+    VUE_APP_SENTRY_ENABLE=false
+    VUE_APP_SENTRY_DSN=https://6a47xxx34e7bxxx5996c87@o136xx522.ingest.sentry.io/450504xxx56736
+    VUE_APP_VERSION=1.0
+    ```
+
     Vue3 代码
 
     ```javascript
@@ -266,23 +274,47 @@ See 'docker run --help'.
       // ...
     });
 
-    Sentry.init({
-      app,
-      dsn: "https://6a47cb9c12634e7bad67be8105996c87@o1361522.ingest.sentry.io/4505046045556736",
-      integrations: [
-        new Sentry.BrowserTracing({
-          routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-          tracePropagationTargets: ["localhost", "my-site-url.com", /^\//],
-        }),
-      ],
-      // Set tracesSampleRate to 1.0 to capture 100%
-      // of transactions for performance monitoring.
-      // We recommend adjusting this value in production
-      tracesSampleRate: 1.0,
-    });
+    // 引入sentry
+    // sentry已启用 && (测试环境 || beta环境)
+    if (
+      import.meta.env.VITE_SENTRY_ENABLE === "true" &&
+      (import.meta.env.VITE_SERVER_MODE === "testBuild" ||
+        import.meta.env.VITE_SERVER_MODE === "developmentBuild")
+    ) {
+      console.log("%c== Sentry init ==", "background:#7E57C2;");
+      Sentry.init({
+        app,
+        dsn: import.meta.env.VITE_SENTRY_DSN,
+        integrations: [
+          new Sentry.BrowserTracing({
+            // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
+            tracePropagationTargets: ["localhost", /^\//],
+            routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+          }),
+          new Sentry.Replay(),
+        ],
+        // Performance Monitoring
+        tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+        // Session Replay
+        replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+        replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+        release: import.meta.env.VITE_APP_VERSION || "1.0",
+      });
+    }
 
     app.use(router);
     app.mount("#app");
+    ```
+
+    `.env`代码为：
+
+    ```
+    VITE_SENTRY_ENABLE=true # sentry手动开关
+    VITE_SENTRY_DSN=https://56a60ccxxx71ab9xxx@o136x22.ingest.sentry.io/45053xxx7312
+    VITE_SENTRY_AUTH_TOKEN=6226f50xxxea6decb92d7d07afxxx
+    VITE_SENTRY_ORG=481931cxxx
+    VITE_SENTRY_PROJECT=ty-store
+    VITE_APP_VERSION=1.6.0
     ```
 
 5.  配置性能监控 &#x20;
@@ -368,8 +400,8 @@ module.exports = defineConfig({
 
 ```bash
 VUE_APP_SENTRY_ENABLE=true # sentry手动开关
-VUE_APP_SENTRY_AUTH_TOKEN=6226f509e6cb40cea6decb92d7d07afec99baefaacfb455f8b6456c8c9e8e162
-VUE_APP_SENTRY_ORG=481931c02245
+VUE_APP_SENTRY_AUTH_TOKEN=6226f50xxxxecbxxxxb64xxe8e162
+VUE_APP_SENTRY_ORG=481xxx245
 VUE_APP_SENTRY_PROJECT=vue2-demo
 VUE_APP_SENTRY_DSN=vue2-demo
 VUE_APP_VERSION=1.0
@@ -404,46 +436,61 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 
+const loadEnvByMode = (mode, env) => {
+  return loadEnv(mode, process.cwd())[env];
+};
+
 // https://vitejs.dev/config/
-export default defineConfig({
-  build: {
-    sourcemap: true, // Source map generation must be turned on
-  },
-  plugins: [
-    vue(),
+export default defineConfig((mode) => {
+  // 获取环境变量
+  console.log("⭐mode==>", mode);
+  console.log("当前环境NODE_ENV==>", process.env.NODE_ENV);
 
-    // Put the Sentry vite plugin after all other plugins
-    sentryVitePlugin({
-      org: "481931c02245",
-      project: "unicom-vue2",
-
-      // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
-      // and need `project:releases` and `org:read` scopes
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-
-      sourcemaps: {
-        // Specify the directory containing build artifacts
-        assets: "./dist/**",
-      },
-
-      // Use the following option if you're on an SDK version lower than 7.47.0:
-      // include: "./dist",
-
-      // Optionally uncomment the line below to override automatic release name detection
-      // release: process.env.RELEASE,
-    }),
-  ],
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+  // 是否开启 sentry
+  const enableSentry =
+    (mode == "developmentBuild" || mode == "testBuild") &&
+    loadEnvByMode(mode, "VITE_SENTRY_ENABLE") == "true";
+  let viteConfig = {
+    build: {
+      sourcemap: enableSentry, // Source map generation must be turned on
     },
-  },
+    plugins: [
+      vue(),
+
+      // Put the Sentry vite plugin after all other plugins
+      sentryVitePlugin({
+        org: loadEnvByMode(mode, "VITE_SENTRY_ORG"),
+        project: loadEnvByMode(mode, "VITE_SENTRY_PROJECT"),
+
+        // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
+        // and need `project:releases` and `org:read` scopes
+        authToken: loadEnvByMode(mode, "VITE_SENTRY_AUTH_TOKEN"),
+
+        sourcemaps: {
+          // Specify the directory containing build artifacts
+          assets: "./dist/**",
+          ignore: ["node_modules"],
+          deleteFilesAfterUpload: "./dist/**/*.map",
+        },
+      }),
+    ],
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+      },
+    },
+  };
+  return viteConfig;
 });
 ```
 
 #### 注意事项
 
 注意：`@sentry/webpack-plugin`在上传后不会删除 sourceMap，需要在构建之后删除 `.map` 代码：
+
+::: warning
+sourcemaps.deleteFilesAfterUpload 可以删除`.map`文件，目前还未验证
+:::
 
 ```json
 "scripts": {
@@ -469,6 +516,22 @@ npm ERR!     C:\Users\daotin\AppData\Local\npm-cache\_logs\2023-04-21T00_46_28_1
 ```
 
 原因未知，但是在自己家里可以。**可能是公司网络问题。**
+
+::: details 尝试使用`--ignore-scripts`指令
+家里的 npm 和 node 版本都和公司的一样，也是同一个项目，但是公司的就是安装不了。。
+
+尝试使用`--ignore-scripts`指令跳过执行 package.json 中定义的安装脚本。
+
+在默认情况下，当你通过 npm install 命令安装一个包时，npm 会执行该包（以及它依赖的其他包）中定义的安装脚本。这些脚本通常用于执行一些初始化操作，如编译、构建或配置环境等。然而，有时安装脚本可能会失败，或者你可能不想执行它们，这时就可以使用 --ignore-scripts 选项来跳过这些脚本的执行。
+
+在你的情况下，由于 @sentry/vite-plugin 的安装脚本需要 sentry-cli 命令，但是该命令在你的系统中没有找到，因此安装失败。使用 --ignore-scripts 选项可以让 npm 跳过这个脚本的执行，从而完成包的安装。
+
+```
+npm install @sentry/vite-plugin --save-dev --ignore-scripts
+```
+
+安装得以顺利进行，但是最后在打包的时候还是报错。目前还未解决！
+:::
 
 **2、配置 sourcemap 后，构建`npm run build`报错：**
 

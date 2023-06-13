@@ -40,6 +40,15 @@ export default defineConfig({
         activeMatch: "/performance/",
       },
       { text: "前端工程化", link: "/fe-engine/", activeMatch: "/fe-engine/" },
+      {
+        text: "TEST",
+        items: [
+          {
+            text: "Markdown Extensions",
+            link: "https://vitepress.dev/guide/markdown",
+          },
+        ],
+      },
     ],
 
     sidebar: {
