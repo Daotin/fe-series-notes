@@ -705,6 +705,10 @@ Docker 会按照 docker-compose.yml 文件中的定义，启动一个新的 Dock
 
 如果您需要停止服务，可以运行 `docker-compose down`。
 
+## 相关文章
+
+- [掌握这 5 个技巧，让你的 Dockerfile 像个大师！](https://mp.weixin.qq.com/s/v9kznJ1OezUxA49-nd_r_Q)
+
 ## 进阶学习资料
 
 - [Docker 入门教程-阮一峰](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html "Docker 入门教程-阮一峰")
