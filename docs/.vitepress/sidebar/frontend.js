@@ -68,7 +68,6 @@ if (yearKeys.length) {
 
     const obj = {
       text: year,
-      collapsible: true,
       collapsed: year === yearKeys[0], // 第一个分组默认展开
       items: names.map((name) => {
         // name格式：// 2022-08-10-git-commit规范
@@ -121,7 +120,6 @@ export default sideBars;
 // export default [
 //   {
 //     text: "2022",
-//     collapsible: true,
 //     collapsed: false,
 //     items: [
 //       {
@@ -140,7 +138,6 @@ export default sideBars;
 //   },
 //   {
 //     text: "2011",
-//     collapsible: true,
 //     collapsed: true,
 //     items: [
 //       { text: "c", link: `${commonPath}/c.md` },

@@ -66,7 +66,6 @@ export function createSideBar(commonPath) {
 
       const obj = {
         text: year,
-        collapsible: true,
         collapsed: year !== yearKeys[0], // 第一个分组默认展开
         items: names.map((name) => {
           // name格式：// 2022-08-10-git-commit规范

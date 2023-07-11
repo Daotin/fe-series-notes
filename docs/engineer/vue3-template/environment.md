@@ -131,7 +131,7 @@ console.log(import.meta.env.DB_PASSWORD); // undefined
 - 在 main.ts 中打印 `process.env` 会报错，提示 process is not defined (因为 vite3 移除了这个变量：https://github.com/vitejs/vite/issues/1973)
 - 在 main.ts 中打印 `import.meta.env` 会有除了内建变量外，还有自定义 `VITE_`开头的环境变量
 
-![](./images/env-1.png)
+![](../images/env-1.png)
 
 3、在 main.ts 执行完成后，再到 vue 组件中看看：
 

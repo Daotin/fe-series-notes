@@ -75,7 +75,6 @@ export function createSideBar(commonPath) {
 
       const obj = {
         text: group,
-        collapsible: true,
         collapsed: group !== groupKeys[0], // 第一个分组默认展开
         items: names.map((name) => {
           // name格式：// 2-测试2

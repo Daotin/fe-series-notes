@@ -29,17 +29,11 @@ export default defineConfig({
 
     nav: [
       {
-        text: "从零搭建Vue3项目",
+        text: "前端工程化",
         link: "/engineer/",
         activeMatch: "/engineer/",
       },
-      { text: "效率工具", link: "/tools/", activeMatch: "/tools/" },
-      {
-        text: "性能优化",
-        link: "/performance/first-screen",
-        activeMatch: "/performance/",
-      },
-      { text: "前端工程化", link: "/fe-engine/", activeMatch: "/fe-engine/" },
+      { text: "BLOG", link: "/blog/", activeMatch: "/blog/" },
       {
         text: "TEST",
         items: [
@@ -54,29 +48,28 @@ export default defineConfig({
     sidebar: {
       "/engineer/": [
         {
-          text: "基础设施",
-          collapsible: true,
+          text: "从零搭建Vue3项目",
           collapsed: false,
           items: [
             {
               text: "开发工具推荐",
-              link: "/engineer/develop-tool",
+              link: "/engineer/vue3-template/develop-tool",
             },
             {
               text: "创建项目",
-              link: "/engineer/create-project",
+              link: "/engineer/vue3-template/create-project",
             },
             {
               text: "目录结构",
-              link: "/engineer/structure",
+              link: "/engineer/vue3-template/structure",
             },
             {
               text: "vite工程化配置",
-              link: "/engineer/vite-config",
+              link: "/engineer/vue3-template/vite-config",
             },
             {
               text: "代码规范",
-              link: "/engineer/format",
+              link: "/engineer/vue3-template/format",
             },
             {
               text: "git提交规范",
@@ -84,127 +77,110 @@ export default defineConfig({
             },
             {
               text: "引入ElementPlus组件库",
-              link: "/engineer/element-plus",
+              link: "/engineer/vue3-template/element-plus",
             },
             {
               text: "引入TailWindCSS",
-              link: "/engineer/tailwind",
+              link: "/engineer/vue3-template/tailwind",
             },
             {
               text: "配置vue-router",
-              link: "/engineer/vue-router",
+              link: "/engineer/vue3-template/vue-router",
             },
             {
               text: "配置Pinia",
-              link: "/engineer/pinia",
+              link: "/engineer/vue3-template/pinia",
             },
             {
               text: "封装axios",
-              link: "/engineer/axios",
+              link: "/engineer/vue3-template/axios",
             },
             {
               text: "配置mock",
-              link: "/engineer/mock",
+              link: "/engineer/vue3-template/mock",
             },
             {
               text: "静态资源管理",
-              link: "/engineer/assets",
+              link: "/engineer/vue3-template/assets",
             },
             {
               text: "界面布局layouts",
-              link: "/engineer/layouts",
+              link: "/engineer/vue3-template/layouts",
             },
             {
               text: "配置环境变量",
-              link: "/engineer/environment",
+              link: "/engineer/vue3-template/environment",
             },
             {
               text: "权限控制",
-              link: "/engineer/auth",
+              link: "/engineer/vue3-template/auth",
+            },
+          ],
+        },
+        {
+          text: "前端脚手架CLI",
+          collapsed: false,
+          items: [
+            {
+              text: "从零开始构建脚手架",
+              link: "/engineer/vue3-cli/从零开始构建脚手架",
             },
           ],
         },
         {
           text: "业务模块",
-          collapsible: true,
           collapsed: false,
           items: [
             {
               text: "登录注册",
-              link: "/engineer/login",
+              link: "/engineer/vue3-component/login",
             },
           ],
         },
         {
-          text: "性能优化",
-          collapsible: true,
-          collapsed: false,
-          items: [
-            {
-              text: "首屏优化",
-              link: "/engineer/first-screen",
-            },
-          ],
-        },
-      ],
-      "/tools/": createSideBar("tools"),
-      "/fe-engine/": [
-        {
-          text: "前端部署",
-          collapsible: true,
+          text: "构建部署",
           collapsed: false,
           items: [
             {
               text: "Nginx从入门到实践",
-              link: "/fe-engine/Nginx从入门到实践",
+              link: "/engineer/cicd/Nginx从入门到实践",
             },
             {
               text: "Docker从入门到实践",
-              link: "/fe-engine/Docker从入门到实践",
+              link: "/engineer/cicd/Docker从入门到实践",
             },
             {
               text: "CICD从入门到实践",
-              link: "/fe-engine/CICD从入门到实践",
+              link: "/engineer/cicd/CICD从入门到实践",
             },
           ],
         },
         {
           text: "前端监控",
-          collapsible: true,
           collapsed: false,
           items: [
             {
               text: "Sentry入门与实践",
-              link: "/fe-engine/Sentry入门与实践",
+              link: "/engineer/cicd/Sentry入门与实践",
             },
-            // {
-            //   text: "Docker从入门到实践",
-            //   link: "/fe-engine/Docker从入门到实践",
-            // },
-            // {
-            //   text: "CICD从入门到实践",
-            //   link: "/fe-engine/CICD从入门到实践",
-            // },
           ],
         },
-      ],
-      "/performance": [
         {
           text: "性能优化",
-          collapsible: true,
           collapsed: false,
           items: [
             {
               text: "首屏优化",
-              link: "/performance/first-screen",
+              link: "/engineer/performance/first-screen",
             },
             {
               text: "体积优化",
-              link: "/performance/size-optimize",
+              link: "/engineer/performance/size-optimize",
             },
           ],
         },
       ],
+      "/blog/": createSideBar("blog"),
     },
 
     // 目录显示

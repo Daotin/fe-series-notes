@@ -75,7 +75,7 @@ module.exports = {
 
 对于一些需要 media query 实现的响应式样式，tailwindcss 提供了一组默认规则，使用 `min-width` 实现的断点功能实现响应式方案。
 
-![](images/2023-05-18-14-57-59.png)
+![](../images/2023-05-18-14-57-59.png)
 
 ```HTML
  <div className="flex flex-wrap sm:flex-nowrap"/>

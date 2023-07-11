@@ -173,4 +173,4 @@ app.use(directives);
 
 `sys:users:new` 是后端接口文档中，在每个接口中，都会描述该接口的 authCode，只需要按照接口文档，在页面添加即可。
 
-![](./images/auth-1.png)
+![](../images/auth-1.png)
