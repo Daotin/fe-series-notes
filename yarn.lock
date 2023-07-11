@@ -769,10 +769,10 @@ vite@4.4.0-beta.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitepress-plugin-search@1.0.4-alpha.17:
-  version "1.0.4-alpha.17"
-  resolved "https://registry.npmmirror.com/vitepress-plugin-search/-/vitepress-plugin-search-1.0.4-alpha.17.tgz#fff6c2d17b5092d79c390487516b839a17047d58"
-  integrity sha512-yxZxfNK51n5xiStjr3aSxsTTUqrm9JmYHuwq59bMrGxNyEyigrFtNybmhHQokVrcxDblokKX9f96sSQmz3PypQ==
+vitepress-plugin-search@1.0.4-alpha.15:
+  version "1.0.4-alpha.15"
+  resolved "https://registry.npmmirror.com/vitepress-plugin-search/-/vitepress-plugin-search-1.0.4-alpha.15.tgz#c26575a7b5f1eaa087835e702a9b93902a2d7948"
+  integrity sha512-Ef/VkhTVYlECVI0H9Ck6745UNPfYFppAqnlxVSMJXdxP2vjOZ5TYNczlTTQ2p9dh16MFw/IurbL1/GrG4nXdNw==
   dependencies:
     "@types/flexsearch" "^0.7.3"
     "@types/markdown-it" "^12.2.3"
