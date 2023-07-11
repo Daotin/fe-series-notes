@@ -12,11 +12,11 @@ nginx (engine x) 是一个 HTTP 和反向代理服务器，一个邮件代理服
 
 Nginx 的三个主要应用场景：
 
-**1、静态资源服务**
+**1、静态资源的托管**
 
 静态资源直接可以由 nginx 提供服务，降低对后台应用访问。
 
-**2、反向代理**
+**2、动态资源的反向代理**
 
 - 通过反向代理访问后端接口
 - 后端应用服务构成集群后，需要动态扩容，有的应用出问题了需要做容灾，那么需要 nginx 负载均衡功能
@@ -197,6 +197,41 @@ http {   # 配置使用最频繁的部分，代理、缓存、日志定义等绝
 - `~`：表示执行一个正则匹配，区分大小写
 - `~*`：表示执行一个正则匹配，不区分大小写
 - `/xxx/`：常规字符串路径匹配
+
+  几个常见的例子说明：
+
+```
+location = /111/ {
+    default_type text/plain;
+    return 200 "111 success";
+}
+
+location /222 {
+    default_type text/plain;
+    return 200 $uri;
+}
+
+location ~ ^/333/bbb.*\.html$ {
+    default_type text/plain;
+    return 200 $uri;
+}
+
+location ~* ^/444/AAA.*\.html$ {
+    default_type text/plain;
+    return 200 $uri;
+}
+```
+
+总结一下，一共 4 个 location 语法：
+
+- `location = /aaa` 是精确匹配 /aaa 的路由。
+- `location /bbb` 是前缀匹配 /bbb 的路由。
+- `location ~ /ccc.*.html` 是正则匹配。可以再加个 * 表示不区分大小写 location ~* /ccc.*.html
+- `location ^~ /ddd` 是前缀匹配，但是优先级更高。
+
+这 4 种语法的优先级是这样的：
+
+精确匹配（=） > 高优先级前缀匹配（^~） > 正则匹配（～ ~*） > 普通前缀匹配
 
 更多参考：[https://z.itpub.net/article/detail/03489CAF30DD7EB79B9E239E941FA82D](https://z.itpub.net/article/detail/03489CAF30DD7EB79B9E239E941FA82D)
 
@@ -1038,6 +1073,7 @@ http {
 
 - nginx 中文文档：[https://docshome.gitbook.io/nginx-docs/](https://docshome.gitbook.io/nginx-docs/)
 - location 匹配规则：[https://www.cnblogs.com/woshimrf/p/nginx-config-location.html](https://www.cnblogs.com/woshimrf/p/nginx-config-location.html "https://www.cnblogs.com/woshimrf/p/nginx-config-location.html")
+- [结合 Docker，快速掌握 Nginx 2 大核心用法——神光](https://mp.weixin.qq.com/s/DAIbd01AlHWnAna7WFMjig)
 
 ### TY-Store 示例
 
