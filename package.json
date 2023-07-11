@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs --port 3001",
-    "log": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "docs:serve": "vitepress serve docs --port 3001"
   },
   "devDependencies": {
     "flexsearch": "^0.7.31",
