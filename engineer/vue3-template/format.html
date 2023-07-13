@@ -6,9 +6,9 @@
     <title>代码规范 | 前端队长小冯</title>
     <meta name="description" content="前端，JavaScript，Vue">
     <link rel="stylesheet" href="/fe-series-notes/assets/style.24b49c60.css">
-    <link rel="modulepreload" href="/fe-series-notes/assets/chunks/virtual_search-data.3c1fe0a2.js">
-    <link rel="modulepreload" href="/fe-series-notes/assets/app.3f9dcbd2.js">
-    <link rel="modulepreload" href="/fe-series-notes/assets/engineer_vue3-template_format.md.c3b7f45e.lean.js">
+    <link rel="modulepreload" href="/fe-series-notes/assets/chunks/virtual_search-data.d306561a.js">
+    <link rel="modulepreload" href="/fe-series-notes/assets/app.38ab461f.js">
+    <link rel="modulepreload" href="/fe-series-notes/assets/engineer_vue3-template_format.md.701abc50.lean.js">
     
     <script id="check-dark-light">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
   </head>
@@ -33,36 +33,18 @@
 <span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#7EE787;">&quot;source.fixAll&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
 <span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#7EE787;">&quot;source.fixAll.eslint&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#79C0FF;">true</span></span>
 <span class="line"><span style="color:#C9D1D9;">  },</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// .ts 文件格式化程序</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;[typescript]&quot;</span><span style="color:#C9D1D9;">: {</span></span>
-<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#7EE787;">&quot;editor.defaultFormatter&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;esbenp.prettier-vscode&quot;</span></span>
-<span class="line"><span style="color:#C9D1D9;">  },</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// .vue 文件格式化程序</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;[vue]&quot;</span><span style="color:#C9D1D9;">: {</span></span>
-<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#7EE787;">&quot;editor.defaultFormatter&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;esbenp.prettier-vscode&quot;</span></span>
-<span class="line"><span style="color:#C9D1D9;">  },</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;[json]&quot;</span><span style="color:#C9D1D9;">: {</span></span>
-<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#7EE787;">&quot;editor.defaultFormatter&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;esbenp.prettier-vscode&quot;</span></span>
-<span class="line"><span style="color:#C9D1D9;">  },</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 保存到额时候用使用 prettier进行格式化</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;editor.formatOnSave&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// // 默认使用prittier作为格式化工具</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;editor.defaultFormatter&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;dbaeumer.vscode-eslint&quot;</span><span style="color:#C9D1D9;">,</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 操作时作为单词分隔符的字符</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;editor.wordSeparators&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;`~!@#%^&amp;*()=+[{]}</span><span style="color:#79C0FF;">\\</span><span style="color:#A5D6FF;">|;:&#39;</span><span style="color:#79C0FF;">\&quot;</span><span style="color:#A5D6FF;">,.&lt;&gt;/?&quot;</span><span style="color:#C9D1D9;">,</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 一个制表符等于的空格数</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;editor.tabSize&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#79C0FF;">2</span><span style="color:#C9D1D9;">,</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 行尾字符</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;files.eol&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;</span><span style="color:#79C0FF;">\n</span><span style="color:#A5D6FF;">&quot;</span><span style="color:#C9D1D9;">,</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 保存到额时候用使用 prettier进行格式化</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;editor.formatOnSave&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// // 不要有分号</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// &quot;prettier.semi&quot;: false,</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// // 使用单引号</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// &quot;prettier.singleQuote&quot;: true,</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// // 默认使用prittier作为格式化工具</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;editor.defaultFormatter&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;esbenp.prettier-vscode&quot;</span><span style="color:#C9D1D9;">,</span></span>
-<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;[less]&quot;</span><span style="color:#C9D1D9;">: {</span></span>
-<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#7EE787;">&quot;editor.defaultFormatter&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;esbenp.prettier-vscode&quot;</span></span>
-<span class="line"><span style="color:#C9D1D9;">  }</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;files.eol&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;</span><span style="color:#79C0FF;">\n</span><span style="color:#A5D6FF;">&quot;</span></span>
 <span class="line"><span style="color:#C9D1D9;">}</span></span>
-<span class="line"></span></code></pre></div><h2 id="prettier-配置" tabindex="-1">Prettier 配置 <a class="header-anchor" href="#prettier-配置" aria-hidden="true">#</a></h2><blockquote><p>Prettier 主要是为了代码风格的规范或统一，例如单引号还是双引号，每行最大长度，等号左右空格，使用 tab 还是 空格等等</p></blockquote><p>1、在 VSCode 中安装<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank" rel="noreferrer">Prettier</a>插件</p><p>2、新增<code>.prettierrc.js</code>文件</p><div class="language-js"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre class="shiki"><code><span class="line"><span style="color:#79C0FF;">module</span><span style="color:#C9D1D9;">.</span><span style="color:#79C0FF;">exports</span><span style="color:#C9D1D9;"> </span><span style="color:#FF7B72;">=</span><span style="color:#C9D1D9;"> {</span></span>
+<span class="line"></span></code></pre></div><h2 id="prettier-配置" tabindex="-1">Prettier 配置 <a class="header-anchor" href="#prettier-配置" aria-hidden="true">#</a></h2><h3 id="如果只使用-prettier-不使用-eslint" tabindex="-1">如果只使用 Prettier 不使用 eslint <a class="header-anchor" href="#如果只使用-prettier-不使用-eslint" aria-hidden="true">#</a></h3><blockquote><p>Prettier 主要是为了代码风格的规范或统一，例如单引号还是双引号，每行最大长度，等号左右空格，使用 tab 还是 空格等等</p></blockquote><p>1、在 VSCode 中安装<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank" rel="noreferrer">Prettier</a>插件</p><p>2、新增<code>.prettierrc.js</code>文件</p><div class="language-js"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre class="shiki"><code><span class="line"><span style="color:#79C0FF;">module</span><span style="color:#C9D1D9;">.</span><span style="color:#79C0FF;">exports</span><span style="color:#C9D1D9;"> </span><span style="color:#FF7B72;">=</span><span style="color:#C9D1D9;"> {</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 超过多少字符后换行</span></span>
 <span class="line"><span style="color:#C9D1D9;">  printWidth: </span><span style="color:#79C0FF;">120</span><span style="color:#C9D1D9;">,</span></span>
 <span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 行末分号</span></span>
@@ -89,7 +71,7 @@
 <span class="line"><span style="color:#c9d1d9;">**/*.sh</span></span>
 <span class="line"><span style="color:#c9d1d9;"></span></span>
 <span class="line"><span style="color:#c9d1d9;">/public/*</span></span>
-<span class="line"><span style="color:#c9d1d9;"></span></span></code></pre></div><h2 id="eslint-配置" tabindex="-1">ESLint 配置 <a class="header-anchor" href="#eslint-配置" aria-hidden="true">#</a></h2><blockquote><p>ESLint 主要是为了做代码检测，例如未使用的变量，未定义的引用，比较时使用 ===，禁止不必要的括号等等</p></blockquote><p>新增 <code>.eslintrc.cjs</code> 文件，并配置规则，关闭 prettier 的警告：</p><div class="language-js"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre class="shiki"><code><span class="line"><span style="color:#8B949E;">/* eslint-env node */</span></span>
+<span class="line"><span style="color:#c9d1d9;"></span></span></code></pre></div><h3 id="如果使用了-eslint-规则校验" tabindex="-1">如果使用了 eslint 规则校验 <a class="header-anchor" href="#如果使用了-eslint-规则校验" aria-hidden="true">#</a></h3><p>上面的配置均可忽略，包括不安装 vscode 的 Prettier 插件。</p><h2 id="eslint-配置" tabindex="-1">ESLint 配置 <a class="header-anchor" href="#eslint-配置" aria-hidden="true">#</a></h2><blockquote><p>ESLint 主要是为了做代码检测，例如未使用的变量，未定义的引用，比较时使用 ===，禁止不必要的括号等等</p></blockquote><h3 id="如果只使用-prettier-不使用-eslint-1" tabindex="-1">如果只使用 Prettier 不使用 eslint <a class="header-anchor" href="#如果只使用-prettier-不使用-eslint-1" aria-hidden="true">#</a></h3><p>新增 <code>.eslintrc.cjs</code> 文件，并配置规则，关闭 prettier 的警告：</p><div class="language-js"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre class="shiki"><code><span class="line"><span style="color:#8B949E;">/* eslint-env node */</span></span>
 <span class="line"><span style="color:#D2A8FF;">require</span><span style="color:#C9D1D9;">(</span><span style="color:#A5D6FF;">&quot;@rushstack/eslint-patch/modern-module-resolution&quot;</span><span style="color:#C9D1D9;">);</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#79C0FF;">module</span><span style="color:#C9D1D9;">.</span><span style="color:#79C0FF;">exports</span><span style="color:#C9D1D9;"> </span><span style="color:#FF7B72;">=</span><span style="color:#C9D1D9;"> {</span></span>
@@ -97,9 +79,134 @@
 <span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;prettier/prettier&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;off&quot;</span><span style="color:#C9D1D9;">,</span></span>
 <span class="line"><span style="color:#C9D1D9;">  },</span></span>
 <span class="line"><span style="color:#C9D1D9;">};</span></span>
-<span class="line"></span></code></pre></div></div></div></main><!--[--><!--]--><footer class="VPDocFooter" data-v-cfb513e0 data-v-21f75714><div class="edit-info" data-v-21f75714><div class="edit-link" data-v-21f75714><a class="VPLink link edit-link-button" href="https://github.com/Daotin/blog/edit/main/docs/engineer/vue3-template/format.md" target="_blank" rel="noreferrer" data-v-21f75714 data-v-3c355974><!--[--><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="edit-link-icon" data-v-21f75714><path d="M18,23H4c-1.7,0-3-1.3-3-3V6c0-1.7,1.3-3,3-3h7c0.6,0,1,0.4,1,1s-0.4,1-1,1H4C3.4,5,3,5.4,3,6v14c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1v-7c0-0.6,0.4-1,1-1s1,0.4,1,1v7C21,21.7,19.7,23,18,23z"></path><path d="M8,17c-0.3,0-0.5-0.1-0.7-0.3C7,16.5,6.9,16.1,7,15.8l1-4c0-0.2,0.1-0.3,0.3-0.5l9.5-9.5c1.2-1.2,3.2-1.2,4.4,0c1.2,1.2,1.2,3.2,0,4.4l-9.5,9.5c-0.1,0.1-0.3,0.2-0.5,0.3l-4,1C8.2,17,8.1,17,8,17zM9.9,12.5l-0.5,2.1l2.1-0.5l9.3-9.3c0.4-0.4,0.4-1.1,0-1.6c-0.4-0.4-1.2-0.4-1.6,0l0,0L9.9,12.5z M18.5,2.5L18.5,2.5L18.5,2.5z"></path></svg> Edit this page on GitHub<!--]--><!----></a></div><div class="last-updated" data-v-21f75714><p class="VPLastUpdated" data-v-21f75714 data-v-18fe8fc2>Last updated: <time datetime="2023-07-11T05:16:16.000Z" data-v-18fe8fc2></time></p></div></div><div class="prev-next" data-v-21f75714><div class="pager" data-v-21f75714><a class="pager-link prev" href="/fe-series-notes/engineer/vue3-template/vite-config.html" data-v-21f75714><span class="desc" data-v-21f75714>Previous page</span><span class="title" data-v-21f75714>vite工程化配置</span></a></div><div class="has-prev pager" data-v-21f75714><a class="pager-link next" href="https://daotin.github.io/posts/2022/08/10/git-commit%E8%A7%84%E8%8C%83.html" data-v-21f75714><span class="desc" data-v-21f75714>Next page</span><span class="title" data-v-21f75714>git提交规范</span></a></div></div></footer><!--[--><!--]--></div></div></div></div></div><footer class="VPFooter has-sidebar" data-v-f44a984a data-v-9f24cc86><div class="container" data-v-9f24cc86><p class="message" data-v-9f24cc86>Released under the CC BY-NC-ND 3.0</p><p class="copyright" data-v-9f24cc86>Copyright © 2022-present Daotin</p></div></footer><!--[--><!--]--></div></div>
-    <script>__VP_HASH_MAP__ = JSON.parse("{\"blog_100-jetbrain激活.md\":\"34fafb9d\",\"blog_200-webstorm插件推荐.md\":\"dd0ae9d6\",\"blog_index.md\":\"cca65192\",\"engineer_cicd_cicd从入门到实践.md\":\"896e3dd0\",\"engineer_cicd_docker从入门到实践.md\":\"0485b3ac\",\"engineer_cicd_nginx从入门到实践.md\":\"2a5fa421\",\"engineer_cicd_sentry入门与实践.md\":\"57ec0f9a\",\"engineer_index.md\":\"a61e70dc\",\"engineer_performance_first-screen.md\":\"6dacd587\",\"engineer_performance_size-optimize.md\":\"b13c176a\",\"engineer_vue3-cli_从零开始构建脚手架.md\":\"00a44e81\",\"engineer_vue3-component_login.md\":\"4b121769\",\"engineer_vue3-template_assets.md\":\"e51baec0\",\"engineer_vue3-template_auth.md\":\"80dad68f\",\"engineer_vue3-template_axios.md\":\"63f08e15\",\"engineer_vue3-template_create-project.md\":\"f221a160\",\"engineer_vue3-template_develop-tool.md\":\"b3052d77\",\"engineer_vue3-template_element-plus.md\":\"9e7abe13\",\"engineer_vue3-template_environment.md\":\"bee2ee1f\",\"engineer_vue3-template_format.md\":\"c3b7f45e\",\"engineer_vue3-template_layouts.md\":\"9bc0b68e\",\"engineer_vue3-template_mock.md\":\"ca06b582\",\"engineer_vue3-template_pinia.md\":\"c48d1519\",\"engineer_vue3-template_structure.md\":\"0757b106\",\"engineer_vue3-template_tailwind.md\":\"8036f6df\",\"engineer_vue3-template_vite-config.md\":\"2aae643c\",\"engineer_vue3-template_vue-router.md\":\"36337180\",\"index.md\":\"a0c74078\"}")</script>
-    <script type="module" async src="/fe-series-notes/assets/app.3f9dcbd2.js"></script>
+<span class="line"></span></code></pre></div><h3 id="如果使用了-eslint-规则校验-1" tabindex="-1">如果使用了 eslint 规则校验 <a class="header-anchor" href="#如果使用了-eslint-规则校验-1" aria-hidden="true">#</a></h3><p>1、安装插件</p><blockquote><p>需要安装 9 个，别怕都是开发才会使用，不会打包到生产环境</p></blockquote><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki"><code><span class="line"><span style="color:#c9d1d9;"></span></span>
+<span class="line"><span style="color:#c9d1d9;">npm i -D eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue prettier vue-eslint-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser @vue/eslint-config-typescript</span></span>
+<span class="line"><span style="color:#c9d1d9;"></span></span>
+<span class="line"><span style="color:#c9d1d9;"></span></span></code></pre></div><p>2、新增 <code>.eslintrc.js</code> 文件，并配置规则：</p><div class="language-js"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre class="shiki"><code><span class="line"><span style="color:#79C0FF;">module</span><span style="color:#C9D1D9;">.</span><span style="color:#79C0FF;">exports</span><span style="color:#C9D1D9;"> </span><span style="color:#FF7B72;">=</span><span style="color:#C9D1D9;"> {</span></span>
+<span class="line"><span style="color:#C9D1D9;">  root: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">  env: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">    node: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">  },</span></span>
+<span class="line"><span style="color:#C9D1D9;">  extends: [</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;plugin:vue/vue3-essential&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;eslint:recommended&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;@vue/typescript/recommended&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;plugin:prettier/recommended&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">  ],</span></span>
+<span class="line"><span style="color:#C9D1D9;">  parserOptions: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">    ecmaVersion: </span><span style="color:#79C0FF;">2020</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">  },</span></span>
+<span class="line"><span style="color:#C9D1D9;">  rules: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 避免同时使用多个三目运算符</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;no-nested-ternary&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;error&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 单行注释使用 `//`，注释应单独一行写在被注释对象的上方，不要追加在某条语句的后面</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;spaced-comment&quot;</span><span style="color:#C9D1D9;">: [</span><span style="color:#A5D6FF;">&quot;error&quot;</span><span style="color:#C9D1D9;">, </span><span style="color:#A5D6FF;">&quot;always&quot;</span><span style="color:#C9D1D9;">, { markers: [</span><span style="color:#A5D6FF;">&quot;/&quot;</span><span style="color:#C9D1D9;">] }],</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;line-comment-position&quot;</span><span style="color:#C9D1D9;">: [</span><span style="color:#A5D6FF;">&quot;error&quot;</span><span style="color:#C9D1D9;">, { position: </span><span style="color:#A5D6FF;">&quot;above&quot;</span><span style="color:#C9D1D9;"> }],</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 未使用的变量</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;@typescript-eslint/no-unused-vars&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;warn&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 可以使用 any</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;@typescript-eslint/no-explicit-any&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;off&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 类型命名规则</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;@typescript-eslint/naming-convention&quot;</span><span style="color:#C9D1D9;">: [</span></span>
+<span class="line"><span style="color:#C9D1D9;">      </span><span style="color:#A5D6FF;">&quot;error&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        selector: </span><span style="color:#A5D6FF;">&quot;interface&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        format: [</span><span style="color:#A5D6FF;">&quot;PascalCase&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">        custom: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">          regex: </span><span style="color:#A5D6FF;">&quot;^I[A-Z]&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">          match: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        selector: </span><span style="color:#A5D6FF;">&quot;typeAlias&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        format: [</span><span style="color:#A5D6FF;">&quot;PascalCase&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">        custom: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">          regex: </span><span style="color:#A5D6FF;">&quot;^T[A-Z]&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">          match: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        selector: </span><span style="color:#A5D6FF;">&quot;class&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        format: [</span><span style="color:#A5D6FF;">&quot;PascalCase&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        selector: </span><span style="color:#A5D6FF;">&quot;variable&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        modifiers: [</span><span style="color:#A5D6FF;">&quot;global&quot;</span><span style="color:#C9D1D9;">, </span><span style="color:#A5D6FF;">&quot;const&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">        format: [</span><span style="color:#A5D6FF;">&quot;PascalCase&quot;</span><span style="color:#C9D1D9;">, </span><span style="color:#A5D6FF;">&quot;UPPER_CASE&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        selector: </span><span style="color:#A5D6FF;">&quot;variable&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        format: [</span><span style="color:#A5D6FF;">&quot;camelCase&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      </span><span style="color:#8B949E;">// 枚举需要以 Enum 开头</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        selector: </span><span style="color:#A5D6FF;">&quot;enum&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        format: [</span><span style="color:#A5D6FF;">&quot;PascalCase&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">        custom: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">          regex: </span><span style="color:#A5D6FF;">&quot;^Enum[A-Z]&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">          match: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        },</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">    ],</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 类名使用大驼峰</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;@typescript-eslint/class-name-casing&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;off&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 多行注释使用 /** ... */ 风格</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;multiline-comment-style&quot;</span><span style="color:#C9D1D9;">: [</span><span style="color:#A5D6FF;">&quot;error&quot;</span><span style="color:#C9D1D9;">, </span><span style="color:#A5D6FF;">&quot;starred-block&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#8B949E;">// 禁用组件名必须多个单词</span></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;vue/multi-word-component-names&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;off&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C9D1D9;">    </span><span style="color:#A5D6FF;">&quot;prettier/prettier&quot;</span><span style="color:#C9D1D9;">: [</span></span>
+<span class="line"><span style="color:#C9D1D9;">      </span><span style="color:#A5D6FF;">&quot;error&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">      {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// 超过多少字符后换行</span></span>
+<span class="line"><span style="color:#C9D1D9;">        printWidth: </span><span style="color:#79C0FF;">120</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// 行末分号</span></span>
+<span class="line"><span style="color:#C9D1D9;">        semi: </span><span style="color:#79C0FF;">false</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// 单引号</span></span>
+<span class="line"><span style="color:#C9D1D9;">        singleQuote: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// 缩进</span></span>
+<span class="line"><span style="color:#C9D1D9;">        tabWidth: </span><span style="color:#79C0FF;">2</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// 使用tab缩进还是空格</span></span>
+<span class="line"><span style="color:#C9D1D9;">        useTabs: </span><span style="color:#79C0FF;">true</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// 是否使用尾逗号</span></span>
+<span class="line"><span style="color:#C9D1D9;">        trailingComma: </span><span style="color:#A5D6FF;">&quot;es5&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// &gt; 标签放在最后一行的末尾，而不是单独放在下一行</span></span>
+<span class="line"><span style="color:#C9D1D9;">        jsxBracketSameLine: </span><span style="color:#79C0FF;">false</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// (x) =&gt; {} 箭头函数参数只有一个时是否要有小括号。 alwaysz:总是带括号，avoid：省略括号</span></span>
+<span class="line"><span style="color:#C9D1D9;">        arrowParens: </span><span style="color:#A5D6FF;">&quot;avoid&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#8B949E;">// Prettier 使用与你的项目中现有的换行符一致</span></span>
+<span class="line"><span style="color:#C9D1D9;">        endOfLine: </span><span style="color:#A5D6FF;">&quot;auto&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">    ],</span></span>
+<span class="line"><span style="color:#C9D1D9;">  },</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#8B949E;">// 添加 overrides，忽略vue文件中的命名规则</span></span>
+<span class="line"><span style="color:#C9D1D9;">  overrides: [</span></span>
+<span class="line"><span style="color:#C9D1D9;">    {</span></span>
+<span class="line"><span style="color:#C9D1D9;">      files: [</span><span style="color:#A5D6FF;">&quot;*.vue&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">      rules: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">        </span><span style="color:#A5D6FF;">&quot;@typescript-eslint/naming-convention&quot;</span><span style="color:#C9D1D9;">: [</span></span>
+<span class="line"><span style="color:#C9D1D9;">          </span><span style="color:#A5D6FF;">&quot;warn&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">          {</span></span>
+<span class="line"><span style="color:#C9D1D9;">            selector: </span><span style="color:#A5D6FF;">&quot;variable&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">            format: [</span><span style="color:#A5D6FF;">&quot;camelCase&quot;</span><span style="color:#C9D1D9;">, </span><span style="color:#A5D6FF;">&quot;PascalCase&quot;</span><span style="color:#C9D1D9;">, </span><span style="color:#A5D6FF;">&quot;UPPER_CASE&quot;</span><span style="color:#C9D1D9;">],</span></span>
+<span class="line"><span style="color:#C9D1D9;">          },</span></span>
+<span class="line"><span style="color:#C9D1D9;">        ],</span></span>
+<span class="line"><span style="color:#C9D1D9;">      },</span></span>
+<span class="line"><span style="color:#C9D1D9;">    },</span></span>
+<span class="line"><span style="color:#C9D1D9;">  ],</span></span>
+<span class="line"><span style="color:#C9D1D9;">};</span></span>
+<span class="line"></span></code></pre></div><p>然后，可以在 package.json 中添加下面指令，用来检测和修复代码的 eslint 错误：</p><div class="language-json"><button title="Copy Code" class="copy"></button><span class="lang">json</span><pre class="shiki"><code><span class="line"><span style="color:#A5D6FF;">&quot;scripts&quot;</span><span style="color:#C9D1D9;">: {</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;lint&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;eslint --ext .js,.ts,.vue --ignore-path .gitignore src/&quot;</span><span style="color:#C9D1D9;">,</span></span>
+<span class="line"><span style="color:#C9D1D9;">  </span><span style="color:#7EE787;">&quot;lint:fix&quot;</span><span style="color:#C9D1D9;">: </span><span style="color:#A5D6FF;">&quot;eslint --ext .js,.ts,.vue --ignore-path .gitignore src/ --fix&quot;</span></span>
+<span class="line"><span style="color:#C9D1D9;">}</span></span>
+<span class="line"></span></code></pre></div><div class="warning custom-block"><p class="custom-block-title">WARNING</p><p>需要注意的是，<code>eslint --fix</code> 不能修复所有的问题。它主要用于自动修复那些可以安全地更改的问题，例如缩进、空格、换行符、引号类型等。这些问题通常与代码格式有关，而不涉及代码逻辑。</p><p>对于一些可能需要更复杂的逻辑或代码结构调整的问题，如注释位置、变量未使用、变量未声明等，eslint 通常无法自动修复。这是因为自动修复这些问题可能会引入新的错误或改变程序的行为，所以需要开发者手动检查并修复这些问题。</p></div><p>或者使用<code>ctrl+shift+p</code>打开 vscode 控制台，通过<code>ESLint: Fix all auto-fixable Problems</code> 进行修复当前代码。</p><p>VSCode 的 ESLint 插件中的 <code>ESLint: Fix all auto-fixable Problems</code> 命令底层调用的就是 <code>eslint --fix</code> 指令。</p><p>当你在 VSCode 中使用这个命令时，插件会针对当前打开的文件运行 eslint --fix，并尝试自动修复所有可以修复的问题。这与在命令行中使用 npm run lint:fix 类似，只是作用范围限于当前打开的文件，而不是整个项目。</p></div></div></main><!--[--><!--]--><footer class="VPDocFooter" data-v-cfb513e0 data-v-21f75714><div class="edit-info" data-v-21f75714><div class="edit-link" data-v-21f75714><a class="VPLink link edit-link-button" href="https://github.com/Daotin/blog/edit/main/docs/engineer/vue3-template/format.md" target="_blank" rel="noreferrer" data-v-21f75714 data-v-3c355974><!--[--><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" class="edit-link-icon" data-v-21f75714><path d="M18,23H4c-1.7,0-3-1.3-3-3V6c0-1.7,1.3-3,3-3h7c0.6,0,1,0.4,1,1s-0.4,1-1,1H4C3.4,5,3,5.4,3,6v14c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1v-7c0-0.6,0.4-1,1-1s1,0.4,1,1v7C21,21.7,19.7,23,18,23z"></path><path d="M8,17c-0.3,0-0.5-0.1-0.7-0.3C7,16.5,6.9,16.1,7,15.8l1-4c0-0.2,0.1-0.3,0.3-0.5l9.5-9.5c1.2-1.2,3.2-1.2,4.4,0c1.2,1.2,1.2,3.2,0,4.4l-9.5,9.5c-0.1,0.1-0.3,0.2-0.5,0.3l-4,1C8.2,17,8.1,17,8,17zM9.9,12.5l-0.5,2.1l2.1-0.5l9.3-9.3c0.4-0.4,0.4-1.1,0-1.6c-0.4-0.4-1.2-0.4-1.6,0l0,0L9.9,12.5z M18.5,2.5L18.5,2.5L18.5,2.5z"></path></svg> Edit this page on GitHub<!--]--><!----></a></div><div class="last-updated" data-v-21f75714><p class="VPLastUpdated" data-v-21f75714 data-v-18fe8fc2>Last updated: <time datetime="2023-07-13T01:35:38.000Z" data-v-18fe8fc2></time></p></div></div><div class="prev-next" data-v-21f75714><div class="pager" data-v-21f75714><a class="pager-link prev" href="/fe-series-notes/engineer/vue3-template/vite-config.html" data-v-21f75714><span class="desc" data-v-21f75714>Previous page</span><span class="title" data-v-21f75714>vite工程化配置</span></a></div><div class="has-prev pager" data-v-21f75714><a class="pager-link next" href="https://daotin.github.io/posts/2022/08/10/git-commit%E8%A7%84%E8%8C%83.html" data-v-21f75714><span class="desc" data-v-21f75714>Next page</span><span class="title" data-v-21f75714>git提交规范</span></a></div></div></footer><!--[--><!--]--></div></div></div></div></div><footer class="VPFooter has-sidebar" data-v-f44a984a data-v-9f24cc86><div class="container" data-v-9f24cc86><p class="message" data-v-9f24cc86>Released under the CC BY-NC-ND 3.0</p><p class="copyright" data-v-9f24cc86>Copyright © 2022-present Daotin</p></div></footer><!--[--><!--]--></div></div>
+    <script>__VP_HASH_MAP__ = JSON.parse("{\"blog_100-jetbrain激活.md\":\"39abd3ee\",\"blog_200-webstorm插件推荐.md\":\"5243713f\",\"blog_index.md\":\"7c77d1d9\",\"engineer_cicd_cicd从入门到实践.md\":\"44c72327\",\"engineer_cicd_docker从入门到实践.md\":\"a04e5b1e\",\"engineer_cicd_nginx从入门到实践.md\":\"4996109a\",\"engineer_cicd_sentry入门与实践.md\":\"9e628c96\",\"engineer_index.md\":\"0b7d7201\",\"engineer_performance_first-screen.md\":\"c3ac0028\",\"engineer_performance_size-optimize.md\":\"24016be5\",\"engineer_vue3-cli_从零开始构建脚手架.md\":\"b0f02f83\",\"engineer_vue3-component_login.md\":\"73317c84\",\"engineer_vue3-template_assets.md\":\"9f26616b\",\"engineer_vue3-template_auth.md\":\"cf2df45a\",\"engineer_vue3-template_axios.md\":\"d92699b3\",\"engineer_vue3-template_create-project.md\":\"462e8049\",\"engineer_vue3-template_develop-tool.md\":\"884ed564\",\"engineer_vue3-template_element-plus.md\":\"2888b9e0\",\"engineer_vue3-template_environment.md\":\"78f96ae4\",\"engineer_vue3-template_format.md\":\"701abc50\",\"engineer_vue3-template_layouts.md\":\"63aa5f82\",\"engineer_vue3-template_mock.md\":\"7add25dc\",\"engineer_vue3-template_pinia.md\":\"0549097d\",\"engineer_vue3-template_structure.md\":\"6e3b1385\",\"engineer_vue3-template_tailwind.md\":\"69ca25b0\",\"engineer_vue3-template_vite-config.md\":\"3ad13fc8\",\"engineer_vue3-template_vue-router.md\":\"4c75c438\",\"index.md\":\"4d73e2f9\"}")</script>
+    <script type="module" async src="/fe-series-notes/assets/app.38ab461f.js"></script>
     
   </body>
 </html>
