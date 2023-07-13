@@ -238,8 +238,8 @@ module.exports = {
         "@typescript-eslint/naming-convention": [
           "warn",
           {
-            selector: "variable",
-            format: ["camelCase", "PascalCase", "UPPER_CASE"],
+            selector: ["variable", "function"],
+            format: ["camelCase"],
           },
         ],
       },
