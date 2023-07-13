@@ -90,7 +90,7 @@ module.exports = {
 /public/*
 ```
 
-### 如果使用了 eslint
+### 如果使用了 eslint 规则校验
 
 上面的配置均可忽略，包括不安装 vscode 的 Prettier 插件。
 
@@ -98,12 +98,31 @@ module.exports = {
 
 > ESLint 主要是为了做代码检测，例如未使用的变量，未定义的引用，比较时使用 ===，禁止不必要的括号等等
 
+### 如果只使用 Prettier 不使用 eslint
+
+新增 `.eslintrc.cjs` 文件，并配置规则，关闭 prettier 的警告：
+
+```js
+/* eslint-env node */
+require("@rushstack/eslint-patch/modern-module-resolution");
+
+module.exports = {
+  rules: {
+    "prettier/prettier": "off",
+  },
+};
+```
+
+### 如果使用了 eslint 规则校验
+
 1、安装插件
 
 > 需要安装 9 个，别怕都是开发才会使用，不会打包到生产环境
 
 ```
+
 npm i -D eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue prettier vue-eslint-parser @typescript-eslint/eslint-plugin @typescript-eslint/parser @vue/eslint-config-typescript
+
 ```
 
 2、新增 `.eslintrc.js` 文件，并配置规则：
