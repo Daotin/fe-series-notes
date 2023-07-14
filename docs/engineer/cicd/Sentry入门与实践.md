@@ -134,7 +134,7 @@ Sentry 的管理后台是基于 Python Django 开发的。同时，这个管理�
 ::: warning
 由于我在使用官方[self-hosted](https://github.com/getsentry/self-hosted "self-hosted")部署的时候，遇到了很多问题，换了很多 docker,docker-compose 以及 self-hosted 的版本均出现不同的问题，基本上都会出现下面的问题：
 
-```text
+```
 #6 Err:5 http://deb.debian.org/debian bullseye/main amd64 Packages Connection timed out [IP: 146.75.114.132 80]
 ...
 #6 314.4 E: Failed to fetch http://deb.debian.org/debian/dists/bullseye/main/binary-amd64/Packages  Connection timed out [IP: 146.75.114.132 80]
@@ -602,7 +602,7 @@ Sentry.captureMessage("this is a debug message", "debug");
 
 第一种错误我们能一眼看出，比如：
 
-```text
+```
 Uncaught (in promise) SyntaxError: Expected ',' or '}' after property value in JSON at position 6
 ```
 
@@ -620,7 +620,7 @@ Non-Error promise rejection captured with keys: remark
 
 通过搜索，得到这个错误的解释如下：
 
-```text
+```
 这个错误表示某个 Promise 被拒绝了，但是被拒绝的值不是一个 Error 对象，而是一个非 Error 类型的值。
 通常情况下，Promise 被拒绝时应该返回一个 Error 对象，以便调用者能够识别和处理错误。
 但是在这种情况下，Promise 被拒绝的值不是一个 Error，而是一个具有键为 "remark" 的对象。

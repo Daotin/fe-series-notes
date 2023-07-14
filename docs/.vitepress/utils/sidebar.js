@@ -62,7 +62,7 @@ export function createSideBar(commonPath) {
     );
   }
 
-  console.log("⭐mdNamesObj==>", mdNamesObj); // { '默认分组': [ '2-测试2', '6-测试6', '10-测试1', '300-测试3' ] }
+  // console.log("⭐mdNamesObj==>", mdNamesObj); // { '默认分组': [ '2-测试2', '6-测试6', '10-测试1', '300-测试3' ] }
 
   // 得到最后的sidebar
   let sideBars = [];
@@ -93,7 +93,7 @@ export function createSideBar(commonPath) {
       sideBars.push(obj);
     }
   }
-  console.log("⭐sideBars==>", sideBars);
+  // console.log("⭐sideBars==>", sideBars);
   return sideBars;
 }
 

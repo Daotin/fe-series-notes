@@ -582,7 +582,7 @@ vuepress1-demo-gitee 的镜像是根据仓库中的 dockerfile 文件创建的�
 
 下面是构建时控制台的打印消息，作为参考：
 
-```text
+```
 Started by user admin
 Running as SYSTEM
 Building in workspace /var/jenkins_home/workspace/jenkins-demo

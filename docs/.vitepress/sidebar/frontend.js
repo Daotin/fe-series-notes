@@ -34,7 +34,7 @@ if (mdNames.length) {
       .split("-")
       .filter((item, i) => i < 3)
       .join("");
-    console.log("⭐a==>", a, b);
+    // console.log("⭐a==>", a, b);
     return b - a;
   });
 }
