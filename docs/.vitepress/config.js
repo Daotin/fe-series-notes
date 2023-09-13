@@ -24,7 +24,7 @@ export default defineConfig({
 
     // 本地搜索
     search: {
-      provider: 'local'
+      provider: "local",
     },
 
     // 获取每个文件最后一次 git 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部
@@ -38,7 +38,11 @@ export default defineConfig({
         link: "/engineer/",
         activeMatch: "/engineer/",
       },
-      { text: "BLOG", link: "/blog/", activeMatch: "/blog/" },
+      {
+        text: "性能优化",
+        link: "/web-performance/",
+        activeMatch: "/web-performance/",
+      },
       {
         text: "TEST",
         items: [
@@ -185,7 +189,34 @@ export default defineConfig({
           ],
         },
       ],
-      "/blog/": createSideBar("blog"),
+      "/web-performance/": [
+        {
+          text: "性能优化",
+          collapsed: false,
+          items: [
+            {
+              text: "关于requestAnimationFrame的理解",
+              link: "/web-performance/关于requestAnimationFrame的理解",
+            },
+            {
+              text: "前端性能优化",
+              link: "/web-performance/前端性能优化",
+            },
+            {
+              text: "通过瀑布图分析前端性能问题",
+              link: "/web-performance/通过瀑布图分析前端性能问题",
+            },
+            {
+              text: "chrome-devtools-performance",
+              link: "/web-performance/chrome-devtools-performance",
+            },
+            {
+              text: "vue2-webpack性能优化",
+              link: "/web-performance/vue2-webpack性能优化",
+            },
+          ],
+        },
+      ],
     },
 
     // 目录显示
