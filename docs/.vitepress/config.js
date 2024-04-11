@@ -16,6 +16,8 @@ export default defineConfig({
     // lineNumbers: true,
   },
 
+  ignoreDeadLinks: true, // 忽略死链接
+
   // head: [["link", { rel: "icon", href: "/favicon.ico" }]],
 
   themeConfig: {
