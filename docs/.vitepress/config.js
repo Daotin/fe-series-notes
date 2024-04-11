@@ -40,27 +40,25 @@ export default defineConfig({
       },
       {
         text: '性能优化',
-        link: '/web-performance/',
-        activeMatch: '/web-performance/',
+        link: '/性能优化/',
       },
       {
         text: '浏览器工作原理',
-        link: '/browser-principle/01-Chrome浏览器架构',
-        activeMatch: '/browser-principle/',
+        link: '/浏览器工作原理/',
       },
-      // {
-      //   text: 'Vue3原理剖析',
-      //   items: [
-      //     {
-      //       text: 'Vue3运行机制',
-      //       link: '',
-      //     },
-      //     {
-      //       text: 'Vue3源码解析',
-      //       link: '',
-      //     },
-      //   ],
-      // },
+      {
+        text: 'vue原理剖析',
+        items: [
+          {
+            text: 'vue2原理剖析',
+            link: '/vue2原理剖析/',
+          },
+          // {
+          //   text: 'vue3原理剖析',
+          //   link: '/vue3原理剖析/',
+          // },
+        ],
+      },
       {
         text: 'TEST',
         items: [
@@ -211,35 +209,7 @@ export default defineConfig({
           ],
         },
       ],
-      '/web-performance/': [
-        {
-          text: '性能优化',
-          collapsed: false,
-          items: [
-            {
-              text: '关于requestAnimationFrame的理解',
-              link: '/web-performance/关于requestAnimationFrame的理解',
-            },
-            {
-              text: '前端性能优化',
-              link: '/web-performance/前端性能优化',
-            },
-            {
-              text: '通过瀑布图分析前端性能问题',
-              link: '/web-performance/通过瀑布图分析前端性能问题',
-            },
-            {
-              text: 'chrome-devtools-performance',
-              link: '/web-performance/chrome-devtools-performance',
-            },
-            {
-              text: 'vue2-webpack性能优化',
-              link: '/web-performance/vue2-webpack性能优化',
-            },
-          ],
-        },
-      ],
-      '/browser-principle/': createSideBar('browser-principle'),
+      // '/browser-principle/': createSideBar('browser-principle'),
     },
 
     // 目录显示

@@ -85,11 +85,11 @@ export function createSideBar(commonPath) {
           };
         }),
       };
-      console.log('⭐obj==>', obj);
+      // console.log('⭐obj==>', obj);
       sideBars.push(obj);
     }
   }
-  console.log('⭐sideBars==>', sideBars);
+  // console.log('⭐sideBars==>', sideBars);
   return sideBars;
 }
 
