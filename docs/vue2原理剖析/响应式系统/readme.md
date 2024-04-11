@@ -8,7 +8,7 @@ Vue2 基于`Object.defineProperty`实现「响应式系统」的。
 
 当点击按钮时，会打印`视图更新啦～`提示，表示更新数据，视图也会更新。
 
-![](../images/2023-10-12-14-53-38.png)## 实现过程
+## 实现过程
 
 - `defineReactive` 是对一个对象的属性进行响应式处理，get 的时候收集依赖，set 的时候更新视图
 - `observer` 是循环遍历对象，对对象的每个顺序进行`defineReactive`响应式处理
