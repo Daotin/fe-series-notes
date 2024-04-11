@@ -5,15 +5,15 @@ title: 前端队长
 titleTemplate: 写一些技术
 
 hero:
-  name: Fe Captain
-  text: Write some frontend articles
-  tagline: Welcome~
+  name: 前端队长の技术专栏
+  text: 系列笔记
+  tagline: 👋👋
   image:
-    src: https://vitejs.dev/logo-with-shadow.png
+    src: https://vitepress.dev/vitepress-logo-large.webp
     alt: VitePress
   actions:
     - theme: brand
-      text: Get Started
+      text: 开始
       link: /engineer/index
     - theme: alt
       text: View on GitHub
@@ -21,20 +21,14 @@ hero:
 
 features:
   - icon: 👨🏻‍💻
-    title: 前端文章
-    details: 分享一些前端的学习心得
-  - icon: ✒️
-    title: 随笔
-    details: 其他的文章，比如读书笔记
-  - icon: 👀
-    title: 嗯~
-    details: 还没想好...
+    title: 前端系列文章
+    details: 分享系列笔记，而非单独的文章，仅此而已。My Blog 👉 https://daotin.github.io
 ---
 
 <style lang="less">
 
   h1.name span {
-    background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff) !important;
+    background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
   }

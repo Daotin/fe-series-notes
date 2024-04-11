@@ -5,7 +5,7 @@ import { createSideBar } from './utils/sidebar';
 export default defineConfig({
   base: '/fe-series-notes/',
 
-  title: '前端队长小冯', // 所有文档的浏览器标签title
+  title: '前端队长', // 所有文档的浏览器标签title
   description: '前端，JavaScript，Vue', // 会渲染成<meta>标签，SEO用
 
   // 最后更新时间
@@ -44,31 +44,23 @@ export default defineConfig({
         activeMatch: '/web-performance/',
       },
       {
-        text: 'Vue2原理剖析',
-        items: [
-          {
-            text: 'Vue2运行机制',
-            link: 'https://github.com/Daotin/vue2-principle-learning/',
-          },
-          {
-            text: 'Vue2源码解析',
-            link: '',
-          },
-        ],
+        text: '浏览器工作原理',
+        link: '/browser-principle/01-Chrome浏览器架构',
+        activeMatch: '/browser-principle/',
       },
-      {
-        text: 'Vue3原理剖析',
-        items: [
-          {
-            text: 'Vue3运行机制',
-            link: '',
-          },
-          {
-            text: 'Vue3源码解析',
-            link: '',
-          },
-        ],
-      },
+      // {
+      //   text: 'Vue3原理剖析',
+      //   items: [
+      //     {
+      //       text: 'Vue3运行机制',
+      //       link: '',
+      //     },
+      //     {
+      //       text: 'Vue3源码解析',
+      //       link: '',
+      //     },
+      //   ],
+      // },
       {
         text: 'TEST',
         items: [
@@ -247,6 +239,7 @@ export default defineConfig({
           ],
         },
       ],
+      '/browser-principle/': createSideBar('browser-principle'),
     },
 
     // 目录显示

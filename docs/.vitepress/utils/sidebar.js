@@ -9,21 +9,21 @@
  * zzz(可选)：表示分组，未填会显示默认分组
  */
 
-const DefaultGroupName = "默认分组";
+const DefaultGroupName = '默认分组';
 
 export function createSideBar(commonPath) {
   const filePath = `./docs/${commonPath}/`;
 
-  const fs = require("fs");
+  const fs = require('fs');
   const mdFiles = fs.readdirSync(filePath);
   let mdNames = []; // 文件名
   const mdNamesObj = {}; // 分组对应文件名
-  let excludeFileName = ["index", "image", "images"];
+  let excludeFileName = ['index', 'image', 'images'];
 
   // 获取文件名
   Object.values(mdFiles).forEach((item) => {
     try {
-      let name = item.split(".")[0];
+      let name = item.split('.')[0];
       // 过滤分组首页index.md
       if (!excludeFileName.includes(name)) {
         mdNames.push(name);
@@ -39,14 +39,14 @@ export function createSideBar(commonPath) {
   // 获取分组对应的文件名
   if (mdNames.length) {
     mdNames.forEach((name) => {
-      const order = name.split("-")[0];
-      const title = name.split("-")[1];
-      const group = name.split("-")[2] || DefaultGroupName;
+      const order = name.split('-')[0];
+      const title = name.split('-')[1];
+      const group = name.split('-')[2] || DefaultGroupName;
 
       if (mdNamesObj[group]) {
-        mdNamesObj[group].push(order + "-" + title);
+        mdNamesObj[group].push(order + '-' + title);
       } else {
-        mdNamesObj[group] = [order + "-" + title];
+        mdNamesObj[group] = [order + '-' + title];
       }
     });
   }
@@ -57,12 +57,10 @@ export function createSideBar(commonPath) {
   for (const key in mdNamesObj) {
     const titleList = mdNamesObj[key];
 
-    mdNamesObj[key] = titleList.sort(
-      (a, b) => a.split("-")[0] - b.split("-")[0]
-    );
+    mdNamesObj[key] = titleList.sort((a, b) => a.split('-')[0] - b.split('-')[0]);
   }
 
-  // console.log("⭐mdNamesObj==>", mdNamesObj); // { '默认分组': [ '2-测试2', '6-测试6', '10-测试1', '300-测试3' ] }
+  // console.log('⭐mdNamesObj==>', mdNamesObj); // { '默认分组': [ '2-测试2', '6-测试6', '10-测试1', '300-测试3' ] }
 
   // 得到最后的sidebar
   let sideBars = [];
@@ -78,11 +76,8 @@ export function createSideBar(commonPath) {
         collapsed: group !== groupKeys[0], // 第一个分组默认展开
         items: names.map((name) => {
           // name格式：// 2-测试2
-          let text = name.split("-")[1];
-          let link =
-            group === DefaultGroupName
-              ? `/${commonPath}/${name}.md`
-              : `/${commonPath}/${name}-${group}.md`;
+          let text = name.split('-')[1];
+          let link = group === DefaultGroupName ? `/${commonPath}/${name}.md` : `/${commonPath}/${name}-${group}.md`;
           // appendData(name, days.join("-"));
           return {
             text: text,
@@ -90,10 +85,11 @@ export function createSideBar(commonPath) {
           };
         }),
       };
+      console.log('⭐obj==>', obj);
       sideBars.push(obj);
     }
   }
-  // console.log("⭐sideBars==>", sideBars);
+  console.log('⭐sideBars==>', sideBars);
   return sideBars;
 }
 
