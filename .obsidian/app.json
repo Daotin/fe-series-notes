@@ -1,1 +1,8 @@
-{}
+{
+  "spellcheck": false,
+  "autoPairBrackets": false,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "docs/assets",
+  "alwaysUpdateLinks": true
+}
