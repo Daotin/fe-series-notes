@@ -4,16 +4,34 @@
     "type": "split",
     "children": [
       {
-        "id": "6ee5fa4dcf3c7bd2",
+        "id": "2b34404e57924256",
         "type": "tabs",
         "children": [
           {
-            "id": "52218edaeeecab4b",
+            "id": "466bdb42c2e5b84e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/浏览器工作原理/JavaScript执行机制.md",
+                "file": "docs/浏览器工作原理/V8工作原理.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "4561c6af922a68a3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "33075966452d65a4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/浏览器工作原理/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +87,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 452
   },
   "right": {
     "id": "5c39e05d376c2a0b",
@@ -85,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/浏览器工作原理/JavaScript执行机制.md",
+                "file": "docs/浏览器工作原理/V8工作原理.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/浏览器工作原理/JavaScript执行机制.md",
+                "file": "docs/浏览器工作原理/V8工作原理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/浏览器工作原理/JavaScript执行机制.md"
+                "file": "docs/浏览器工作原理/V8工作原理.md"
               }
             }
           }
@@ -134,7 +152,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 252
+    "width": 252,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -147,8 +166,30 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "52218edaeeecab4b",
+  "active": "466bdb42c2e5b84e",
   "lastOpenFiles": [
+    "docs/assets/img-20240502190597.png",
+    "docs/浏览器工作原理/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
+    "docs/浏览器工作原理/V8工作原理.md",
+    "docs/assets/img-20240502190547.png",
+    "docs/assets/img-20240502190529.png",
+    "docs/浏览器工作原理/已归档/13-垃圾回收：垃圾数据是如何自动回收的？.md",
+    "docs/assets/img-20240502190598.png",
+    "docs/浏览器工作原理/已归档/11-this：从JavaScript执行上下文的视角讲清楚this.md",
+    "docs/浏览器工作原理/已归档/10-作用域链和闭包：代码中出现相同的变量，JavaScript引擎是如何选择的？.md",
+    "docs/浏览器工作原理/已归档/08-调用栈：为什么JavaScript代码会出现栈溢出？.md",
+    "docs/浏览器工作原理/JavaScript执行机制.md",
+    "docs/浏览器工作原理/浏览器的多进程，页面渲染流程.md",
+    "docs/浏览器工作原理/已归档/07-变量提升：JavaScript代码是按顺序执行的吗？.md",
+    "docs/浏览器工作原理/已归档/06-渲染流程（下）：HTML、CSS和JavaScript，是如何变成页面的？.md",
+    "docs/浏览器工作原理/已归档/05-渲染流程（上）：HTML、CSS和JavaScript，是如何变成页面的？.md",
+    "docs/浏览器工作原理/已归档/04-导航流程：从输入URL到页面展示，这中间发生了什么？.md",
+    "docs/浏览器工作原理/已归档/03-HTTP请求流程：为什么很多站点第二次打开速度会很快？.md",
+    "docs/浏览器工作原理/已归档/02-TCP协议：如何保证页面文件能被完整送达浏览器？.md",
+    "docs/浏览器工作原理/已归档/01-Chrome浏览器架构.md",
+    "docs/浏览器工作原理/已归档",
+    "docs/浏览器工作原理/学什么？.md",
+    "docs/浏览器工作原理/index.md",
     "docs/assets/img-20240502120564.png",
     "docs/assets/img-20240502100577.png",
     "docs/assets/img-20240501220582.png",
@@ -156,21 +197,10 @@
     "docs/assets/img-20240501220586.png",
     "docs/assets/img-20240501220511.png",
     "docs/assets/img-20240501210580-1.png",
-    "docs/assets/img-20240501210580.png",
-    "docs/浏览器工作原理/07-变量提升：JavaScript代码是按顺序执行的吗？.md",
-    "docs/浏览器工作原理/JavaScript执行机制.md",
-    "docs/浏览器工作原理/index.md",
-    "docs/浏览器工作原理/学什么？.md",
-    "docs/浏览器工作原理/浏览器的多进程，页面渲染流程.md",
-    "docs/assets/img-20240501170567.png",
-    "docs/浏览器工作原理/01-Chrome浏览器架构.md",
-    "docs/assets/img-20240501160591.png",
     "docs/assets",
-    "Pasted image 20240501161340.png",
     "Excalidraw/HTTP 请求示意图.excalidraw.md",
     "Excalidraw/Drawing 2024-05-01 15.53.27.excalidraw.md",
     "Excalidraw",
-    "docs/浏览器工作原理/08-调用栈：为什么JavaScript代码会出现栈溢出？.md",
     "readme.md",
     "docs/index.md"
   ]
