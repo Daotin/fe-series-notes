@@ -3,6 +3,6 @@
   "autoPairBrackets": false,
   "newLinkFormat": "relative",
   "useMarkdownLinks": true,
-  "attachmentFolderPath": "docs/assets",
+  "attachmentFolderPath": "./images",
   "alwaysUpdateLinks": true
 }
