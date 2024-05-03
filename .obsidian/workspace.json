@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/浏览器工作原理/V8工作原理.md",
+                "file": "docs/浏览器工作原理/事件循环.md",
                 "mode": "source",
                 "source": false
               }
@@ -22,16 +22,16 @@
         ]
       },
       {
-        "id": "4561c6af922a68a3",
+        "id": "72655e86c130fa9b",
         "type": "tabs",
         "children": [
           {
-            "id": "33075966452d65a4",
+            "id": "52a34f7bb0653409",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/浏览器工作原理/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
+                "file": "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
                 "mode": "source",
                 "source": false
               }
@@ -87,7 +87,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 452
+    "width": 351
   },
   "right": {
     "id": "5c39e05d376c2a0b",
@@ -103,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/浏览器工作原理/V8工作原理.md",
+                "file": "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -120,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/浏览器工作原理/V8工作原理.md",
+                "file": "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/浏览器工作原理/V8工作原理.md"
+                "file": "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md"
               }
             }
           }
@@ -166,11 +166,24 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "466bdb42c2e5b84e",
+  "active": "972a9134f92587d1",
   "lastOpenFiles": [
-    "docs/assets/img-20240502190597.png",
-    "docs/浏览器工作原理/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
+    "docs/浏览器工作原理/事件循环.md",
+    "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
+    "docs/浏览器工作原理/已归档/19-Promise：使用Promise，告别回调函数.md",
+    "docs/浏览器工作原理/已归档/18-宏任务和微任务：不是所有任务都是一个待遇.md",
+    "docs/浏览器工作原理/已归档/17-WebAPI：XMLHttpRequest是怎么实现的？.md",
+    "docs/assets/img-20240503130509.png",
+    "docs/浏览器工作原理/已归档/16-WebAPI：setTimeout是如何实现的？.md",
+    "docs/assets/img-20240503100532.png",
+    "docs/assets/img-20240503100572.png",
+    "docs/浏览器工作原理/已归档/15-消息队列和事件循环：页面是怎么“活”起来的？.md",
+    "docs/assets/img-20240501210580.png",
+    "docs/assets/img-20240501210580-1.png",
+    "docs/浏览器工作原理/学什么？.md",
     "docs/浏览器工作原理/V8工作原理.md",
+    "docs/assets/img-20240502190597.png",
+    "docs/浏览器工作原理/已归档/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
     "docs/assets/img-20240502190547.png",
     "docs/assets/img-20240502190529.png",
     "docs/浏览器工作原理/已归档/13-垃圾回收：垃圾数据是如何自动回收的？.md",
@@ -188,20 +201,11 @@
     "docs/浏览器工作原理/已归档/02-TCP协议：如何保证页面文件能被完整送达浏览器？.md",
     "docs/浏览器工作原理/已归档/01-Chrome浏览器架构.md",
     "docs/浏览器工作原理/已归档",
-    "docs/浏览器工作原理/学什么？.md",
     "docs/浏览器工作原理/index.md",
     "docs/assets/img-20240502120564.png",
-    "docs/assets/img-20240502100577.png",
-    "docs/assets/img-20240501220582.png",
-    "docs/assets/img-20240501220563.png",
-    "docs/assets/img-20240501220586.png",
-    "docs/assets/img-20240501220511.png",
-    "docs/assets/img-20240501210580-1.png",
     "docs/assets",
     "Excalidraw/HTTP 请求示意图.excalidraw.md",
     "Excalidraw/Drawing 2024-05-01 15.53.27.excalidraw.md",
-    "Excalidraw",
-    "readme.md",
-    "docs/index.md"
+    "Excalidraw"
   ]
 }
