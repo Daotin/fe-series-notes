@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md",
+                "file": "docs/性能优化/chrome-devtools-performance.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md",
+                "file": "docs/性能优化/chrome-devtools-performance.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md",
+                "file": "docs/性能优化/chrome-devtools-performance.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md"
+                "file": "docs/性能优化/chrome-devtools-performance.md"
               }
             }
           }
@@ -149,42 +149,42 @@
   },
   "active": "466bdb42c2e5b84e",
   "lastOpenFiles": [
+    "docs/性能优化/images/img-20240505170586.png",
+    "docs/性能优化/images/img-20240505170593.png",
+    "docs/浏览器工作原理/V8工作原理.md",
+    "docs/浏览器工作原理/浏览器的多进程，页面渲染流程.md",
+    "docs/性能优化/chrome-devtools-performance.md",
+    "docs/性能优化/images/img-20240505150592.png",
+    "docs/性能优化/images/img-20240505150574.png",
+    "docs/性能优化/images/img-20240505150524.png",
+    "docs/性能优化/images/img-20240505150582.png",
+    "docs/性能优化/images/img-20240505150595.png",
+    "docs/性能优化/前端性能优化.md",
+    "docs/性能优化/images/img-20240505120500.png",
+    "docs/性能优化/images/img-20240505120563.png",
+    "docs/性能优化/关于requestAnimationFrame的理解.md",
+    "docs/engineer/vue3-template/auth.md",
+    "docs/engineer/vue3-template/assets.md",
+    "docs/engineer/vue3-template/format.md",
+    "docs/浏览器工作原理/已归档/21-Chrome开发者工具：利用网络面板做性能分析.md",
+    "docs/浏览器工作原理/学什么？.md",
+    "docs/浏览器工作原理/index.md",
+    "docs/性能优化/index.md",
     "docs/性能优化/images/img-20240503210508.png",
     "img-20240503210557.png",
     "docs/性能优化/通过Timing瀑布图分析前端性能问题.md",
-    "docs/性能优化/chrome-devtools-performance.md",
-    "docs/浏览器工作原理/21-Chrome开发者工具：利用网络面板做性能分析.md",
-    "docs/性能优化/前端性能优化.md",
-    "docs/性能优化/index.md",
     "docs/浏览器工作原理/已归档/16-WebAPI：setTimeout是如何实现的？.md",
-    "docs/浏览器工作原理/V8工作原理.md",
     "docs/浏览器工作原理/事件循环.md",
-    "docs/性能优化/关于requestAnimationFrame的理解.md",
     "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
     "docs/浏览器工作原理/已归档/19-Promise：使用Promise，告别回调函数.md",
     "docs/浏览器工作原理/已归档/18-宏任务和微任务：不是所有任务都是一个待遇.md",
     "docs/浏览器工作原理/已归档/17-WebAPI：XMLHttpRequest是怎么实现的？.md",
-    "docs/浏览器工作原理/images/img-20240503130509.png",
-    "docs/浏览器工作原理/images/img-20240503100532.png",
-    "docs/浏览器工作原理/images/img-20240503100572.png",
     "docs/浏览器工作原理/已归档/15-消息队列和事件循环：页面是怎么“活”起来的？.md",
-    "docs/浏览器工作原理/images/img-20240501210580.png",
-    "docs/浏览器工作原理/images/img-20240501210580-1.png",
-    "docs/浏览器工作原理/学什么？.md",
-    "docs/浏览器工作原理/images/img-20240502190597.png",
     "docs/浏览器工作原理/已归档/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
-    "docs/浏览器工作原理/images/img-20240502190547.png",
-    "docs/浏览器工作原理/images/img-20240502190529.png",
     "docs/浏览器工作原理/已归档/13-垃圾回收：垃圾数据是如何自动回收的？.md",
-    "docs/浏览器工作原理/images/img-20240502190598.png",
     "docs/浏览器工作原理/已归档/11-this：从JavaScript执行上下文的视角讲清楚this.md",
     "docs/浏览器工作原理/已归档/10-作用域链和闭包：代码中出现相同的变量，JavaScript引擎是如何选择的？.md",
     "docs/浏览器工作原理/已归档/08-调用栈：为什么JavaScript代码会出现栈溢出？.md",
-    "docs/浏览器工作原理/JavaScript执行机制.md",
-    "docs/浏览器工作原理/浏览器的多进程，页面渲染流程.md",
-    "docs/浏览器工作原理/已归档/07-变量提升：JavaScript代码是按顺序执行的吗？.md",
-    "docs/浏览器工作原理/已归档/06-渲染流程（下）：HTML、CSS和JavaScript，是如何变成页面的？.md",
-    "docs/浏览器工作原理/已归档/05-渲染流程（上）：HTML、CSS和JavaScript，是如何变成页面的？.md",
     "docs/浏览器工作原理/已归档",
     "docs/浏览器工作原理/images",
     "Excalidraw"
