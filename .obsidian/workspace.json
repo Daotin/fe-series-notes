@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "2b34404e57924256",
+        "id": "163888f92c508f83",
         "type": "tabs",
         "children": [
           {
-            "id": "466bdb42c2e5b84e",
+            "id": "91c2e494aa05f442",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/性能优化/chrome-devtools-performance.md",
+                "file": "docs/webpack通关秘籍/学什么.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/性能优化/chrome-devtools-performance.md",
+                "file": "docs/webpack通关秘籍/学什么.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/性能优化/chrome-devtools-performance.md",
+                "file": "docs/webpack通关秘籍/学什么.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/性能优化/chrome-devtools-performance.md"
+                "file": "docs/webpack通关秘籍/学什么.md"
               }
             }
           }
@@ -147,13 +147,17 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "466bdb42c2e5b84e",
+  "active": "91c2e494aa05f442",
   "lastOpenFiles": [
+    "docs/index.md",
+    "docs/webpack通关秘籍/学什么.md",
+    "docs/webpack通关秘籍/index.md",
+    "docs/webpack通关秘籍",
+    "docs/性能优化/chrome-devtools-performance.md",
     "docs/性能优化/images/img-20240505170586.png",
     "docs/性能优化/images/img-20240505170593.png",
     "docs/浏览器工作原理/V8工作原理.md",
     "docs/浏览器工作原理/浏览器的多进程，页面渲染流程.md",
-    "docs/性能优化/chrome-devtools-performance.md",
     "docs/性能优化/images/img-20240505150592.png",
     "docs/性能优化/images/img-20240505150574.png",
     "docs/性能优化/images/img-20240505150524.png",
@@ -171,7 +175,6 @@
     "docs/浏览器工作原理/index.md",
     "docs/性能优化/index.md",
     "docs/性能优化/images/img-20240503210508.png",
-    "img-20240503210557.png",
     "docs/性能优化/通过Timing瀑布图分析前端性能问题.md",
     "docs/浏览器工作原理/已归档/16-WebAPI：setTimeout是如何实现的？.md",
     "docs/浏览器工作原理/事件循环.md",
@@ -183,8 +186,6 @@
     "docs/浏览器工作原理/已归档/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
     "docs/浏览器工作原理/已归档/13-垃圾回收：垃圾数据是如何自动回收的？.md",
     "docs/浏览器工作原理/已归档/11-this：从JavaScript执行上下文的视角讲清楚this.md",
-    "docs/浏览器工作原理/已归档/10-作用域链和闭包：代码中出现相同的变量，JavaScript引擎是如何选择的？.md",
-    "docs/浏览器工作原理/已归档/08-调用栈：为什么JavaScript代码会出现栈溢出？.md",
     "docs/浏览器工作原理/已归档",
     "docs/浏览器工作原理/images",
     "Excalidraw"

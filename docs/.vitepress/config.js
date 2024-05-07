@@ -49,6 +49,10 @@ export default defineConfig({
         link: '/浏览器工作原理/',
       },
       {
+        text: 'webpack通关秘籍',
+        link: '/webpack通关秘籍/',
+      },
+      {
         text: 'vue原理剖析',
         items: [
           {
