@@ -22,7 +22,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/logo.jpg',
-    siteTitle: "Daotin's Blog",
+    siteTitle: "前端队长の博客",
 
     // 本地搜索
     search: {

@@ -5,9 +5,9 @@ title: 前端队长
 titleTemplate: 写一些技术
 
 hero:
-  name: 前端队长の技术专栏
-  text: 系列笔记
-  tagline: 👋👋
+  name: 前端队长の博客
+  text: 
+  tagline: 分享前端相关专栏笔记
   image:
     src: https://vitepress.dev/vitepress-logo-large.webp
     alt: VitePress

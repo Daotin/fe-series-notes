@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md",
-                "mode": "source",
+                "file": "docs/性能优化/BlueLink项目打包体积优化.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#typescript",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md",
+                "file": "docs/性能优化/BlueLink项目打包体积优化.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md",
+                "file": "docs/性能优化/BlueLink项目打包体积优化.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/性能优化/前端性能优化.md"
+                "file": "docs/性能优化/BlueLink项目打包体积优化.md"
               }
             }
           }
@@ -149,46 +149,51 @@
   },
   "active": "91c2e494aa05f442",
   "lastOpenFiles": [
-    "docs/engineer/vue3-cli/index.md",
-    "docs/engineer/monitor/index.md",
-    "docs/engineer/monitor/Sentry入门与实践.md",
-    "docs/engineer/monitor",
-    "docs/engineer/cicd/index.md",
-    "docs/webpack通关秘籍/webpack常用配置.md",
-    "docs/webpack通关秘籍/index.md",
-    "docs/webpack通关秘籍/学什么.md",
-    "docs/index.md",
-    "docs/webpack通关秘籍",
-    "docs/性能优化/chrome-devtools-performance.md",
-    "docs/性能优化/images/img-20240505170586.png",
-    "docs/性能优化/images/img-20240505170593.png",
-    "docs/浏览器工作原理/V8工作原理.md",
-    "docs/浏览器工作原理/浏览器的多进程，页面渲染流程.md",
-    "docs/性能优化/images/img-20240505150592.png",
-    "docs/性能优化/images/img-20240505150574.png",
-    "docs/性能优化/images/img-20240505150524.png",
-    "docs/性能优化/images/img-20240505150582.png",
-    "docs/性能优化/images/img-20240505150595.png",
-    "docs/性能优化/前端性能优化.md",
-    "docs/性能优化/images/img-20240505120500.png",
-    "docs/性能优化/images/img-20240505120563.png",
-    "docs/性能优化/关于requestAnimationFrame的理解.md",
-    "docs/engineer/vue3-template/auth.md",
-    "docs/engineer/vue3-template/assets.md",
-    "docs/engineer/vue3-template/format.md",
-    "docs/浏览器工作原理/已归档/21-Chrome开发者工具：利用网络面板做性能分析.md",
-    "docs/浏览器工作原理/学什么？.md",
-    "docs/浏览器工作原理/index.md",
-    "docs/性能优化/index.md",
-    "docs/性能优化/images/img-20240503210508.png",
-    "docs/性能优化/通过Timing瀑布图分析前端性能问题.md",
-    "docs/浏览器工作原理/已归档/16-WebAPI：setTimeout是如何实现的？.md",
-    "docs/浏览器工作原理/事件循环.md",
-    "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
-    "docs/浏览器工作原理/已归档/19-Promise：使用Promise，告别回调函数.md",
-    "docs/浏览器工作原理/已归档/18-宏任务和微任务：不是所有任务都是一个待遇.md",
-    "docs/浏览器工作原理/已归档",
-    "docs/浏览器工作原理/images",
-    "Excalidraw"
+    "docs/性能优化/images/vFeP7iWDjB.png",
+    "docs/性能优化/images/NOX_nx-nVccubS.png",
+    "docs/TypeScript通关秘籍/index.md",
+    "docs/性能优化/images/-PT0HAR$KQS9QB8CJXX0MBC_Psvb8c0SZf.png",
+    "docs/性能优化/images/OA4OU2ROGXIK`QG2KGTLCD5_vFeP7iWDjB.png",
+    "docs/性能优化/images/image_YwLE9HUYQw.png",
+    "docs/性能优化/images/image_Upwp9i6NDr.png",
+    "docs/性能优化/images/image_-qHNynhQwr.png",
+    "docs/性能优化/images/image_paUWYENUg2.png",
+    "docs/性能优化/images/image_lTGGs6ydqj.png",
+    "docs/性能优化/images/image_Ek2j2dhGUv.png",
+    "docs/性能优化/images/image_3IGXfwSJgc.png",
+    "docs/性能优化/BlueLink项目打包体积优化.md",
+    "Obsidian使用技巧.md",
+    "docs/前端进阶训练营/一、浏览器工作原理.md",
+    "node_modules/argparse/CHANGELOG.md",
+    "node_modules/tslib/README.md",
+    "docs/前端进阶训练营/二、重学JavaScript.md",
+    "docs/TypeScript通关秘籍/images",
+    "docs/TypeScript通关秘籍/image",
+    "docs/TypeScript通关秘籍",
+    "docs/前端进阶训练营/images/ECMA-262.pdf",
+    "docs/前端进阶训练营/开班直播.md",
+    "docs/前端进阶训练营/images",
+    "docs/前端进阶训练营/学习安排.md",
+    "docs/重学前端/前端的学习路线与方法.md",
+    "docs/前端进阶训练营/index.md",
+    "docs/左耳听风/技术变现.md",
+    "docs/重学前端/JavaScript-1：关于类型，有哪些你不知道的细节？.md",
+    "docs/重学前端/JavaScript篇.md",
+    "docs/重学前端/images",
+    "docs/重学前端/index.md",
+    "docs/重学前端",
+    "docs/vue2组件精讲/01.md",
+    "docs/vue2组件精讲/index.md",
+    "docs/vue2组件精讲",
+    "docs/左耳听风/技术趋势.md",
+    "docs/左耳听风/技术领导力.md",
+    "docs/左耳听风/index.md",
+    "docs/10x程序员工作法/10x程序员工作法.md",
+    "docs/左耳听风/技术“领导力”.md",
+    "docs/左耳听风/时间管理.md",
+    "docs/左耳听风/职业发展.md",
+    "docs/左耳听风/左耳听风.md",
+    "docs/左耳听风",
+    "docs/新建文件夹"
   ]
 }
