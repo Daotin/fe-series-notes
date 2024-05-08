@@ -1645,7 +1645,7 @@ import '/modules/my-module.js';
   npm i --save-dev @types/lodash
   ```
 - 定义的一个对象obj的`type ?: string`， 然后在使用的时候:
-  ```纯文本
+  ```
   if(obj.type) {}  // TSERROR type does not exist on obj
   ```
 
