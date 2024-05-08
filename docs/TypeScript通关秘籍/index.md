@@ -1493,7 +1493,7 @@ import '/modules/my-module.js';
 - ✅import vue文件的时候不能省略`.vue`后缀。
 - ✅data as 形式  还是属性单个写？
 
-  ![](image/image_n94qN4ZqP8.png)
+  ![](images/image_n94qN4ZqP8.png)
   > 💡单个写好
 - ✅函数没有返回值，写void
   ```typescript
@@ -1505,7 +1505,7 @@ import '/modules/my-module.js';
   > 💡返回值写void
 - ✅mapActions 不用处理
 
-  ![](image/image_HW8vmebbA_.png)
+  ![](images/image_HW8vmebbA_.png)
   > 💡mapActions的不用写
 - ✅解构赋值`let {a, b}: {a: string, b: number} = o;`
   ```typescript
@@ -1520,7 +1520,7 @@ import '/modules/my-module.js';
   泛型：[https://segmentfault.com/q/1010000005712897/a-1020000005713059](https://segmentfault.com/q/1010000005712897/a-1020000005713059 "https://segmentfault.com/q/1010000005712897/a-1020000005713059")
 - ✅`object → Record<string, unknown>`
 
-  ![](image/image_yGp_MeZdQw.png)
+  ![](images/image_yGp_MeZdQw.png)
 - ✅断言可以这样写吗？【匿名形式】
   ```typescript
   uoploadPicHead: {
@@ -1580,7 +1580,7 @@ import '/modules/my-module.js';
    HTMLStyleElement
 
   ```
-  ![](image/image_PHIUEKQhFg.png)
+  ![](images/image_PHIUEKQhFg.png)
 - ✅`Promise<any> `的 any表示 resolve(value) 的 value的类型
 - ✅用冒号还是断言？
   ```typescript
@@ -1599,10 +1599,10 @@ import '/modules/my-module.js';
   > 📌冒号比as好。
 - ✅这种问题表示Vue组件未改造成TS
 
-  ![](image/image_Ivbgp5jXuX.png)
+  ![](images/image_Ivbgp5jXuX.png)
 - `render ?: (any) => VNode`
 
-  ![](image/image_KwVZpc4rzC.png)
+  ![](images/image_KwVZpc4rzC.png)
   > 💡参数写any
   >
   > `render?: (arg0: (any)=>VNode, any) => VNode`
@@ -1613,7 +1613,7 @@ import '/modules/my-module.js';
 
   debounce等高阶函数定义，需要访问this的, 先在data里定义成函数，然后在created里面赋值;
 
-  ![](image/image_kpkaZX8tEW.png)
+  ![](images/image_kpkaZX8tEW.png)
   > 💡`disabled: (this as any).disabledFn`
 - data中的函数如何定义？
   ```typescript
@@ -1630,7 +1630,7 @@ import '/modules/my-module.js';
   ```typescript
   this.selectList as unknown as Array<{ label: string; isUser: boolean }>
   ```
-  ![](image/image_1BPRegcnKA.png)
+  ![](images/image_1BPRegcnKA.png)
   > 💡改成as unknown as 就对了
 - 如何在Typescript中定义Promise的返回值类型？
 - `this.$refs.tree as InstanceType<Tree>`  需要改成 `this.$refs.tree as Tree`
@@ -1660,7 +1660,7 @@ const main = new Promise((resolve, reject) => {
 })
 ```
 
-![](image/image_XImqqImTMB.png)
+![](images/image_XImqqImTMB.png)
 
 很明显，resolve了一个数字，如何使得main的类型为 `Promise<number>`？
 
@@ -1672,7 +1672,7 @@ const main = new Promise<number>((resolve, reject) => {
 })
 ```
 
-![](image/image_YtbCH0556y.png)
+![](images/image_YtbCH0556y.png)
 
 方法二：设置resolve参数的类型
 
@@ -1682,7 +1682,7 @@ const main = new Promise((resolve: (arg:number) => void, reject) => {
 })
 ```
 
-![](image/image_mtt6ubcEWW.png)
+![](images/image_mtt6ubcEWW.png)
 
 参考链接：
 
