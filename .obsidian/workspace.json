@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/学什么.md",
+                "file": "docs/性能优化/前端性能优化.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/学什么.md",
+                "file": "docs/性能优化/前端性能优化.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/学什么.md",
+                "file": "docs/性能优化/前端性能优化.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/学什么.md"
+                "file": "docs/性能优化/前端性能优化.md"
               }
             }
           }
@@ -149,9 +149,15 @@
   },
   "active": "91c2e494aa05f442",
   "lastOpenFiles": [
-    "docs/index.md",
-    "docs/webpack通关秘籍/学什么.md",
+    "docs/engineer/vue3-cli/index.md",
+    "docs/engineer/monitor/index.md",
+    "docs/engineer/monitor/Sentry入门与实践.md",
+    "docs/engineer/monitor",
+    "docs/engineer/cicd/index.md",
+    "docs/webpack通关秘籍/webpack常用配置.md",
     "docs/webpack通关秘籍/index.md",
+    "docs/webpack通关秘籍/学什么.md",
+    "docs/index.md",
     "docs/webpack通关秘籍",
     "docs/性能优化/chrome-devtools-performance.md",
     "docs/性能优化/images/img-20240505170586.png",
@@ -181,11 +187,6 @@
     "docs/浏览器工作原理/已归档/20-async↗await：使用同步的方式去写异步代码.md",
     "docs/浏览器工作原理/已归档/19-Promise：使用Promise，告别回调函数.md",
     "docs/浏览器工作原理/已归档/18-宏任务和微任务：不是所有任务都是一个待遇.md",
-    "docs/浏览器工作原理/已归档/17-WebAPI：XMLHttpRequest是怎么实现的？.md",
-    "docs/浏览器工作原理/已归档/15-消息队列和事件循环：页面是怎么“活”起来的？.md",
-    "docs/浏览器工作原理/已归档/14-编译器和解释器：V8是如何执行一段JavaScript代码的？.md",
-    "docs/浏览器工作原理/已归档/13-垃圾回收：垃圾数据是如何自动回收的？.md",
-    "docs/浏览器工作原理/已归档/11-this：从JavaScript执行上下文的视角讲清楚this.md",
     "docs/浏览器工作原理/已归档",
     "docs/浏览器工作原理/images",
     "Excalidraw"

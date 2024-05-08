@@ -37,11 +37,27 @@ export default defineConfig({
     nav: [
       {
         text: '前端工程化',
-        link: '/engineer/',
-        activeMatch: '/engineer/',
+        items: [
+          {
+            text: '从零搭建Vue3项目',
+            link: '/engineer/',
+          },
+          {
+            text: '前端脚手架CLI',
+            link: '/engineer/vue3-cli/',
+          },
+          {
+            text: '前端构建部署',
+            link: '/engineer/cicd/',
+          },
+          {
+            text: '前端监控',
+            link: '/engineer/monitor/',
+          },
+        ],
       },
       {
-        text: '性能优化',
+        text: '前端性能优化',
         link: '/性能优化/',
       },
       {
@@ -149,16 +165,6 @@ export default defineConfig({
           ],
         },
         {
-          text: '前端脚手架CLI',
-          collapsed: false,
-          items: [
-            {
-              text: '从零开始构建脚手架',
-              link: '/engineer/vue3-cli/从零开始构建脚手架',
-            },
-          ],
-        },
-        {
           text: '业务模块',
           collapsed: false,
           items: [
@@ -172,8 +178,22 @@ export default defineConfig({
             },
           ],
         },
+      ],
+      '/engineer/vue3-cli/': [
         {
-          text: '构建部署',
+          text: '前端脚手架CLI',
+          collapsed: false,
+          items: [
+            {
+              text: '从零开始构建脚手架',
+              link: '/engineer/vue3-cli/从零开始构建脚手架',
+            },
+          ],
+        },
+      ],
+      '/engineer/cicd/': [
+        {
+          text: '前端构建部署',
           collapsed: false,
           items: [
             {
@@ -190,31 +210,19 @@ export default defineConfig({
             },
           ],
         },
+      ],
+      '/engineer/monitor/': [
         {
           text: '前端监控',
           collapsed: false,
           items: [
             {
               text: 'Sentry入门与实践',
-              link: '/engineer/cicd/Sentry入门与实践',
+              link: '/engineer/monitor/Sentry入门与实践',
             },
           ],
         },
-        {
-          text: '性能优化',
-          collapsed: false,
-          items: [
-            {
-              text: '首屏优化',
-              link: '/engineer/performance/first-screen',
-            },
-            {
-              text: '体积优化',
-              link: '/engineer/performance/size-optimize',
-            },
-          ],
-        },
-      ],
+      ]
       // '/browser-principle/': createSideBar('browser-principle'),
     },
 
