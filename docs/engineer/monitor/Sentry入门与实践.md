@@ -337,7 +337,7 @@ See 'docker run --help'.
 
 下面是官方给出的对比图：
 
-![](../images/image_5RVperOIYB.png)
+![](images/image_5RVperOIYB.png)
 
 上传 sourceMap 到 sentry 平台 这里有两种方式&#x20;
 
@@ -422,11 +422,11 @@ Sentry.init({
 
 运行程序，可以看到已经将 map 上传到了 sentry 服务。
 
-![](../images/image_vH7DRJAsud.png)
+![](images/image_vH7DRJAsud.png)
 
 我们再次尝试让代码报错，然后看到已经可以定位到代码具体的行数。
 
-![](../images/image_UD9_XHXV7b.png)
+![](images/image_UD9_XHXV7b.png)
 
 Vue3+vite 配置
 
@@ -632,7 +632,7 @@ Non-Error promise rejection captured with keys: remark
 
 看完，还是不知道是什么错误，于是通过面包屑，重现错误发生的过程：
 
-![](../images/image_prReBAXID3.png)
+![](images/image_prReBAXID3.png)
 
 从而定位到了函数的位置，下面为调用的函数：
 
@@ -731,7 +731,7 @@ catch (error) {
 
 下面是一张图进行形象说明：
 
-![](../images/image_jkcYGNwcVh.png)
+![](images/image_jkcYGNwcVh.png)
 
 Sentry 中的性能数据指标有如下这些：
 
@@ -745,21 +745,21 @@ Sentry 中的性能数据指标有如下这些：
 
 在 Web Vitals 界面，我们可以看到所有页面首次加载的时间。如果过长，可以进入交易详情进行分析。
 
-![](../images/image_JfG7KnG_I0.png)
+![](images/image_JfG7KnG_I0.png)
 
 比如我们常说的“页面秒开”指标，就可以在 Web Vitals 界面找到。一般来说，页面秒开指的就是 FCP。
 
 > 关于如何评判 `FCP`、`LCP`、`FID`、`CLS` 表现的优劣，`Sentry` 提供了标准:
 
-![](../images/image_7KxziFpcgL.png)
+![](images/image_7KxziFpcgL.png)
 
 点进去后，我们可以看到这些首屏按照用时长度降序排列：
 
-![](../images/image_CiICfCZGcc.png)
+![](images/image_CiICfCZGcc.png)
 
 点击其中一个 Event ID，可以看到具体的各个部分的花费时长，比如 http 请求，资源请求，以及其他的。
 
-![](../images/image_ccBVaxt7XQ.png)
+![](images/image_ccBVaxt7XQ.png)
 
 我们可以看到 http 花费的时间最长，可以找打对应的接口，告诉后端改进，或者考虑是否因为请求过多；如果是 resource 花费的时间长，可以考虑减少资源请求等操作。
 
