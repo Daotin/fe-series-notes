@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a}from"./chunks/framework.ff44d2fd.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"vue2组件精讲/index.md","filePath":"vue2组件精讲/index.md","lastUpdated":1715150632000}'),n={name:"vue2组件精讲/index.md"};function r(o,s,d,c,i,p){return t(),a("div")}const f=e(n,[["render",r]]);export{m as __pageData,f as default};

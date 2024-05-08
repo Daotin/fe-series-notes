@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a}from"./chunks/framework.ff44d2fd.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"前端进阶训练营/index.md","filePath":"前端进阶训练营/index.md","lastUpdated":1715154134000}'),n={name:"前端进阶训练营/index.md"};function r(o,s,d,c,i,p){return t(),a("div")}const f=e(n,[["render",r]]);export{m as __pageData,f as default};
