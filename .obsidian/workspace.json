@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/性能优化/BlueLink项目打包体积优化.md",
-                "mode": "preview",
+                "file": "docs/engineer/vue3-component/优先使用webp图片.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/性能优化/BlueLink项目打包体积优化.md",
+                "file": "docs/engineer/vue3-component/优先使用webp图片.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/性能优化/BlueLink项目打包体积优化.md",
+                "file": "docs/engineer/vue3-component/优先使用webp图片.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/性能优化/BlueLink项目打包体积优化.md"
+                "file": "docs/engineer/vue3-component/优先使用webp图片.md"
               }
             }
           }
@@ -149,6 +149,8 @@
   },
   "active": "91c2e494aa05f442",
   "lastOpenFiles": [
+    "docs/性能优化/BlueLink项目打包体积优化.md",
+    "docs/engineer/vue3-component/优先使用webp图片.md",
     "node_modules/vitepress/node_modules/@esbuild/openbsd-x64",
     "node_modules/vitepress/node_modules/@esbuild/netbsd-x64",
     "node_modules/vitepress/node_modules/@esbuild/linux-x64",
@@ -159,7 +161,6 @@
     "node_modules/vitepress/node_modules/@esbuild/linux-loong64",
     "node_modules/vitepress/node_modules/@esbuild/linux-ia32",
     "node_modules/vitepress/node_modules/@esbuild/linux-arm64",
-    "node_modules/vitepress/node_modules/@esbuild/linux-arm",
     "node_modules/cross-spawn/README.md",
     "node_modules/cross-env/README.md",
     "node_modules/cross-env/CHANGELOG.md",
@@ -181,7 +182,6 @@
     "docs/engineer/monitor/images/image_5RVperOIYB.png",
     "docs/engineer/monitor/images/image_Zwpk_0Zq0M.png",
     "docs/TypeScript通关秘籍/index.md",
-    "docs/性能优化/BlueLink项目打包体积优化.md",
     "Obsidian使用技巧.md",
     "docs/前端进阶训练营/一、浏览器工作原理.md",
     "node_modules/argparse/CHANGELOG.md",

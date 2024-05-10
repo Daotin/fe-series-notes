@@ -176,6 +176,10 @@ export default defineConfig({
               text: 'svg预览组件',
               link: '/engineer/vue3-component/svg预览组件',
             },
+            {
+              text: '优先使用webp图片',
+              link: '/engineer/vue3-component/优先使用webp图片',
+            },
           ],
         },
       ],
