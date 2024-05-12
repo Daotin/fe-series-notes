@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a}from"./chunks/framework.ff44d2fd.js";const x=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"10x程序员工作法/index.md","filePath":"10x程序员工作法/index.md","lastUpdated":1715150390000}'),n={name:"10x程序员工作法/index.md"};function r(o,s,d,c,i,p){return t(),a("div")}const m=e(n,[["render",r]]);export{x as __pageData,m as default};
