@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md",
+                "file": "docs/10x程序员工作法/index.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md",
+                "file": "docs/10x程序员工作法/index.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md",
+                "file": "docs/10x程序员工作法/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md"
+                "file": "docs/10x程序员工作法/index.md"
               }
             }
           }
@@ -161,8 +161,10 @@
   },
   "active": "91c2e494aa05f442",
   "lastOpenFiles": [
-    "Obsidian使用技巧.md",
+    "docs/10x程序员工作法/images/img-20240512200545.png",
+    "docs/10x程序员工作法/images",
     "docs/webpack通关秘籍/webpack常用配置.md",
+    "Obsidian使用技巧.md",
     "docs/engineer/vue3-component/优先使用webp图片.md",
     "docs/性能优化/BlueLink项目打包体积优化.md",
     "node_modules/vitepress/node_modules/@esbuild/openbsd-x64",
@@ -174,7 +176,6 @@
     "node_modules/vitepress/node_modules/@esbuild/linux-mips64el",
     "node_modules/vitepress/node_modules/@esbuild/linux-loong64",
     "node_modules/vitepress/node_modules/@esbuild/linux-ia32",
-    "node_modules/vitepress/node_modules/@esbuild/linux-arm64",
     "node_modules/cross-spawn/README.md",
     "node_modules/cross-env/README.md",
     "node_modules/cross-env/CHANGELOG.md",
@@ -205,7 +206,6 @@
     "docs/重学前端/前端的学习路线与方法.md",
     "docs/前端进阶训练营/index.md",
     "docs/左耳听风/技术变现.md",
-    "docs/重学前端/JavaScript-1：关于类型，有哪些你不知道的细节？.md",
-    "docs/重学前端/JavaScript篇.md"
+    "docs/重学前端/JavaScript-1：关于类型，有哪些你不知道的细节？.md"
   ]
 }
