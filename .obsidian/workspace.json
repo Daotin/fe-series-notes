@@ -4,28 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "163888f92c508f83",
+        "id": "0e2c976d147bf0f2",
         "type": "tabs",
         "children": [
           {
-            "id": "91c2e494aa05f442",
+            "id": "5e5c03e19c0d4430",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/10x程序员工作法/index.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8c83a5958a8a3c02",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Obsidian使用技巧.md",
+                "file": "docs/webpack通关秘籍/webpack常用配置.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/10x程序员工作法/index.md",
+                "file": "docs/webpack通关秘籍/webpack常用配置.md",
                 "collapseAll": false,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -114,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/10x程序员工作法/index.md",
+                "file": "docs/webpack通关秘籍/webpack常用配置.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/10x程序员工作法/index.md"
+                "file": "docs/webpack通关秘籍/webpack常用配置.md"
               }
             }
           }
@@ -159,12 +147,23 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "91c2e494aa05f442",
+  "active": "5e5c03e19c0d4430",
   "lastOpenFiles": [
+    "docs/webpack通关秘籍/index.md",
+    "docs/webpack通关秘籍/学什么.md",
+    "docs/webpack通关秘籍/webpack常用配置.md",
+    "docs/webpack通关秘籍/images/img-20240513130549.png",
+    "docs/webpack通关秘籍/images/img-20240513130540-1.png",
+    "docs/webpack通关秘籍/images/img-20240513130531.png",
+    "docs/webpack通关秘籍/images/img-20240513130503.png",
+    "docs/webpack通关秘籍/images/img-20240513130585.png",
+    "docs/webpack通关秘籍/images/img-20240513130540.png",
+    "docs/webpack通关秘籍/images/img-20240513110552.png",
+    "docs/webpack通关秘籍/images",
+    "Obsidian使用技巧.md",
+    "docs/10x程序员工作法/index.md",
     "docs/10x程序员工作法/images/img-20240512200545.png",
     "docs/10x程序员工作法/images",
-    "docs/webpack通关秘籍/webpack常用配置.md",
-    "Obsidian使用技巧.md",
     "docs/engineer/vue3-component/优先使用webp图片.md",
     "docs/性能优化/BlueLink项目打包体积优化.md",
     "node_modules/vitepress/node_modules/@esbuild/openbsd-x64",
@@ -175,7 +174,6 @@
     "node_modules/vitepress/node_modules/@esbuild/linux-ppc64",
     "node_modules/vitepress/node_modules/@esbuild/linux-mips64el",
     "node_modules/vitepress/node_modules/@esbuild/linux-loong64",
-    "node_modules/vitepress/node_modules/@esbuild/linux-ia32",
     "node_modules/cross-spawn/README.md",
     "node_modules/cross-env/README.md",
     "node_modules/cross-env/CHANGELOG.md",
@@ -188,14 +186,6 @@
     "node_modules/isexe/README.md",
     "docs/engineer/monitor/images/image_CiICfCZGcc.png",
     "docs/engineer/monitor/images/image_ccBVaxt7XQ.png",
-    "docs/engineer/monitor/images/image_7KxziFpcgL.png",
-    "docs/engineer/monitor/images/image_JfG7KnG_I0.png",
-    "docs/engineer/monitor/images/image_jkcYGNwcVh.png",
-    "docs/engineer/monitor/images/image_prReBAXID3.png",
-    "docs/engineer/monitor/images/image_UD9_XHXV7b.png",
-    "docs/engineer/monitor/images/image_vH7DRJAsud.png",
-    "docs/engineer/monitor/images/image_5RVperOIYB.png",
-    "docs/engineer/monitor/images/image_Zwpk_0Zq0M.png",
     "docs/TypeScript通关秘籍/index.md",
     "docs/前端进阶训练营/一、浏览器工作原理.md",
     "node_modules/argparse/CHANGELOG.md",
@@ -204,8 +194,6 @@
     "docs/前端进阶训练营/开班直播.md",
     "docs/前端进阶训练营/学习安排.md",
     "docs/重学前端/前端的学习路线与方法.md",
-    "docs/前端进阶训练营/index.md",
-    "docs/左耳听风/技术变现.md",
-    "docs/重学前端/JavaScript-1：关于类型，有哪些你不知道的细节？.md"
+    "docs/前端进阶训练营/index.md"
   ]
 }
