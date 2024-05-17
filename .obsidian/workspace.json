@@ -129,7 +129,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -146,10 +147,11 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "7e6c1fd667903e53",
+  "active": "5e5c03e19c0d4430",
   "lastOpenFiles": [
-    "docs/webpack通关秘籍/index.md",
+    "docs/webpack通关秘籍/webpack配置最佳实践.md",
     "docs/webpack通关秘籍/webpack常用配置.md",
+    "docs/webpack通关秘籍/index.md",
     "docs/webpack通关秘籍/images/img-20240517110506.png",
     "docs/webpack通关秘籍/images/img-20240517100597.png",
     "docs/webpack通关秘籍/images/img-20240517100513.png",
