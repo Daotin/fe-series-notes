@@ -378,3 +378,418 @@ module.exports = {
 内置了了 uglifyjs-webpack-plugin，并且自动压缩。
 
 如果要自己配置，需要手动安装 uglifyjs-webpack-plugin 然后配置。
+
+
+## 自动清理构建目录
+
+**1、使用rimraf库**
+`rimraf` 是一个用于 Node.js 的包，常用于删除文件和目录。它是一个跨平台的实现，类似于 Unix 系统中的 `rm -rf` 命令，可以递归地删除目录及其内容。
+
+安装：
+```
+npm install rimraf -D
+```
+
+设置：
+```json
+{
+  "scripts": {
+    "build": "rimraf ./dist && vue-cli-service build"
+  }
+}
+```
+
+**2、使用clean-webpack-plugin插件**
+
+安装：
+```
+npm i clean-webpack-plugin@^2 -D
+```
+> 注意安装的版本为2（最新的为4）
+
+```js
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+  // 其他配置项
+  plugins: [
+    new CleanWebpackPlugin()
+  ]
+};
+
+```
+
+## ⾃动补⻬ CSS3 前缀
+
+安装：
+```
+npm install css-loader style-loader postcss-loader autoprefixer -D
+
+```
+
+配置 `webpack.config.js`：
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  ['autoprefixer', { /* 插件选项 */ }]
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+};
+
+```
+
+3、配置 PostCSS
+在项目根目录下创建一个 postcss.config.js 文件，以便配置 PostCSS 和 Autoprefixer 插件：
+```js
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+};
+```
+
+## 自动px转viewport
+
+参考：[使用viewport代替rem](https://github.com/Daotin/Web/blob/master/07-%E7%A7%BB%E5%8A%A8Web%E5%BC%80%E5%8F%91/09-em%E5%92%8Crem.md#%E4%BD%BF%E7%94%A8viewport%E4%BB%A3%E6%9B%BFrem)
+
+## sourcemap配置
+
+`vue.config.js` 文件中配置 `devtool` 选项：
+```js
+module.exports = {
+  // 根据环境变量判断是否生成 source map，并指定 source map 类型
+  productionSourceMap: process.env.NODE_ENV !== 'production',
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'development') {
+      // 开发环境下使用 eval-source-map
+      config.devtool = 'eval-source-map';
+    } else if (process.env.NODE_ENV === 'production') {
+      // 生产环境下使用 source-map
+      config.devtool = 'source-map';
+    }
+  }
+};
+```
+
+下图为开发环境使用了sourcemap的调试效果：
+![](images/img-20240516150584.png)
+
+
+下图为开发环境关闭使用sourcemap的调试效果，不是源码（上下会有很多其他代码）：
+![](images/img-20240516150561.png)
+![](images/img-20240516150506.png)
+
+> ❓在**开发环境**生成sourcemap，要怎么使用呢？
+
+当开发环境生成了 source map 文件并且浏览器加载这些文件后，浏览器会自动解析 source map 文件并将压缩或混淆后的代码映射到源文件。开发者不需要进行任何额外的操作。具体过程如下：
+
+1. **自动加载**：
+   - 浏览器在加载 JavaScript 文件时，会检查这些文件是否包含 source map 注释。这些注释通常是这样的形式：
+     ```javascript
+     //# sourceMappingURL=main.js.map
+     ```
+   - 如果存在这个注释，浏览器会自动请求并加载对应的 source map 文件（如 `main.js.map`）。
+
+2. **解析 source map**：
+   - 浏览器加载并解析 source map 文件，将压缩或混淆后的代码映射到源文件。这使得浏览器可以显示源代码而不是压缩后的代码。
+
+3. **开发者工具显示源代码**：
+   - 在浏览器的开发者工具中（例如 Chrome 的 DevTools 或 Firefox 的 Developer Tools），源代码会显示在“Sources”或“源”面板中。你可以看到原始的未压缩、未混淆的源代码。
+   - 调试时，断点和错误信息都会对应到源代码中，而不是压缩后的代码行。
+
+浏览器在加载 JavaScript 文件时，如果发现有指向 source map 文件的注释，会自动加载和解析这些 source map 文件。开发者无需进行任何额外操作，就可以在开发者工具中查看和调试原始的源代码。这大大简化了调试过程，使得定位和修复问题更加高效。
+
+
+> ❓在**生产环境**生成sourcemap，要怎么使用呢？
+
+1. **配置生成 source map**：
+   - 在 `vue.config.js` 中配置生成 source map 文件，但在部署时不将这些文件公开。
+   
+   ```javascript
+   module.exports = {
+     productionSourceMap: true,  // 生成 source map 文件
+     configureWebpack: config => {
+       if (process.env.NODE_ENV === 'production') {
+         config.devtool = 'source-map';  // 使用适合生产环境的 source map 类型
+       }
+     }
+   };
+   ```
+
+2. **部署时不公开 source map 文件**：
+   - 将 source map 文件保存到安全的位置，例如服务器的某个保护目录，或者仅在内部网络访问的存储位置，不将其公开发布到用户可访问的目录中。
+
+
+如何使用？
+
+1. **使用错误日志服务**：
+像 Sentry 这样的错误日志服务可以自动解析 source map 文件，只需将生成的 source map 文件上传到相应的服务中。
+
+2. **手动使用 source map 文件进行调试**
+步骤：
+- 从错误日志服务或浏览器控制台中获取错误信息和堆栈跟踪。
+- 使用 source map 文件手动或通过工具解析错误堆栈，定位到源代码中的具体位置。
+- 通过 source map 文件，你可以手动将压缩代码的行列号映射回源代码。例如，可以使用工具如 `source-map` 库来进行映射。
+
+   ```javascript
+   const { SourceMapConsumer } = require('source-map');
+   const fs = require('fs');
+
+   // 读取 source map 文件
+   const rawSourceMap = JSON.parse(fs.readFileSync('path/to/your.map', 'utf8'));
+
+   // 创建 SourceMapConsumer
+   SourceMapConsumer.with(rawSourceMap, null, consumer => {
+     const originalPosition = consumer.originalPositionFor({
+       line: 1,  // 错误发生的压缩代码行号
+       column: 1005  // 错误发生的压缩代码列号
+     });
+
+     console.log('Original position:', originalPosition);
+   });
+   ```
+
+示例：
+![](images/img-20240517100597.png)
+![](images/img-20240517100557.png)
+
+解析后：
+![](images/img-20240517100513.png)
+
+## 基础库分离出dist
+
+将 Vue、Element-UI 基础包通过 cdn 引⼊，不打⼊ bundle 中。
+
+安装：
+```
+npm i html-webpack-externals-plugin -D
+```
+
+`html-webpack-externals-plugin` 是一个用于 Webpack 的插件，它主要的作用是将某些依赖（如第三方库）通过外部链接的方式加载，而不是将它们打包到最终的 bundle 文件中。它会自动在生成的 HTML 文件中插入相应的 `<script>` 或 `<link>` 标签。
+
+这种做法有几个好处：
+
+1. **减小打包后的文件大小**：通过将一些不经常变化的库（例如 jQuery、Lodash 等）从 bundle 中移除，可以显著减小打包后的文件大小，从而提升页面加载速度。
+    
+2. **利用 CDN 加速**：这些外部依赖可以通过 CDN（内容分发网络）加载，CDN 通常在全球多地部署服务器，能够加速文件的下载速度。
+    
+3. **缓存利用**：因为这些外部库可能已经被浏览器缓存，可以减少重复下载的时间。
+
+配置：
+```js
+
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+
+module.exports = {
+  // 你的其他 webpack 配置
+  plugins: [
+    new HtmlWebpackExternalsPlugin({
+      externals: [
+        {
+          module: 'jquery',
+          entry: 'https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js',
+          global: 'jQuery',
+        },
+        {
+          module: 'lodash',
+          entry: 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
+          global: '_',
+        },
+      ],
+    }),
+  ],
+};
+```
+在上述配置中，`HtmlWebpackExternalsPlugin` 被添加到了插件数组中，并且指定了两个外部依赖：jQuery 和 Lodash。这样，在生成的 HTML 文件中会自动插入相应的 `<script>` 标签，加载 jQuery 和 Lodash，而不是将它们打包进 bundle 文件中。
+
+## 基础包拆分打包
+
+Webpack 的 `SplitChunksPlugin` 插件用于将代码分离成多个 chunk，以实现更好的缓存和更快的加载时间。它主要用于优化共享模块，并将其分离到单独的文件中。
+
+配置：
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  //其他配置
+  optimization: {
+    splitChunks: {
+      chunks: 'all', // 分离所有类型的 chunks（包括同步和异步）
+      minSize: 20000, // 最小大小，超过这个大小的模块才会被分离
+      minRemainingSize: 0, // 保持不变
+      minChunks: 2, // 至少被多少模块共享
+      maxAsyncRequests: 30, // 按需加载时的最大并行请求数
+      maxInitialRequests: 30, // 入口点的最大并行请求数
+      enforceSizeThreshold: 50000, // 强制执行拆分的大小阈值
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            // 获取模块名，例如 node_modules/packageName/index.js -> packageName
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `vendor.${packageName}`;
+          },
+          chunks: 'all',
+          // 多个缓存组匹配同一模块时，优先级高的缓存组优先处理。
+          priority: -10,
+          // 如果已有相同名称的 chunk，复用它而不是创建新的
+          reuseExistingChunk: true,
+        },
+        commons: {
+	      // 匹配 `src` 目录下 `components` 和 `utils` 目录中的模块，将其分离到一个统一的 `commons` chunk 中。
+          test: /[\\/]src[\\/](components|utils)[\\/]/, 
+          name: 'commons',
+          chunks: 'all',
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+};
+
+```
+
+
+## Scope Hoisting（不用配置）
+
+`ModuleConcatenationPlugin` 是 Webpack 中的一个优化插件，用于通过 Scope Hoisting（作用域提升）来减少 JavaScript 文件的体积和提升执行性能。它的主要作用包括：
+
+1. **减少闭包函数的数量**：通过将所有模块合并到一个作用域中，减少了闭包函数的数量，从而降低了 JavaScript 解析和执行的开销。
+
+2. **提升运行时性能**：合并模块可以减少代码中的函数调用和作用域查找，提升代码的执行效率。
+
+3. **缩小打包后的文件体积**：通过减少模块间的边界和闭包，生成的代码通常更简洁，文件体积更小。
+
+这个插件在生产环境中特别有用，因为它可以显著提高应用的加载速度和响应性能。`ModuleConcatenationPlugin` 在 Webpack 3 及以后的版本中被默认启用。
+
+**当设置mode: 'production'的时候，会自动启用！**
+
+> 但，注意：只能对 ES6 模块进行优化，而不能对 CommonJS 模块进行优化。原因是 ES6 模块的静态结构使得 Webpack 能够在编译时进行更多的优化，而 CommonJS 模块的动态特性则限制了这种优化的可能性。
+
+![](images/img-20240517110506.png)
+
+当然，也可以手动配置。在 Webpack 配置中使用 `ModuleConcatenationPlugin` 插件：
+
+```javascript
+const webpack = require('webpack');
+
+module.exports = {
+  mode: 'production',
+  optimization: {
+    concatenateModules: true,  // 启用作用域提升
+  },
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),  // 添加插件
+  ],
+};
+```
+
+以上配置会自动应用作用域提升优化。
+
+
+## 添加ESLint
+
+如果是Vue-cli项目，添加eslint会比较简单：
+
+1、安装
+```
+vue add @vue/eslint
+```
+
+期间会让你选择ESLint 规则，以及最后会生成`.eslintrc.js` 文件，其中包含 ESLint 的配置。
+
+2、安装VSCode插件
+在 `.vscode` 文件夹下创建一个 `settings.json` 文件，并添加以下内容：
+
+```json
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+
+```
+
+3、运行eslint
+```json
+"scripts": {
+  "lint": "vue-cli-service lint"
+}
+```
+
+4、配置webpack
+```js
+module.exports = {
+  lintOnSave: process.env.NODE_ENV !== 'production'
+}
+```
+> 即使 lintOnSave 设置为 false，运行 npm run lint 仍然会生效。lintOnSave 选项只是控制在开发过程中保存文件时是否自动运行 ESLint 检查。如果你手动运行 npm run lint，它会检查整个项目的代码，无论 lintOnSave 的设置如何。
+
+## 打包组件库
+
+跟打包业务代码基本一致，区别在于在`output`中增加几个选项：
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-library.js',
+    library: 'MyLibrary', // 你的库的全局变量名称
+    // libraryTarget只需要写umd，就可以支持 AMD、CMD、UMD 以及 script 标签的方式引用
+    libraryTarget: 'umd', // 支持 UMD 规范
+    // 如果你的库是通过 export default 导出的，那么你应该使用 libraryExport: 'default' 来确保库在 UMD、AMD 和 CommonJS 模块系统中正确导出。比如 export default function func() {} ,当对于命名导出的情况，不需要 libraryExport: 'default'，如 export function func() {} 
+    libraryExport: 'default', 
+    umdNamedDefine: true  // 允许 UMD 规范下的命名
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  }
+};
+
+```
+
+
+
