@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md",
+                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 351
+    "width": 233.5
   },
   "right": {
     "id": "5c39e05d376c2a0b",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md",
+                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md",
+                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack常用配置.md"
+                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md"
               }
             }
           }
@@ -149,8 +149,10 @@
   },
   "active": "5e5c03e19c0d4430",
   "lastOpenFiles": [
-    "docs/webpack通关秘籍/webpack配置最佳实践.md",
+    "docs/webpack通关秘籍/images/img-20240518150576.png",
+    "docs/webpack通关秘籍/images/img-20240518140515.png",
     "docs/webpack通关秘籍/webpack常用配置.md",
+    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
     "docs/webpack通关秘籍/index.md",
     "docs/webpack通关秘籍/images/img-20240517110506.png",
     "docs/webpack通关秘籍/images/img-20240517100597.png",
@@ -162,7 +164,6 @@
     "docs/webpack通关秘籍/学什么.md",
     "docs/webpack通关秘籍/images/img-20240513130549.png",
     "docs/webpack通关秘籍/images/img-20240513130540-1.png",
-    "docs/webpack通关秘籍/images/img-20240513130531.png",
     "docs/webpack通关秘籍/images",
     "Obsidian使用技巧.md",
     "docs/10x程序员工作法/index.md",
@@ -193,7 +194,6 @@
     "node_modules/tslib/README.md",
     "docs/前端进阶训练营/二、重学JavaScript.md",
     "docs/前端进阶训练营/开班直播.md",
-    "docs/前端进阶训练营/学习安排.md",
-    "docs/重学前端/前端的学习路线与方法.md"
+    "docs/前端进阶训练营/学习安排.md"
   ]
 }
