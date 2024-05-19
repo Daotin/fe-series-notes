@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+                "file": "docs/webpack通关秘籍/webpack执行原理.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+                "file": "docs/webpack通关秘籍/webpack执行原理.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+                "file": "docs/webpack通关秘籍/webpack执行原理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md"
+                "file": "docs/webpack通关秘籍/webpack执行原理.md"
               }
             }
           }
@@ -149,10 +149,11 @@
   },
   "active": "5e5c03e19c0d4430",
   "lastOpenFiles": [
+    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+    "docs/webpack通关秘籍/webpack执行原理.md",
     "docs/webpack通关秘籍/images/img-20240518150576.png",
     "docs/webpack通关秘籍/images/img-20240518140515.png",
     "docs/webpack通关秘籍/webpack常用配置.md",
-    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
     "docs/webpack通关秘籍/index.md",
     "docs/webpack通关秘籍/images/img-20240517110506.png",
     "docs/webpack通关秘籍/images/img-20240517100597.png",
@@ -163,7 +164,6 @@
     "docs/webpack通关秘籍/images/img-20240516150584.png",
     "docs/webpack通关秘籍/学什么.md",
     "docs/webpack通关秘籍/images/img-20240513130549.png",
-    "docs/webpack通关秘籍/images/img-20240513130540-1.png",
     "docs/webpack通关秘籍/images",
     "Obsidian使用技巧.md",
     "docs/10x程序员工作法/index.md",
