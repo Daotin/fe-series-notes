@@ -260,8 +260,165 @@ if (firstOptions.watch || options.watch) {
 3. 引用webpack，根据配置项options进行编译和构建。
 
 
-compiler到底做了什么？
+### compiler到底做了什么？
 
+compiler是引入的webpack库，当使用require引入一个库的时候，实际上调用的是`package.json` 文件中 `main` 字段对应的入口文件。
+
+比如 `const webpack = require("webpack");` ，实际上找到的`lib/webpack.js` 文件：
+```json
+"main": "lib/webpack.js",
+```
+
+
+进入代码后，首先引入了compiler文件：
+```js
+const Compiler = require("./Compiler");
+```
+
+提到compiler文件，就涉及到一个Tapable架构。
+
+
+### Tapable
+
+`tapable` 是 Webpack 的一个核心库，它提供了钩子机制，用于在不同的生命周期阶段运行插件。`tapable` 允许开发人员在 Webpack 的编译过程中插入自定义逻辑，从而实现扩展和定制 Webpack 的行为。
+
+`tapable` 是一个小型的库，提供了多种钩子（hook）类型，用于在特定时刻运行特定的函数。主要的钩子类型包括：
+
+- `SyncHook`：同步执行，不关心返回值。
+- `SyncBailHook`：同步执行，如果某个钩子返回非 `undefined`，则中断后续钩子的执行。
+- `SyncWaterfallHook`：同步执行，前一个钩子的返回值会作为参数传给下一个钩子。
+- `SyncLoopHook`：同步执行，钩子函数返回 `true` 时重复执行当前钩子。
+- `AsyncParallelHook`：并行异步执行，不关心返回值。
+- `AsyncParallelBailHook`：并行异步执行，如果某个钩子返回非 `undefined`，则中断后续钩子的执行。
+- `AsyncSeriesHook`：串行异步执行。
+- `AsyncSeriesBailHook`：串行异步执行，如果某个钩子返回非 `undefined`，则中断后续钩子的执行。
+- `AsyncSeriesWaterfallHook`：串行异步执行，前一个钩子的返回值会作为参数传给下一个钩子。
+
+可以把`tapable`理解成nodejs中的EventEmitter，就是一个事件监听器，但是会比EventEmitter的事件监听更复杂点，功能多点。
+
+比如事件的绑定和触发，分为同步和异步的方式：
+
+|                  | 同步方式 | 异步方式                |
+| ---------------- | ---- | ------------------- |
+| 绑定（类似node中的on）   | tap  | tapAsync/tapPromise |
+| 触发（类似node中的emit） | call | callAsync/promise   |
+示例：
+```js
+const { SyncHook, AsyncSeriesHook } = require("tapable");
+
+class MyCompiler {
+    constructor() {
+        this.hooks = {
+            initialize: new SyncHook(),
+            compile: new SyncHook(["compilation"]),
+            emit: new AsyncSeriesHook(["compilation"])
+        };
+    }
+
+    run() {
+        this.hooks.initialize.call();
+        const compilation = {};
+        this.hooks.compile.call(compilation);
+        this.hooks.emit.callAsync(compilation, (err) => {
+            if (err) {
+                console.error("Emit phase failed:", err);
+            } else {
+                console.log("Emit phase succeeded");
+            }
+        });
+    }
+}
+
+const compiler = new MyCompiler();
+
+/*
+同步绑定
+*/
+// 注册插件
+compiler.hooks.initialize.tap("InitializePlugin", () => {
+    console.log("Initialization phase");
+});
+
+compiler.hooks.compile.tap("CompilePlugin", (compilation) => {
+    console.log("Compilation phase");
+    // 模拟生成编译结果
+    compilation.result = "some result";
+});
+
+/*
+异步绑定
+*/
+compiler.hooks.emit.tapAsync("EmitPlugin", (compilation, callback) => {
+    console.log("Emit phase");
+    setTimeout(() => {
+        console.log("Emitting:", compilation.result);
+        callback();
+    }, 1000);
+});
+
+// 事件触发
+compiler.run();
+```
+
+在Webpack 中的实际应用：
+在 Webpack 中，`tapable` 被广泛用于其内部的编译流程，通过钩子机制允许插件在特定阶段执行。以下是一个 Webpack 插件的简单示例：
+
+创建一个 Webpack 插件：
+```js
+class MyPlugin {
+    apply(compiler) {
+        // 在编译开始时触发
+        compiler.hooks.compile.tap("MyPlugin", (params) => {
+            console.log("The compiler is starting to compile...");
+        });
+
+        // 在生成资源到 output 目录之前触发
+        compiler.hooks.emit.tapAsync("MyPlugin", (compilation, callback) => {
+            console.log("The compilation is going to emit files...");
+            // 在这里可以访问并修改编译结果
+            callback();
+        });
+    }
+}
+
+module.exports = MyPlugin;
+
+```
+
+在 Webpack 配置文件中使用插件：
+
+```js
+const MyPlugin = require("./path/to/MyPlugin");
+
+module.exports = {
+    // ...其他配置项
+    plugins: [
+        new MyPlugin()
+    ]
+};
+```
+
+> tapable相比EventEmitter的优势是什么？
+
+**`tapable` 是专门为解决 Webpack 插件机制中的问题而诞生的。** 确实与 Node.js 的 `EventEmitter` 有一些相似之处，因为两者都允许注册和触发事件，但它们之间有几个重要的区别，使得 `tapable` 更适合用于 Webpack 的插件系统：
+
+1、钩子类型多样性与灵活性
+
+`tapable` 提供了多种类型的钩子（同步、异步、串行、并行、瀑布等），每种类型的钩子都有不同的行为和用途，使其在不同场景下更灵活地控制插件的执行顺序和方式。例如：
+
+- `SyncHook`：同步执行，不关心返回值。
+- `AsyncSeriesHook`：串行异步执行，依次执行每个注册的插件。
+- `AsyncParallelHook`：并行异步执行，所有插件并发执行。
+
+相比之下，`EventEmitter` 只支持简单的同步事件机制，没有内置支持复杂的异步控制和执行模式。
+
+2、上下文和数据流管理
+
+`tapable` 可以传递上下文参数，并通过钩子共享和传递数据。例如，`SyncWaterfallHook` 会将前一个钩子的返回值传递给下一个钩子，而 `EventEmitter` 只能传递固定的事件参数，无法动态传递和变更数据。这种能力使得 `tapable` 更适合处理复杂的编译过程，其中每个阶段可能需要基于前一个阶段的结果进行操作。
+
+3、扩展能力和插件系统需求
+
+`tapable` 设计为扩展 Webpack 编译过程，支持灵活的插件机制。通过钩子的 `tap`、`tapAsync`、`tapPromise` 等方法，可以方便地处理不同类型的插件和事件。Webpack 的插件系统需要在不同的编译阶段执行特定的逻辑，这些逻辑可能是同步的，也可能是异步的。`tapable` 提供的钩子类型和控制能力，能够满足 Webpack 插件系统的复杂需求。
 
 
 
