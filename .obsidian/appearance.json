@@ -2,8 +2,8 @@
   "accentColor": "",
   "cssTheme": "AnuPpuccin",
   "translucency": true,
-  "theme": "system",
-  "textFontFamily": "霞鹜新晰黑 屏幕阅读版",
+  "theme": "obsidian",
+  "textFontFamily": "",
   "interfaceFontFamily": "霞鹜新晰黑 屏幕阅读版",
   "baseFontSize": 14
 }
