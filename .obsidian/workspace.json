@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md",
+                "file": "docs/engineer/vue3-template/format.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 233.5,
-    "collapsed": true
+    "width": 233.5
   },
   "right": {
     "id": "5c39e05d376c2a0b",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md",
+                "file": "docs/engineer/vue3-template/format.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md",
+                "file": "docs/engineer/vue3-template/format.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md"
+                "file": "docs/engineer/vue3-template/format.md"
               }
             }
           }
@@ -150,8 +149,15 @@
   },
   "active": "5e5c03e19c0d4430",
   "lastOpenFiles": [
-    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+    "docs/engineer/vue3-template/images/img-20240524160505.png",
+    "docs/engineer/vue3-template/images/img-20240524160553.png",
+    "docs/engineer/vue3-template/images/img-20240524160502.png",
+    "docs/engineer/vue3-template/images/img-20240524160554.png",
+    "docs/engineer/vue3-template/images/1716539666978 1.jpg",
+    "docs/engineer/vue3-template/images/1716539666978.jpg",
+    "docs/engineer/vue3-template/images",
     "docs/webpack通关秘籍/webpack执行原理.md",
+    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
     "docs/webpack通关秘籍/images/img-20240520140536.png",
     "docs/webpack通关秘籍/images/img-20240520140527.png",
     "docs/webpack通关秘籍/images/Pasted image 20240520140512.png",
@@ -159,11 +165,6 @@
     "docs/webpack通关秘籍/images/img-20240518140515.png",
     "docs/webpack通关秘籍/webpack常用配置.md",
     "docs/webpack通关秘籍/index.md",
-    "docs/webpack通关秘籍/images/img-20240517110506.png",
-    "docs/webpack通关秘籍/images/img-20240517100597.png",
-    "docs/webpack通关秘籍/images/img-20240517100513.png",
-    "docs/webpack通关秘籍/images/img-20240517100557.png",
-    "docs/webpack通关秘籍/images/img-20240516150506.png",
     "docs/webpack通关秘籍/学什么.md",
     "docs/webpack通关秘籍/images",
     "Obsidian使用技巧.md",
@@ -178,7 +179,6 @@
     "node_modules/vitepress/node_modules/@esbuild/linux-s390x",
     "node_modules/vitepress/node_modules/@esbuild/linux-ppc64",
     "node_modules/vitepress/node_modules/@esbuild/linux-mips64el",
-    "node_modules/vitepress/node_modules/@esbuild/linux-loong64",
     "node_modules/cross-spawn/README.md",
     "node_modules/cross-env/README.md",
     "node_modules/cross-env/CHANGELOG.md",

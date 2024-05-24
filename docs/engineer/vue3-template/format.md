@@ -105,6 +105,24 @@ module.exports = {
 /public/*
 ```
 
+
+#### idea配置Prettier
+
+1、下载prettier插件
+![](images/img-20240524160554.png)
+
+
+2、配置
+
+![](images/img-20240524160502.png)
+
+
+3、代码的右键就可以手动格式化了，当然，可以设置保存时自动格式化。
+
+![](images/img-20240524160505.png)
+
+![](images/img-20240524160553.png)
+
 ### 如果使用了 eslint 规则校验
 
 上面的配置均可忽略，包括不安装 vscode 的 Prettier 插件。
