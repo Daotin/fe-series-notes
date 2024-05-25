@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "0e2c976d147bf0f2",
+        "id": "915cfa87b52ee58c",
         "type": "tabs",
         "children": [
           {
-            "id": "5e5c03e19c0d4430",
+            "id": "6953d86a2819d9c4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/engineer/vue3-template/format.md",
+                "file": "docs/webpack通关秘籍/webpack执行原理.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/engineer/vue3-template/format.md",
+                "file": "docs/webpack通关秘籍/webpack执行原理.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/engineer/vue3-template/format.md",
+                "file": "docs/webpack通关秘籍/webpack执行原理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/engineer/vue3-template/format.md"
+                "file": "docs/webpack通关秘籍/webpack执行原理.md"
               }
             }
           }
@@ -134,7 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 252
+    "width": 237.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -147,22 +147,23 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "5e5c03e19c0d4430",
+  "active": "6953d86a2819d9c4",
   "lastOpenFiles": [
+    "docs/webpack通关秘籍/images/img-20240525170599.png",
+    "docs/webpack通关秘籍/images/img-20240525150533.png",
+    "docs/webpack通关秘籍/images/img-20240525150503.png",
+    "docs/webpack通关秘籍/images/img-20240525150546.png",
+    "docs/webpack通关秘籍/images/img-20240525150597.png",
+    "docs/webpack通关秘籍/images/img-20240525140506.png",
+    "docs/webpack通关秘籍/images/img-20240525110552.png",
+    "docs/webpack通关秘籍/images/img-20240525100503.png",
+    "docs/engineer/vue3-template/format.md",
     "docs/engineer/vue3-template/images/img-20240524160505.png",
     "docs/engineer/vue3-template/images/img-20240524160553.png",
     "docs/engineer/vue3-template/images/img-20240524160502.png",
-    "docs/engineer/vue3-template/images/img-20240524160554.png",
-    "docs/engineer/vue3-template/images/1716539666978 1.jpg",
-    "docs/engineer/vue3-template/images/1716539666978.jpg",
     "docs/engineer/vue3-template/images",
     "docs/webpack通关秘籍/webpack执行原理.md",
     "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
-    "docs/webpack通关秘籍/images/img-20240520140536.png",
-    "docs/webpack通关秘籍/images/img-20240520140527.png",
-    "docs/webpack通关秘籍/images/Pasted image 20240520140512.png",
-    "docs/webpack通关秘籍/images/img-20240518150576.png",
-    "docs/webpack通关秘籍/images/img-20240518140515.png",
     "docs/webpack通关秘籍/webpack常用配置.md",
     "docs/webpack通关秘籍/index.md",
     "docs/webpack通关秘籍/学什么.md",
@@ -193,7 +194,6 @@
     "docs/前端进阶训练营/一、浏览器工作原理.md",
     "node_modules/argparse/CHANGELOG.md",
     "node_modules/tslib/README.md",
-    "docs/前端进阶训练营/二、重学JavaScript.md",
-    "docs/前端进阶训练营/开班直播.md"
+    "docs/前端进阶训练营/二、重学JavaScript.md"
   ]
 }

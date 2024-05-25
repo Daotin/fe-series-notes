@@ -269,7 +269,6 @@ compiler是引入的webpack库，当使用require引入一个库的时候，实�
 "main": "lib/webpack.js",
 ```
 
-
 进入代码后，首先引入了compiler文件：
 ```js
 const Compiler = require("./Compiler");
@@ -278,7 +277,7 @@ const Compiler = require("./Compiler");
 提到compiler文件，就涉及到一个Tapable架构。
 
 
-### Tapable
+#### Tapable
 
 `tapable` 是 Webpack 的一个核心库，它提供了钩子机制，用于在不同的生命周期阶段运行插件。`tapable` 允许开发人员在 Webpack 的编译过程中插入自定义逻辑，从而实现扩展和定制 Webpack 的行为。
 
@@ -296,12 +295,12 @@ const Compiler = require("./Compiler");
 
 可以把`tapable`理解成nodejs中的EventEmitter，就是一个事件监听器，但是会比EventEmitter的事件监听更复杂点，功能多点。
 
-比如事件的绑定和触发，分为同步和异步的方式：
+比如事件的监听和触发，分为同步和异步的方式：
 
-|                  | 同步方式 | 异步方式                |
-| ---------------- | ---- | ------------------- |
-| 绑定（类似node中的on）   | tap  | tapAsync/tapPromise |
-| 触发（类似node中的emit） | call | callAsync/promise   |
+|                    | 同步方式   | 异步方式                    |
+| ------------------ | ------ | ----------------------- |
+| 监听（类似node中的`on`）   | `tap`  | `tapAsync`/`tapPromise` |
+| 触发（类似node中的`emit`） | `call` | `callAsync`/`promise`   |
 示例：
 ```js
 const { SyncHook, AsyncSeriesHook } = require("tapable");
@@ -420,34 +419,519 @@ module.exports = {
 
 `tapable` 设计为扩展 Webpack 编译过程，支持灵活的插件机制。通过钩子的 `tap`、`tapAsync`、`tapPromise` 等方法，可以方便地处理不同类型的插件和事件。Webpack 的插件系统需要在不同的编译阶段执行特定的逻辑，这些逻辑可能是同步的，也可能是异步的。`tapable` 提供的钩子类型和控制能力，能够满足 Webpack 插件系统的复杂需求。
 
+#### compiler对象
+
+compiler对象其实就是继承tapable的，然后定义了很多个hooks。
+
+> 还有一个`compilation.js`，负责模块编译，打包，优化的过程。
+
+![](images/img-20240525100503.png)
+
+然后所有的插件都有个apply方法，参数传入compiler对象。
+
+在apply里面监听compiler的某些hook，然后当compiler对象去触发这些hook的时候，就在插件中捕获到该事件，执行一些逻辑。这就是插件的执行逻辑。
+
+总结一下：插件就是监听compiler中上百个hook的其中几个，然后执行一些特定的操作。
+
+演示代码：
+```js
+// compiler.js
+const {
+    SyncHook,
+    AsyncSeriesHook
+} = require('tapable');
+
+module.exports = class Compiler {
+    constructor() {
+        this.hooks = {
+            accelerate: new SyncHook(['newspeed']),
+            brake: new SyncHook(),
+            calculateRoutes: new AsyncSeriesHook(["source", "target", "routesList"])
+        }
+    }
+    run(){
+        this.accelerate(10)
+        this.break()
+        this.calculateRoutes('Async', 'hook', 'demo')
+    }
+    accelerate(speed) {
+        this.hooks.accelerate.call(speed);
+    }
+    break() {
+        this.hooks.brake.call();
+    }
+    calculateRoutes() {
+        this.hooks.calculateRoutes.promise(...arguments).then(() => {
+        }, err => {
+            console.error(err);
+        });
+    }
+}
+```
+
+自定义插件：
+```js
+const Compiler = require('./Compiler')
+ 
+class MyPlugin{
+    constructor() {
+ 
+    }
+    apply(compiler){
+        compiler.hooks.brake.tap("WarningLampPlugin", () => console.log('WarningLampPlugin'));
+        compiler.hooks.accelerate.tap("LoggerPlugin", newSpeed => console.log(`Accelerating to ${newSpeed}`));
+        compiler.hooks.calculateRoutes.tapPromise("calculateRoutes tapAsync", (source, target, routesList) => {
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    console.log(`tapPromise to ${source} ${target} ${routesList}`)
+                    resolve();
+                },1000)
+            });
+        });
+    }
+}
+ 
+const myPlugin = new MyPlugin();
+ 
+const options = {
+    plugins: [myPlugin]
+}
+
+const compiler = new Compiler();
+
+for (const plugin of options.plugins) {
+    if (typeof plugin === "function") {
+        plugin.call(compiler, compiler);
+    } else {
+        plugin.apply(compiler);
+    }
+}
+compiler.run();
+```
+
+当最后`compiler.run();`的时候，插件就会触发对应的hook，执行特定的逻辑。
+
+### webpack如何使用tapable的？
+
+上面我们提到，实际执行的是`lib/webpack.js`，我们看了源码，其实和上面的示例过程是相同的。
+
+```js
+const webpack = (options, callback) => {
+	const webpackOptionsValidationErrors = validateSchema(
+		webpackOptionsSchema,
+		options
+	);
+	if (webpackOptionsValidationErrors.length) {
+		throw new WebpackOptionsValidationError(webpackOptionsValidationErrors);
+	}
+	let compiler;
+	if (Array.isArray(options)) {
+		compiler = new MultiCompiler(
+			Array.from(options).map(options => webpack(options))
+		);
+	} else if (typeof options === "object") {
+		/**
+		 * 引入webpack.config.js中的配置
+		 */
+		options = new WebpackOptionsDefaulter().process(options);
+		/**
+		 * 构建Compiler
+		 */
+		compiler = new Compiler(options.context);
+		compiler.options = options;
+		new NodeEnvironmentPlugin({
+			infrastructureLogging: options.infrastructureLogging
+		}).apply(compiler);
+		/**
+		 * 如果插件配置存在，那么遍历这些插件，然后apply(compiler)，
+		 * 监听compiler的一些hook
+		 */
+		if (options.plugins && Array.isArray(options.plugins)) {
+			for (const plugin of options.plugins) {
+				if (typeof plugin === "function") {
+					plugin.call(compiler, compiler);
+				} else {
+					plugin.apply(compiler);
+				}
+			}
+		}
+		compiler.hooks.environment.call();
+		compiler.hooks.afterEnvironment.call();
+		/**
+		 * 导入webpack自身内置的一些插件
+		 */
+		compiler.options = new WebpackOptionsApply().process(options, compiler);
+	}
+```
 
 
 
+### webpack编译过程
+
+webpack的编译都按照下面的钩子调用顺序执行：
+
+![](images/img-20240525140506.png)
+
+#### 1、准备阶段
+
+回到`lib/webpack.js`里面，会先触发`entryOption`事件：
+```js
+/**
+* 根据一些配置，导入webpack自身内置的一些插件
+* 比如开启devtool会导入EvalDevtoolModulePlugin, SourceMapDevToolPlugin等插件
+*/
+compiler.options = new WebpackOptionsApply().process(options, compiler);
+```
+
+在`WebpackOptionsApply.js`源代码中有一行，compiler会触发entryOption事件：
+```js
+new EntryOptionPlugin().apply(compiler);
+compiler.hooks.entryOption.call(options.context, options.entry);
+```
+监听的位置如下：
+![](images/img-20240525110552.png)
+
+然后执行`compiler.run`的时候，先触发`beforeRun`然后触发`run`，最后执行compile，第二阶段模块编译。
+```js
+// compiler.js
+this.hooks.beforeRun.callAsync(this, err => {
+	if (err) return finalCallback(err);
+
+	this.hooks.run.callAsync(this, err => {
+		if (err) return finalCallback(err);
+
+		this.readRecords(err => {
+			if (err) return finalCallback(err);
+
+			this.compile(onCompiled);
+		});
+	});
+});
+```
+
+#### 2、模块构建优化阶段
+
+在compile阶段，流程相关hook：
+- beforeRun/run
+- beforeCompile/compile/afterCompile
+- make
+- emit/afterEmit
+- done
+
+如果是watch，则是下面的流程：
+- watch-run
+- watch-close
+
+compile会调用compilation文件，里面也有hook：
+- addEntry
+- finish（上报模块错误）
+- seal（资源生成，优化）
 
 
+```js
+compile(callback) {
+	/**
+	 * 创建两个工厂函数
+	 * NormalModuleFactory：处理普通导出的模块
+	 * ContextModuleFactory:处理require导入的模块
+	 */
+	const params = this.newCompilationParams();
+	this.hooks.beforeCompile.callAsync(params, err => {
+		if (err) return callback(err);
+
+		this.hooks.compile.call(params);
+
+		const compilation = this.newCompilation(params);
+
+		this.hooks.make.callAsync(compilation, err => {
+			if (err) return callback(err);
+
+			compilation.finish(err => {
+				if (err) return callback(err);
+
+				compilation.seal(err => {
+					if (err) return callback(err);
+
+					this.hooks.afterCompile.callAsync(compilation, err => {
+						if (err) return callback(err);
+
+						return callback(null, compilation);
+					});
+				});
+			});
+		});
+	});
+}
+```
 
 
+其实还有很多类型的ModuleFactory：
+![](images/img-20240525150597.png)
+
+**这里以普通模块为例，看看make做了啥？**
+
+整个流程：
+1. 使用 loader-runner 运行 loaders来构建代码
+2. 在构建代码的中，如果有通过require引入了依赖，则通过 Parser 解析 (内部是 acron)，将解析的依赖通过ParserPlugins 添加到依赖列表。
 
 
+![](images/img-20240525150546.png)
+在SingleEntryPlugin中，当compilation加入后，就会正式开始编译：
+![](images/img-20240525150503.png)
+
+compilation首先会触发buildModule，buildModule会调用普通模块NormalModule中的build方法，build方法会调用doBuild方法，doBuild具体要做的事情就是，使用loader-runner，使用loader构建代码。
+```js
+doBuild(options, compilation, resolver, fs, callback) {
+	const loaderContext = this.createLoaderContext(
+		resolver,
+		options,
+		compilation,
+		fs
+	);
+
+	runLoaders(
+		{
+			resource: this.resource,
+			loaders: this.loaders,
+			context: loaderContext,
+			readResource: fs.readFile.bind(fs)
+		},
+		(err, result) => {
+			// ...
+		}
+```
+
+doBuild完成后，会调用`parser.parse` 也就是acorn，用来提取我们代码中通过require导入的依赖，然后添加到依赖列表中，然后遍历依赖的模块继续进行构建。
+
+```js
+//...
+return this.doBuild(options, compilation, resolver, fs, err => {
+	//...
+	try {
+		const result = this.parser.parse(
+			this._ast || this._source.source(),
+			{
+				current: this,
+				module: this,
+				compilation: compilation,
+				options: options
+			},
+			(err, result) => {
+				if (err) {
+					handleParseError(err);
+				} else {
+					handleParseResult(result);
+				}
+			}
+		);
+```
+
+模块构建好了会触发succeedModule钩子，然后整个make阶段就结束了。
+
+然后生成的资源进入seal阶段，做一些优化工作。
+
+**在make的时候，chunk的生成算法：**
+
+1. webpack 先将 entry 中对应的 module 都生成一个新的 chunk
+2. 遍历 module 的依赖列表，将依赖的 module 也加入到 chunk 中
+3. 如果一个依赖 module 是动态引入的模块，那么就会根据这个 module 创建一个
+新的 chunk，继续遍历依赖
+4. 重复上面的过程，直至得到所有的 chunk
+
+#### 3、代码生成到dist
+
+构建优化完成，在onCompiled回调里面会调用emitAssets函数：
+
+![](images/img-20240525150533.png)
+
+这个方法最后触发emit事件，然后通过outputFileSystem输出到dist目录。
+```js
+emitAssets(compilation, callback) {
+	let outputPath;
+	
+	const emitFiles = err => {
+		//...
+	}
+	this.hooks.emit.callAsync(compilation, err => {
+		if (err) return callback(err);
+		outputPath = compilation.getPath(this.outputPath);
+		this.outputFileSystem.mkdirp(outputPath, emitFiles);
+	});
+}
+```
 
 
+自己实现一个简易webpack：simplepack
+
+功能：
+- 转化es6到es5：通过 babylon 生成AST，然后通过 babel-core 将AST重新生成源码
+- 分析模块之间的依赖关系：通过 babel-traverse 的 ImportDeclaration 方法获取依赖属性
+- 生成类似webpack的模块结构
+
+项目结构如下：
+![](images/img-20240525170599.png)
+
+parser.js文件，用来转化es6到es5，并且分析模块之间的依赖关系：
+```js
+// parser.js
 
 
+const fs = require('fs');
+const babylon = require('babylon');
+const traverse = require('babel-traverse').default;
+const { transformFromAst } = require('babel-core');
+
+module.exports = {
+    /**
+     * 生成ast语法树
+     * @param {*} path 
+     * @returns 
+     */
+    getAST: (path) => {
+        const content = fs.readFileSync(path, 'utf-8')
+    
+        return babylon.parse(content, {
+            sourceType: 'module',
+        });
+    },
+    /**
+     * 分析生成的依赖
+     * 示例：类似 [./greeting.js]
+     * @param {*} ast 
+     * @returns 
+     */
+    getDependencis: (ast) => {
+        const dependencies = []
+        traverse(ast, {
+          ImportDeclaration: ({ node }) => {
+            dependencies.push(node.source.value);
+          }
+        });
+        return dependencies;
+    },
+    /**
+     * 讲ast生成es5代码
+     * @param {*} ast 
+     * @returns 
+     */
+    transform: (ast) => {
+        const { code } = transformFromAst(ast, null, {
+            presets: ['env']
+        });
+      
+        return code;
+    }
+};
+```
+
+compiler.js用来生成类似webpack的模块结构，并写入到本地文件：
+```js
+// compiler.js
+
+const fs = require('fs');
+const path = require('path');
+const { getAST, getDependencis, transform } = require('./parser');
 
 
+module.exports = class Compiler {
+    constructor(options) {
+        const { entry, output } = options;
+        this.entry = entry;
+        this.output = output;
+        this.modules = []; // 存放依赖列表
+    }
 
+    run() {
+        const entryModule = this.buildModule(this.entry, true);
+        // 构建好的模块添加到modules
+        this.modules.push(entryModule);
+        // 如果有依赖，则循环依赖进行构建，然后也添加到modules
+        this.modules.map((_module) => {
+            _module.dependencies.map((dependency) => {
+                this.modules.push(this.buildModule(dependency));
+            });
+        });
+        this.emitFiles();
+    }
+    /**
+     * 构建单个模块
+     * @param {*} filename 
+     * @param {*} isEntry 
+     * @returns 
+     */
+    buildModule(filename, isEntry) {
+        let ast;
+        if (isEntry) {
+            ast = getAST(filename);
+        } else {
+            let absolutePath = path.join(process.cwd(), './src', filename);
+            ast = getAST(absolutePath);
+        }
 
+        return {
+          filename,
+          dependencies: getDependencis(ast),
+          transformCode: transform(ast)
+        };
+    }
+    /**
+     * 输出代码到dist
+     */
+    emitFiles() { 
+        const outputPath = path.join(this.output.path, this.output.filename);
+        let modules = '';
+        this.modules.map((_module) => {
+            modules += `'${ _module.filename }': function (require, module, exports) { ${ _module.transformCode } },`
+        });
+        /**
+         * 构建类似webpack 的模块结构
+         */
+        const bundle = `
+            (function(modules) {
+                function require(fileName) {
+                    const fn = modules[fileName];
+        
+                    const module = { exports : {} };
+        
+                    fn(require, module, module.exports);
+        
+                    return module.exports;
+                }
 
+                require('${this.entry}');
+            })({${modules}})
+        `;
+        // 写入到simplepack.config.js中指定的dist/main.js中
+        fs.writeFileSync(outputPath, bundle, 'utf-8');
+    }
+};
 
+```
 
+index.js执行的入口文件：
+```js
+// index.js
+const Compiler = require('./compiler.js');
+const options = require('../simplepack.config.js');
+/**
+ * 通过compiler.run来执行构建
+ */
+new Compiler(options).run();
+```
 
+simplepack.config.js
+```js
+'use strict';
 
+const path = require('path');
 
-
-
-
-
-
-
+module.exports = {
+    entry: path.join(__dirname, './src/index.js'),
+    output: {
+        path: path.join(__dirname, './dist'),
+        filename: 'main.js'
+    }
+};
+```
 
 
