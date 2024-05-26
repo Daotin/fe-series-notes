@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack5新特性.md",
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack5新特性.md",
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack5新特性.md",
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack5新特性.md"
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md"
               }
             }
           }
@@ -149,8 +149,8 @@
   },
   "active": "6953d86a2819d9c4",
   "lastOpenFiles": [
-    "docs/webpack通关秘籍/webpack编写loader和plugin.md",
     "docs/webpack通关秘籍/webpack5新特性.md",
+    "docs/webpack通关秘籍/webpack编写loader和plugin.md",
     "docs/webpack通关秘籍/webpack构建原理.md",
     "docs/webpack通关秘籍/images/img-20240526150559.png",
     "docs/webpack通关秘籍/index.md",
