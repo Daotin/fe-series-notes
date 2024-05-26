@@ -469,7 +469,7 @@ module.exports = class Compiler {
 }
 ```
 
-自定义插件：
+自定义插件： ^5480f4
 ```js
 const Compiler = require('./Compiler')
  
