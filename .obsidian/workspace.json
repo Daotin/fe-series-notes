@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md",
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 233.5
+    "width": 285.5
   },
   "right": {
     "id": "5c39e05d376c2a0b",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md",
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md",
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack执行原理.md"
+                "file": "docs/webpack通关秘籍/webpack编写loader和plugin.md"
               }
             }
           }
@@ -149,6 +149,10 @@
   },
   "active": "6953d86a2819d9c4",
   "lastOpenFiles": [
+    "docs/webpack通关秘籍/index.md",
+    "docs/webpack通关秘籍/webpack编写loader和plugin.md",
+    "docs/webpack通关秘籍/学什么.md",
+    "docs/webpack通关秘籍/webpack构建原理.md",
     "docs/webpack通关秘籍/images/img-20240525170599.png",
     "docs/webpack通关秘籍/images/img-20240525150533.png",
     "docs/webpack通关秘籍/images/img-20240525150503.png",
@@ -160,13 +164,9 @@
     "docs/engineer/vue3-template/format.md",
     "docs/engineer/vue3-template/images/img-20240524160505.png",
     "docs/engineer/vue3-template/images/img-20240524160553.png",
-    "docs/engineer/vue3-template/images/img-20240524160502.png",
     "docs/engineer/vue3-template/images",
-    "docs/webpack通关秘籍/webpack执行原理.md",
     "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
     "docs/webpack通关秘籍/webpack常用配置.md",
-    "docs/webpack通关秘籍/index.md",
-    "docs/webpack通关秘籍/学什么.md",
     "docs/webpack通关秘籍/images",
     "Obsidian使用技巧.md",
     "docs/10x程序员工作法/index.md",
