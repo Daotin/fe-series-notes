@@ -2,7 +2,7 @@
 
 ### 分析工具
 
-`speed-measure-webpack-plugin` 是一个 Webpack 插件，主要功能是对 Webpack 的各个插件和加载器进行时间测量，并以可视化的方式展示这些信息。这样开发者可以很容易地发现哪些步骤耗时较多，从而进行针对性的优化。
+`speed-measure-webpack-plugin` 是一个 Webpack 插件，主要功能是对 Webpack 的各个插件和loader进行时间测量，并以可视化的方式展示这些信息。这样开发者可以很容易地发现哪些步骤耗时较多，从而进行针对性的优化。
 
 安装：
 
@@ -199,6 +199,14 @@ optimization: {
 
 ```
 
+注意：在terser-webpack-plugin v5版本中，移除了`cache`和`cacheKeys`选项：
+![](images/img-20240528160554.png)
+
+因为在webpack5中，会有单独的[cache](https://webpack.docschina.org/configuration/cache/#cache)选项去配置。
+
+> Webpack has built-in cache [https://webpack.js.org/configuration/cache/#cachetype](https://webpack.js.org/configuration/cache/#cachetype), if you set `type: 'filesystem',`, you will cache not only terser output, but all webpack build (try it and the next build will be faster), note - when you use `filesystem` memory cache will be used too.
+
+
 3、在 Webpack 配置中的 `plugins` 数组中添加 `HardSourceWebpackPlugin` 插件
 
 ```js
@@ -253,7 +261,7 @@ npm install purgecss-webpack-plugin glob -D
 配置：
 
 ```js
-const PurgecssPlugin = require("purgecss-webpack-plugin");
+const { PurgecssPlugin } = require("purgecss-webpack-plugin");
 const glob = require("glob");
 const path = require("path");
 
