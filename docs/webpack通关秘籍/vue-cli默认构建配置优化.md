@@ -613,7 +613,7 @@ terser-webpack-plugin在v5弃用了cache选项。而且在 Webpack 5 中，一�
 
 如果是vue-cli4/5搭建的项目，需要配置：
 
-- 构建缓存（**只有4需要**）：hard-source-webpack-plugin
+- 构建缓存（**只有4需要，且热更新耗时才需要**）：hard-source-webpack-plugin
 - css treeshaking：@fullhuman/purgecss@^3
 - 打包压缩：compression-webpack-plugin@^6
 - 图片压缩
