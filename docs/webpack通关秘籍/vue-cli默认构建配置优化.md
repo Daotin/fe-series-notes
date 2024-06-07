@@ -1,9 +1,9 @@
-> vue-cli@5 和 vue-cli@4 区别：
->
-> - 都是使用的vue@2.6+
-> - vue-cli@4 使用的是 webpack@4，vue-cli@5 使用的是 webpack@5
-
 # 通用前置操作
+
+> vue-cli5 和 vue-cli4 区别：
+>
+> - 都是使用的 vue2.6+
+> - vue-cli4 使用的是 webpack4，vue-cli5 使用的是 webpack5
 
 对于优化主要是两个方面
 
@@ -107,7 +107,7 @@ module.exports = {
 
 缓存的默认路径为：`node_modules/.cache/hard-source`
 
-开启前后使用npm run dev对比，速度明显减小（工程为vue-cli@4默认构建的hello-word项目）
+开启前后使用npm run dev对比，速度明显减小（工程为vue-cli4默认构建的hello-word项目）
 
 | 项目/次数                     | 1     | 2     | 3     | 4     |
 | ------------------------- | ----- | ----- | ----- | ----- |
@@ -115,7 +115,7 @@ module.exports = {
 | 加HardSourceWebpackPlugin  | 2.46s | 0.27s | 0.29s | 0.77s |
 
 
-> vue-cli@4默认没用生成vue.config.js，需要自己手动添加：
+> vue-cli4默认没用生成vue.config.js，需要自己手动添加：
 
 模板：
 
@@ -611,8 +611,8 @@ terser-webpack-plugin 在 v5 弃用了 cache 选项。而且在 Webpack 5 中，
 如果是 vue-cli4/5 搭建的项目，需要配置：
 
 - 构建缓存（**只有 4 需要，且热更新耗时才需要**）：hard-source-webpack-plugin
-- css treeshaking：@fullhuman/purgecss@^3
-- 打包压缩：compression-webpack-plugin@^6
+- css treeshaking：`@fullhuman/purgecss@^3`
+- 打包压缩：`compression-webpack-plugin@^6`
 - 图片压缩
 - 生产环境关闭 sourcemap
 - 删除 console.log
