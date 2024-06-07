@@ -36,21 +36,21 @@
   "editor.formatOnSave": true,
   // // 默认使用prittier作为格式化工具
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[javascriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[vue]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   // 操作时作为单词分隔符的字符
   "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?",
   // 一个制表符等于的空格数
@@ -73,21 +73,39 @@
 ```js
 module.exports = {
   // 超过多少字符后换行
-  printWidth: 120,
+  printWidth: 180,
+  // 使用tab缩进还是空格
+  useTabs: true,
+  // 缩进
+  tabWidth: 2,
   // 行末分号
   semi: false,
   // 单引号
   singleQuote: true,
-  // 缩进
-  tabWidth: 2,
-  // 使用tab缩进还是空格
-  useTabs: true,
   // 是否使用尾逗号
-  trailingComma: "es5", // 对象或数组末尾加逗号
+  trailingComma: 'all', // 对象或数组末尾加逗号
   // > 标签放在最后一行的末尾，而不是单独放在下一行
   jsxBracketSameLine: false,
   // (x) => {} 箭头函数参数只有一个时是否要有小括号。 alwaysz:总是带括号，avoid：省略括号
-  arrowParens: "avoid",
+  arrowParens: 'avoid',
+  // 仅在需要时为对象的键添加引号，如果至少一个键需要引号，则所有键都用引号
+  quoteProps: 'consistent',
+  // 在对象的大括号内添加空格
+  bracketSpacing: true,
+  // 将多行元素的结束标签放在最后一行的末尾，而不是单独占一行
+  bracketSameLine: false,
+  // 保持文本换行符的处理方式不变
+  proseWrap: 'preserve',
+  // 根据CSS显示样式处理HTML中的空白符
+  htmlWhitespaceSensitivity: 'css',
+  // 在Vue文件中的<script>和<style>标签内缩进代码
+  vueIndentScriptAndStyle: true,
+  // 使用换行符（LF）作为行结束符
+  endOfLine: 'lf',
+  // 自动格式化嵌入的代码块
+  embeddedLanguageFormatting: 'auto',
+  // 每行允许多个HTML属性
+  singleAttributePerLine: false,
 };
 ```
 
@@ -105,17 +123,14 @@ module.exports = {
 /public/*
 ```
 
+#### idea 配置 Prettier
 
-#### idea配置Prettier
-
-1、下载prettier插件
+1、下载 prettier 插件
 ![](images/img-20240524160554.png)
-
 
 2、配置
 
 ![](images/img-20240524160502.png)
-
 
 3、代码的右键就可以手动格式化了，当然，可以设置保存时自动格式化。
 
@@ -137,11 +152,11 @@ module.exports = {
 
 ```js
 /* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   rules: {
-    "prettier/prettier": "off",
+    'prettier/prettier': 'off',
   },
 };
 ```
@@ -166,81 +181,76 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/typescript/recommended",
-    "plugin:prettier/recommended",
-  ],
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', '@vue/typescript/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaVersion: 2020,
   },
   rules: {
     // 避免同时使用多个三目运算符
-    "no-nested-ternary": "error",
+    'no-nested-ternary': 'error',
 
     // 单行注释使用 `//`，注释应单独一行写在被注释对象的上方，不要追加在某条语句的后面
-    "spaced-comment": ["error", "always", { markers: ["/"] }],
-    "line-comment-position": ["error", { position: "above" }],
+    'spaced-comment': ['error', 'always', { markers: ['/'] }],
+    'line-comment-position': ['error', { position: 'above' }],
 
     // 未使用的变量
-    "@typescript-eslint/no-unused-vars": "warn",
+    '@typescript-eslint/no-unused-vars': 'warn',
     // 可以使用 any
-    "@typescript-eslint/no-explicit-any": "off",
+    '@typescript-eslint/no-explicit-any': 'off',
 
     // 类型命名规则
-    "@typescript-eslint/naming-convention": [
-      "error",
+    '@typescript-eslint/naming-convention': [
+      'error',
       {
-        selector: "interface",
-        format: ["PascalCase"],
+        selector: 'interface',
+        format: ['PascalCase'],
         custom: {
-          regex: "^I[A-Z]",
+          regex: '^I[A-Z]',
           match: true,
         },
       },
       {
-        selector: "typeAlias",
-        format: ["PascalCase"],
+        selector: 'typeAlias',
+        format: ['PascalCase'],
         custom: {
-          regex: "^T[A-Z]",
+          regex: '^T[A-Z]',
           match: true,
         },
       },
       {
-        selector: "class",
-        format: ["PascalCase"],
+        selector: 'class',
+        format: ['PascalCase'],
       },
       {
-        selector: "variable",
-        modifiers: ["global", "const"],
-        format: ["PascalCase", "UPPER_CASE"],
+        selector: 'variable',
+        modifiers: ['global', 'const'],
+        format: ['PascalCase', 'UPPER_CASE'],
       },
       {
-        selector: "variable",
-        format: ["camelCase"],
+        selector: 'variable',
+        format: ['camelCase'],
       },
       // 枚举需要以 Enum 开头
       {
-        selector: "enum",
-        format: ["PascalCase"],
+        selector: 'enum',
+        format: ['PascalCase'],
         custom: {
-          regex: "^Enum[A-Z]",
+          regex: '^Enum[A-Z]',
           match: true,
         },
       },
     ],
     // 类名使用大驼峰
-    "@typescript-eslint/class-name-casing": "off",
+    '@typescript-eslint/class-name-casing': 'off',
 
     // 多行注释使用 /** ... */ 风格
-    "multiline-comment-style": ["error", "starred-block"],
+    'multiline-comment-style': ['error', 'starred-block'],
 
     // 禁用组件名必须多个单词
-    "vue/multi-word-component-names": "off",
+    'vue/multi-word-component-names': 'off',
 
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
         // 超过多少字符后换行
         printWidth: 120,
@@ -253,26 +263,26 @@ module.exports = {
         // 使用tab缩进还是空格
         useTabs: true,
         // 是否使用尾逗号
-        trailingComma: "es5",
+        trailingComma: 'es5',
         // > 标签放在最后一行的末尾，而不是单独放在下一行
         jsxBracketSameLine: false,
         // (x) => {} 箭头函数参数只有一个时是否要有小括号。 alwaysz:总是带括号，avoid：省略括号
-        arrowParens: "avoid",
+        arrowParens: 'avoid',
         // Prettier 使用与你的项目中现有的换行符一致
-        endOfLine: "auto",
+        endOfLine: 'auto',
       },
     ],
   },
   // 添加 overrides，忽略vue文件中的命名规则
   overrides: [
     {
-      files: ["*.vue"],
+      files: ['*.vue'],
       rules: {
-        "@typescript-eslint/naming-convention": [
-          "warn",
+        '@typescript-eslint/naming-convention': [
+          'warn',
           {
-            selector: ["variable", "function"],
-            format: ["camelCase"],
+            selector: ['variable', 'function'],
+            format: ['camelCase'],
           },
         ],
       },
