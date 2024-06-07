@@ -1,4 +1,4 @@
-# 通用前置操作
+## 通用前置操作
 
 > vue-cli5 和 vue-cli4 区别：
 >
@@ -12,12 +12,12 @@
 
 所以不管是分析问题还是解决问题有围绕这连个方面进行处理。
 
-Vue-Cli 自带
+**Vue-Cli 自带**
 
 - **cache-loader** 会默认为 `Vue/Babel/TypeScript` 编译开启。文件会缓存在 `node_modules/.cache` 中。 如果你遇到了编译方面的问题，记得先清缓存目录之后再试试看。
 - **thread-loader** 会在多核 CPU 的机器上为 `Babel/TypeScript` 转译开启。
 
-## 查看 Vue-Cli 默认配置
+### 查看 Vue-Cli 默认配置
 
 ```
 vue inspect --mode production > output-prod.js
@@ -35,9 +35,11 @@ vue inspect --mode development > output-dev.js
   devtool: 'source-map',
   node: {
   ...
+  }
+}
 ```
 
-## 分析构建时间
+### 分析构建时间
 
 安装：
 
@@ -56,7 +58,7 @@ module.exports = {
 };
 ```
 
-## 查看打包大小
+### 查看打包大小
 
 vue-cli 内置工具
 
@@ -68,7 +70,7 @@ vue-cli-service build --report
 
 和之前的 webpack-bundle-analyzer 效果一样，就没必要使用了。
 
-# vue-cli4
+## vue-cli4
 
 下面是还原的 production 下的 webpack 配置：[webpack-prod.js](./file/webpack-prod.js)
 
@@ -76,7 +78,7 @@ vue-cli-service build --report
 
 > 如果分析构建时间短，则不需要优化。
 
-## 构建速度优化
+### 构建速度优化
 
 **1、并行构建**：[已默认配置](https://github.com/vuejs/vue-cli/tree/v4.5.19/docs/config#parallel)（是否为 Babel 或 TypeScript 使用  `thread-loader`）
 
@@ -148,7 +150,7 @@ module.exports = {
 
 仅在耗时的操作中使用 thread-loader，否则使用 thread-loader 会后可能会导致项目构建时间变得更长，因为每个 worker 都是一个独立的 node.js 进程，其开销大约为 600ms 左右，同时还会限制跨进程的数据交换等。所以一般只在 babel-loader 中使用。
 
-## 减小打包体积
+### 减小打包体积
 
 **1、css tree shaking**
 
@@ -362,7 +364,7 @@ module.exports = {
 };
 ```
 
-## 其他友好配置
+### 其他友好配置
 
 **1、chunk-vendors 分包**
 
@@ -466,11 +468,11 @@ module.exports = {
 };
 ```
 
-### 全量配置
+#### 全量配置
 
 参考：https://github.com/staven630/vue-cli4-config
 
-# vue-cli5
+## vue-cli5
 
 在处理之前，先比较下，vue-cli4 生成的 webpack 配置和 vue-cli5 生成的 webpack 配置的区别：
 
@@ -580,13 +582,13 @@ memory 意味着缓存数据会存储在内存中，重启构建工具后缓存�
 3. **移除了未使用的插件**:
    - Vue CLI 5 移除了 `HashedModuleIdsPlugin`，这一插件用于生成稳定的模块 ID，但也会增加额外的哈希计算和模块大小。
 
-## 构建速度优化
+### 构建速度优化
 
 terser-webpack-plugin 在 v5 弃用了 cache 选项。而且在 Webpack 5 中，一般不再需要使用 `hard-source-webpack-plugin`，因为 Webpack 5 本身已经内置了强大的`cache`缓存功能，能够提供与 `hard-source-webpack-plugin` 类似的缓存效果。
 
 所以，构建速度优化方面无需任何额外配置。
 
-## 减小打包体积
+### 减小打包体积
 
 **1、css tree shaking**：依然需要
 
