@@ -1,8 +1,7 @@
-
-
-> vue-cli@5和vue-cli@4区别：
+> vue-cli@5 和 vue-cli@4 区别：
+>
 > - 都是使用的vue@2.6+
-> - vue-cli@4使用的是webpack@4，vue-cli@5使用的是webpack@5
+> - vue-cli@4 使用的是 webpack@4，vue-cli@5 使用的是 webpack@5
 
 # 通用前置操作
 
@@ -13,22 +12,21 @@
 
 所以不管是分析问题还是解决问题有围绕这连个方面进行处理。
 
-Vue-Cli自带
+Vue-Cli 自带
 
 - **cache-loader** 会默认为 `Vue/Babel/TypeScript` 编译开启。文件会缓存在 `node_modules/.cache` 中。 如果你遇到了编译方面的问题，记得先清缓存目录之后再试试看。
 - **thread-loader** 会在多核 CPU 的机器上为 `Babel/TypeScript` 转译开启。
 
-
-## 查看Vue-Cli默认配置
+## 查看 Vue-Cli 默认配置
 
 ```
 vue inspect --mode production > output-prod.js
 vue inspect --mode development > output-dev.js
 ```
 
-然后通过chatgpt还原成webpack的配置：
+然后通过 chatgpt 还原成 webpack 的配置：
 
-> 下面是通过vue-cli搭建的前端项目，通过vue inspect输出的被序列化的格式，请将其还原成原本的webpack配置文件，我的目的是了解vue-cli默认对webpack做了什么配置：
+> 下面是通过 vue-cli 搭建的前端项目，通过 vue inspect 输出的被序列化的格式，请将其还原成原本的 webpack 配置文件，我的目的是了解 vue-cli 默认对 webpack 做了什么配置：
 
 ```
 {
@@ -39,61 +37,56 @@ vue inspect --mode development > output-dev.js
   ...
 ```
 
-
 ## 分析构建时间
 
 安装：
+
 ```
 npm install --save-dev speed-measure-webpack-plugin
 ```
 
 配置：
-```js
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
-module.exports = {
-  chainWebpack: config => {
-    config
-      .plugin('speed-measure-webpack-plugin')
-      .use(SpeedMeasurePlugin)
-      .end();
-  }
-}
-```
 
+```js
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+module.exports = {
+  chainWebpack: (config) => {
+    config.plugin('speed-measure-webpack-plugin').use(SpeedMeasurePlugin).end();
+  },
+};
+```
 
 ## 查看打包大小
 
-vue-cli内置工具
+vue-cli 内置工具
+
 ```
 vue-cli-service build --report
 ```
 
 成功后就会在项目目录下找到`/dist/report.html`
 
-和之前的 webpack-bundle-analyzer效果一样，就没必要使用了。
+和之前的 webpack-bundle-analyzer 效果一样，就没必要使用了。
 
+# vue-cli4
 
-
-# vue-cli@4
-
-下面是还原的production下的webpack配置：[webpack-prod.js](./file/webpack-prod.js)
+下面是还原的 production 下的 webpack 配置：[webpack-prod.js](./file/webpack-prod.js)
 
 提升构建速度
 
 > 如果分析构建时间短，则不需要优化。
 
 ## 构建速度优化
-**1、并行构建**：[已默认配置](https://github.com/vuejs/vue-cli/tree/v4.5.19/docs/config#parallel)（是否为 Babel 或 TypeScript 使用 `thread-loader`）
 
-**2、并行压缩**：从转换的代码可以看到TerserPlugin已默认配置parallel
+**1、并行构建**：[已默认配置](https://github.com/vuejs/vue-cli/tree/v4.5.19/docs/config#parallel)（是否为 Babel 或 TypeScript 使用  `thread-loader`）
 
-**3、开启缓存**：
-	- TerserPlugin已默认配置cache
-	- loader缓存：已经默认开启vue-loader，babel-loader, eslint-loader，ts-loader等缓存
-	- 使用hard-source-webpack-plugin配置持久化缓存功能
+**2、并行压缩**：从转换的代码可以看到 TerserPlugin 已默认配置 parallel
+
+**3、开启缓存**： - TerserPlugin 已默认配置 cache - loader 缓存：已经默认开启 vue-loader，babel-loader, eslint-loader，ts-loader 等缓存 - 使用 hard-source-webpack-plugin 配置持久化缓存功能
 安装：`npm install hard-source-webpack-plugin -D`
 配置：
-```js
+
+````js
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
@@ -102,7 +95,7 @@ module.exports = {
      * 开启 HardSourceWebpackPlugin 构建缓存
      * HardSourceWebpackPlugin 的缓存机制依赖于文件系统中的缓存数据。
      * 如果在开发环境中生成的缓存数据由于某些原因被损坏或者不完整，可能会导致生产环境中的构建出现问题。所以在生产环境中不建议使用 HardSourceWebpackPlugin。
-     * 
+     *
      */
     if (process.env.NODE_ENV !== 'production') {
       config.plugins.push(new HardSourceWebpackPlugin());
@@ -132,7 +125,7 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   // options...
 })
-```
+````
 
 会报错，因为`defineConfig` is used by Vue CLI 5 not by Vue CLI 4, the right syntax for vue cli 4:
 
@@ -140,79 +133,79 @@ module.exports = defineConfig({
 // vue.config.js
 module.exports = {
   // options...
-}
+};
 ```
 
-
-> [!warning] 关于`DllPlugin`，DllPlugin是通过预编译特定的模块（通常是第三方库），将这些模块打包成独立的动态链接库 (DLL)，在主构建中只需要引用这些预编译的模块，从而大幅减少构建时间。
-> 
+> [!warning] 关于`DllPlugin`，DllPlugin 是通过预编译特定的模块（通常是第三方库），将这些模块打包成独立的动态链接库 (DLL)，在主构建中只需要引用这些预编译的模块，从而大幅减少构建时间。
+>
 > 但是，如果已经使用 HardSourceWebpackPlugin 并且不考虑缓存失效的情况下，会将第三方依赖（如 React、Lodash 等）缓存到文件系统中。这样在后续的构建中，这些依赖的编译结果会直接从缓存中读取，因此无需重新编译这些依赖。在这种情况下，`DllPlugin` 的作用会有所减弱，因为 `HardSourceWebpackPlugin` 已经提供了类似的缓存功能。确实不再需要 DllPlugin。
-> 
+>
 > 而且，vue-cli 引入 webpack4 之后，移除了该包，"因为 Webpack 4 的打包性能足够好的，dll 没有在 Vue ClI 里继续维护的必要了。"
-> 
+>
 > [dll option will be removed. Webpack 4 should provide good enough perf and the cost of maintaining DLL mode inside Vue CLI is no longer justified.](https://github.com/vuejs/vue-cli/issues/1205)
 
+> 关于 thread-loader，并不是所有的 loader 都要使用：
 
-> 关于thread-loader，并不是所有的loader都要使用：
-
-仅在耗时的操作中使用 thread-loader，否则使用 thread-loader 会后可能会导致项目构建时间变得更长，因为每个 worker 都是一个独立的 node.js 进程，其开销大约为 600ms 左右，同时还会限制跨进程的数据交换等。所以一般只在babel-loader中使用。
-
+仅在耗时的操作中使用 thread-loader，否则使用 thread-loader 会后可能会导致项目构建时间变得更长，因为每个 worker 都是一个独立的 node.js 进程，其开销大约为 600ms 左右，同时还会限制跨进程的数据交换等。所以一般只在 babel-loader 中使用。
 
 ## 减小打包体积
 
-**1、css tree shaking** 
+**1、css tree shaking**
 
-可以使用purgecss插件，但区别于webpack的配置，可以使用[vue add 的方式](https://purgecss.com/guides/vue.html)进行添加：
+可以使用 purgecss 插件，但区别于 webpack 的配置，可以使用[vue add 的方式](https://purgecss.com/guides/vue.html)进行添加：
 
 安装：
+
 ```js
 vue add @fullhuman/purgecss@^3
 ```
 
 > [!warning] 注意
-> 这里要添加版本3，否则会报错：`Error: PostCSS plugin postcss-purgecss requires PostCSS 8.`
+> 这里要添加版本 3，否则会报错：`Error: PostCSS plugin postcss-purgecss requires PostCSS 8.`
 
-然后会自动生成并配置好postcss.config.js，无需其他额外配置。
+然后会自动生成并配置好 postcss.config.js，无需其他额外配置。
 
-**2、gzip压缩**
+**2、gzip 压缩**
 
 安装：
+
 ```
 npm install compression-webpack-plugin@^6 --save-dev
 ```
 
 配置：
-我bulid的时候报了`Cannot read property 'tapPromise' of undefined`的错，其实就是版本和vue-cli的某些包不兼容，把 compression-webpack-plugin 的版本降低到`6`就可以了。
+我 bulid 的时候报了`Cannot read property 'tapPromise' of undefined`的错，其实就是版本和 vue-cli 的某些包不兼容，把 compression-webpack-plugin 的版本降低到`6`就可以了。
 
 ```js
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     if (process.env.NODE_ENV === 'production') {
       // 在生产环境中使用 gzip 压缩
       config.plugins.push(
         new CompressionWebpackPlugin({
-          filename: '[path][base].gz',// 压缩后的文件名，默认值是 [path][base].gz
+          filename: '[path][base].gz', // 压缩后的文件名，默认值是 [path][base].gz
           algorithm: 'gzip',
           test: /\.(js|json|css|html|svg)$/,
           threshold: 10240, // 对超过10k的数据压缩
           minRatio: 0.8, // 压缩比
-          deleteOriginalAssets: false // 是否删除原始文件
+          deleteOriginalAssets: false, // 是否删除原始文件
         })
       );
     }
-  }
-}
+  },
+};
 ```
 
-nginx中配置：
+nginx 中配置：
+
 ```nginx
 server {
     location ~ .*\.(js|json|css)$ {
         gzip on;
         gzip_static on; # 启用 gzip_static 选项
-        
+
         gzip_min_length 1k;
         gzip_http_version 1.1;
         gzip_comp_level 9;
@@ -228,13 +221,15 @@ server {
 **3、图片压缩**
 
 安装：
+
 ```
 cnpm install image-webpack-loader -D
 ```
 
-> `image-webpack-loader` 是需要配合 `file-loader` 来使用的。不过，Vue Cli 搭建的项目中已经内置了 `file-loader` 就不需要我们进行额外安装配置了！
+> `image-webpack-loader`  是需要配合  `file-loader`  来使用的。不过，Vue Cli 搭建的项目中已经内置了  `file-loader`  就不需要我们进行额外安装配置了！
 
 配置：
+
 ```js
 chainWebpack: (config) => {
     // 找到图片加载器并对其进行配置
@@ -253,57 +248,58 @@ chainWebpack: (config) => {
 ```
 
 > 如果打包报错：Syntax Error: Error: Cannot find module 'imagemin-gifsicle'
-> 则使用cnpm安装。
+> 则使用 cnpm 安装。
 
-> [!danger] 目前只能压缩jpg，如果引入了png则打包出错，原因未知。。。
+> [!danger] 目前只能压缩 jpg，如果引入了 png 则打包出错，原因未知。。。
 
 **4、动态 polyfill**
 
-vue-cli已经基于你的浏览器目标自动决定要运用的语法转换和 polyfill，无需我们配置：
+vue-cli 已经基于你的浏览器目标自动决定要运用的语法转换和 polyfill，无需我们配置：
 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-babel-preset-app/README.md
 
-**5、production环境不生成SourceMap**
+**5、production 环境不生成 SourceMap**
 
 ```js
 module.exports = {
-	productionSourceMap: false,
-}
+  productionSourceMap: false,
+};
 ```
 
-**6、分离基础库使用cdn**
+**6、分离基础库使用 cdn**
 
-> 慎用，除非公司有稳定的cdn服务。
+> 慎用，除非公司有稳定的 cdn 服务。
 
-不需要安装html-webpack-externals-plugin，Vue CLI 自带的 `html-webpack-plugin` 已经足够用于我们的需求。
+不需要安装 html-webpack-externals-plugin，Vue CLI 自带的 `html-webpack-plugin` 已经足够用于我们的需求。
 
 配置：
+
 ```js
 module.exports = {
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     config.externals = {
       vue: 'Vue',
       'vue-router': 'VueRouter',
-      axios: 'axios'
-    }
+      axios: 'axios',
+    };
   },
-  chainWebpack: config => {
-    config.plugin('html').tap(args => {
+  chainWebpack: (config) => {
+    config.plugin('html').tap((args) => {
       args[0].cdn = {
         js: [
           'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
           'https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js',
-          'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js'
+          'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js',
         ],
-        css: []
+        css: [],
       };
       return args;
     });
-  }
+  },
 };
-
 ```
 
-修改public/index.html,以便在生成的 HTML 文件中自动插入 CDN 链接：
+修改 public/index.html,以便在生成的 HTML 文件中自动插入 CDN 链接：
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -311,65 +307,67 @@ module.exports = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <% if (htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
-      <% for (var css of htmlWebpackPlugin.options.cdn.css) { %>
-        <link rel="stylesheet" href="<%= css %>">
-      <% } %>
-    <% } %>
+    <% if (htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %> <% for (var css of htmlWebpackPlugin.options.cdn.css) {
+    %>
+    <link rel="stylesheet" href="<%= css %>" />
+    <% } %> <% } %>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
     <div id="app"></div>
-    <% if (htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
-      <% for (var js of htmlWebpackPlugin.options.cdn.js) { %>
-        <script src="<%= js %>"></script>
-      <% } %>
-    <% } %>
+    <% if (htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %> <% for (var js of htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= js %>"></script>
+    <% } %> <% } %>
   </body>
 </html>
-
 ```
-
 
 **7、删除 console.log**
 
 安装：
+
 ```
 npm install terser-webpack-plugin@^4 --save-dev
 ```
 
 配置：
+
 ```js
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     if (process.env.NODE_ENV === 'production') {
       config.optimization.minimizer = config.optimization.minimizer || [];
-      config.optimization.minimizer.push(new TerserPlugin({
-        terserOptions: {
-          compress: {
-            drop_console: true,  // 移除生产环境的 console.log
-            drop_debugger: true  // 移除生产环境的 debugger
+      config.optimization.minimizer.push(
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true, // 移除生产环境的 console.log
+              drop_debugger: true, // 移除生产环境的 debugger
+            },
+            output: {
+              comments: false, // 删除所有注释
+            },
           },
-          output: {
-		    comments: false // 删除所有注释
-		  }
-        }
-      }));
+        })
+      );
     }
-  }
-}
+  },
+};
 ```
-
 
 ## 其他友好配置
 
-**1、chunk-vendors分包**
+**1、chunk-vendors 分包**
 
 配置：
+
 ```js
 chainWebpack: config => {
   if (process.env.NODE_ENV === 'production') {
@@ -418,66 +416,63 @@ chainWebpack: config => {
 }
 ```
 
-**2、IgnorePlugin**：忽略指定的模块或文件，通常用于如果引入了moment.js，则忽略其他的语言包，另外我通常会在项目中新建demo模板，也可以使用`IgnorePlugin`忽略测试文件。
+**2、IgnorePlugin**：忽略指定的模块或文件，通常用于如果引入了 moment.js，则忽略其他的语言包，另外我通常会在项目中新建 demo 模板，也可以使用`IgnorePlugin`忽略测试文件。
+
 ```js
 const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     config.plugins.push(
       new webpack.IgnorePlugin({
-        resourceRegExp: /src\/views\/demo/ // 匹配要忽略的资源路径
+        resourceRegExp: /src\/views\/demo/, // 匹配要忽略的资源路径
       })
     );
-  }
+  },
 };
-
 ```
 
 **3、resolve.alias**
 resolve.alias 是用于创建 import 或 require 的别名，来确保模块引入变得更简单：
+
 ```js
 chainWebpack: (config) => {
   // 配置别名
   config.resolve.alias
-	.set('@build', pathResolve('../build')) // 构建目录
-	.set('@', pathResolve('../src'))
-	.set('@api', pathResolve('../src/api'))
-	.set('@utils', pathResolve('../src/utils'))
-	.set('@views', pathResolve('../src/views'));
-}
-
+    .set('@build', pathResolve('../build')) // 构建目录
+    .set('@', pathResolve('../src'))
+    .set('@api', pathResolve('../src/api'))
+    .set('@utils', pathResolve('../src/utils'))
+    .set('@views', pathResolve('../src/views'));
+};
 ```
 
-
-**4、去掉preload和prefetch**
+**4、去掉 preload 和 prefetch**
 
 preload：在页面加载时立即下载，优先级高。
 prefetch：在浏览器空闲时下载，优先级低。
 
-但是如果引入的资源过多，会占用大量带宽，导致其他关键资源（如 CSS 和主 JavaScript 文件）的下载速度变慢，prefetch虽然在空闲时间下载，但是依然会有影响。
+但是如果引入的资源过多，会占用大量带宽，导致其他关键资源（如 CSS 和主 JavaScript 文件）的下载速度变慢，prefetch 虽然在空闲时间下载，但是依然会有影响。
 
 所以，尽管 `preload` 在某些情况下可以显著提升页面性能，但如果没有精细管理和选择性使用，全部加入 `preload` 可能会适得其反。因此，综合考虑性能和简化配置，全部去掉 `preload` 会是更安全和更通用的选择。
 
 ```js
 module.exports = {
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.plugins.delete('prefetch');
     config.plugins.delete('preload');
-  }
+  },
 };
-
 ```
 
 ### 全量配置
 
 参考：https://github.com/staven630/vue-cli4-config
 
-# vue-cli@5
+# vue-cli5
 
-
-在处理之前，先比较下，vue-cli4生成的webpack配置和vue-cli5生成的webpack配置的区别：
+在处理之前，先比较下，vue-cli4 生成的 webpack 配置和 vue-cli5 生成的 webpack 配置的区别：
 
 在提升打包速度和减小打包体积上，Vue CLI 4 和 Vue CLI 5 的配置文件有一些明显的区别。以下是详细的列举：
 
@@ -488,7 +483,9 @@ module.exports = {
      ```javascript
      new TerserPlugin({
        terserOptions: {
-         compress: { /* many options */ },
+         compress: {
+           /* many options */
+         },
          mangle: {
            safari10: true,
          },
@@ -497,29 +494,30 @@ module.exports = {
        cache: true,
        parallel: true,
        extractComments: false,
-     })
+     });
      ```
    - **Vue CLI 5**:
      ```javascript
      new TerserPlugin({
        terserOptions: {
-         compress: { /* many options */ },
+         compress: {
+           /* many options */
+         },
          mangle: {
            safari10: true,
          },
        },
        parallel: true,
        extractComments: false,
-     })
+     });
      ```
      Vue CLI 5 移除了 `sourceMap` 和 `cache` 配置，这可以在某些情况下提升打包速度，因为生成 source map 和缓存处理可能会增加额外的时间。
 
 在 Webpack 4 中，由于没有内置的高级缓存机制，使用 TerserPlugin 的 `cache` 选项可以显著提升压缩过程中的性能。而在 Webpack 5 中，由于有了内置的持久化缓存机制，就不再需要单独在 TerserPlugin 中配置 `cache` 选项。
 
-在vue-cli 5 中，`cache` 会在[`开发` 模式](https://webpack.docschina.org/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](https://webpack.docschina.org/configuration/mode/#mode-production) 中被禁用。
+在 vue-cli 5 中，`cache`  会在[`开发`  模式](https://webpack.docschina.org/configuration/mode/#mode-development)被设置成  `type: 'memory'`  而且在  [`生产`  模式](https://webpack.docschina.org/configuration/mode/#mode-production)  中被禁用。
 
-memory意味着缓存数据会存储在内存中，重启构建工具后缓存会丢失。
-
+memory 意味着缓存数据会存储在内存中，重启构建工具后缓存会丢失。
 
 2. **插件变化**:
    - **Vue CLI 4** 使用了 `OptimizeCssnanoPlugin` 来压缩 CSS，且未提及并行处理。
@@ -536,13 +534,14 @@ memory意味着缓存数据会存储在内存中，重启构建工具后缓存�
            },
          ],
        },
-     })
+     });
      ```
      启用并行处理可以显著提升 CSS 压缩的速度。
 
 主要区别：
+
 - **并行处理**: `CssMinimizerPlugin` 支持并行处理，而 `OptimizeCssnanoPlugin` 不支持。这使得 `CssMinimizerPlugin` 在处理大规模 CSS 文件时具有更好的性能。
--  **集成度**: `CssMinimizerPlugin` 专为 Webpack 5 设计，能更好地利用 Webpack 5 的新特性和优化机制。而 `OptimizeCssnanoPlugin` 更适合于 Webpack 4 及之前的版本。
+- **集成度**: `CssMinimizerPlugin` 专为 Webpack 5 设计，能更好地利用 Webpack 5 的新特性和优化机制。而 `OptimizeCssnanoPlugin` 更适合于 Webpack 4 及之前的版本。
 - **配置简洁性**: `CssMinimizerPlugin` 的配置更简洁，并且内置了许多优化，减少了手动配置的复杂度。
 - **维护与更新**: `CssMinimizerPlugin` 是 Webpack 官方推荐的插件，更新和维护更加及时，适配新版本的 Webpack 更加迅速。
 
@@ -555,14 +554,15 @@ memory意味着缓存数据会存储在内存中，重启构建工具后缓存�
      }
      ```
 
-
 二、打包体积方面
 
 1. **CSS 压缩插件的差异**:
+
    - **Vue CLI 4** 使用 `OptimizeCssnanoPlugin` 来压缩 CSS。
    - **Vue CLI 5** 使用 `CssMinimizerPlugin`，默认的配置同样通过 `cssnano` 进行压缩，但配置了 `mergeLonghand: false` 和 `cssDeclarationSorter: false` 来避免某些长声明合并和 CSS 声明排序的问题，这些设置可以确保在最小化体积的同时，不影响 CSS 的兼容性和性能。
 
 2. **splitChunks 配置的改进**:
+
    - 两者在 `splitChunks` 配置上大致相似，但 Vue CLI 5 默认禁用了 `realContentHash`：
      ```javascript
      optimization: {
@@ -580,12 +580,9 @@ memory意味着缓存数据会存储在内存中，重启构建工具后缓存�
 3. **移除了未使用的插件**:
    - Vue CLI 5 移除了 `HashedModuleIdsPlugin`，这一插件用于生成稳定的模块 ID，但也会增加额外的哈希计算和模块大小。
 
-
-
-
 ## 构建速度优化
 
-terser-webpack-plugin在v5弃用了cache选项。而且在 Webpack 5 中，一般不再需要使用 `hard-source-webpack-plugin`，因为 Webpack 5 本身已经内置了强大的`cache`缓存功能，能够提供与 `hard-source-webpack-plugin` 类似的缓存效果。
+terser-webpack-plugin 在 v5 弃用了 cache 选项。而且在 Webpack 5 中，一般不再需要使用 `hard-source-webpack-plugin`，因为 Webpack 5 本身已经内置了强大的`cache`缓存功能，能够提供与 `hard-source-webpack-plugin` 类似的缓存效果。
 
 所以，构建速度优化方面无需任何额外配置。
 
@@ -593,9 +590,9 @@ terser-webpack-plugin在v5弃用了cache选项。而且在 Webpack 5 中，一�
 
 **1、css tree shaking**：依然需要
 
-**2、gzip压缩**：依然需要
+**2、gzip 压缩**：依然需要
 
-**3、图片压缩**：依然需要（在webpack4中使用的是`image-webpack-loader`，但是一直报错，也没有其他的选择，但是webpack5中可以使用官方的[`ImageMinimizerWebpackPlugin`](https://webpack.js.org/plugins/image-minimizer-webpack-plugin/)）
+**3、图片压缩**：依然需要（在 webpack4 中使用的是`image-webpack-loader`，但是一直报错，也没有其他的选择，但是 webpack5 中可以使用官方的[`ImageMinimizerWebpackPlugin`](https://webpack.js.org/plugins/image-minimizer-webpack-plugin/)）
 
 安装：
 
@@ -603,7 +600,7 @@ terser-webpack-plugin在v5弃用了cache选项。而且在 Webpack 5 中，一�
 `npm install image-minimizer-webpack-plugin imagemin imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev`
 ```
 
-> imagemin-mozjpeg安装失败，可以使用cnpm安装。
+> imagemin-mozjpeg 安装失败，可以使用 cnpm 安装。
 
 > [!bug] 自己尝试后，依然无法安装。。。
 
@@ -611,12 +608,12 @@ terser-webpack-plugin在v5弃用了cache选项。而且在 Webpack 5 中，一�
 
 ## 总结
 
-如果是vue-cli4/5搭建的项目，需要配置：
+如果是 vue-cli4/5 搭建的项目，需要配置：
 
-- 构建缓存（**只有4需要，且热更新耗时才需要**）：hard-source-webpack-plugin
+- 构建缓存（**只有 4 需要，且热更新耗时才需要**）：hard-source-webpack-plugin
 - css treeshaking：@fullhuman/purgecss@^3
 - 打包压缩：compression-webpack-plugin@^6
 - 图片压缩
-- 生产环境关闭sourcemap
-- 删除console.log
-- 去掉preload和prefetch
+- 生产环境关闭 sourcemap
+- 删除 console.log
+- 去掉 preload 和 prefetch
