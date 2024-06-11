@@ -73,7 +73,7 @@
 ```js
 module.exports = {
   // 超过多少字符后换行
-  printWidth: 180,
+  printWidth: 120,
   // 使用tab缩进还是空格
   useTabs: true,
   // 缩进
@@ -93,18 +93,18 @@ module.exports = {
   // 在对象的大括号内添加空格
   bracketSpacing: true,
   // 将多行元素的结束标签放在最后一行的末尾，而不是单独占一行
-  bracketSameLine: false,
+  bracketSameLine: true,
   // 保持文本换行符的处理方式不变
   proseWrap: 'preserve',
-  // 根据CSS显示样式处理HTML中的空白符
-  htmlWhitespaceSensitivity: 'css',
+  //html存在空格是不敏感的
+  htmlWhitespaceSensitivity: 'ignore',
   // 在Vue文件中的<script>和<style>标签内缩进代码
-  vueIndentScriptAndStyle: true,
+  vueIndentScriptAndStyle: false,
   // 使用换行符（LF）作为行结束符
   endOfLine: 'lf',
   // 自动格式化嵌入的代码块
   embeddedLanguageFormatting: 'auto',
-  // 每行允许多个HTML属性
+  // 每行单个HTML属性
   singleAttributePerLine: false,
 };
 ```
