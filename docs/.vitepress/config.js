@@ -36,7 +36,7 @@ export default defineConfig({
 
     nav: [
       {
-        text: '前端工程化',
+        text: '🚀 前端工程化',
         items: [
           {
             text: '从零搭建Vue3项目',
@@ -54,41 +54,73 @@ export default defineConfig({
             text: '前端监控',
             link: '/engineer/monitor/',
           },
+          {
+            text: '前端性能优化',
+            link: '/性能优化/',
+          },
         ],
       },
       {
-        text: '前端性能优化',
-        link: '/性能优化/',
-      },
-      {
-        text: '浏览器工作原理',
-        link: '/浏览器工作原理/',
-      },
-      {
-        text: 'webpack通关秘籍',
-        link: '/webpack通关秘籍/',
-      },
-      {
-        text: 'vue原理剖析',
+        text: '📘 框架原理',
         items: [
           {
             text: 'vue2原理剖析',
             link: '/vue2原理剖析/',
           },
-          // {
-          //   text: 'vue3原理剖析',
-          //   link: '/vue3原理剖析/',
-          // },
+          {
+            text: 'vue3原理剖析',
+            link: '/vue3原理剖析/',
+          },
+          {
+            text: 'webpack通关秘籍',
+            link: '/webpack通关秘籍/',
+          },
+          {
+            text: '浏览器工作原理',
+            link: '/浏览器工作原理/',
+          },
         ],
       },
       {
-        text: 'TEST',
+        text: '👨‍💻 技术专栏',
         items: [
+          {
+            text: 'TypeScript通关秘籍',
+            link: '/TypeScript通关秘籍/',
+          },
+          {
+            text: '左耳听风',
+            link: '/左耳听风/',
+          },
+          {
+            text: '重学前端',
+            link: '/重学前端/',
+          },
+          {
+            text: '前端进阶训练营',
+            link: '/前端进阶训练营/',
+          },
+          {
+            text: '玩转vue3全家桶',
+            link: '/玩转vue3全家桶/',
+          },
+          {
+            text: '大厂晋升指南',
+            link: '/大厂晋升指南/',
+          },
+          {
+            text: '10x程序员工作法',
+            link: '/10x程序员工作法/',
+          },
           {
             text: 'Markdown Extensions',
             link: 'https://vitepress.dev/guide/markdown',
           },
         ],
+      },
+      {
+        text: '🌐 Blog',
+        link: 'https://daotin.github.io/',
       },
     ],
 
