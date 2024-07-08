@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a}from"./chunks/framework.ff44d2fd.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"重学前端/index.md","filePath":"重学前端/index.md","lastUpdated":1715154151000}'),n={name:"重学前端/index.md"};function r(o,s,d,c,i,p){return t(),a("div")}const f=e(n,[["render",r]]);export{m as __pageData,f as default};
