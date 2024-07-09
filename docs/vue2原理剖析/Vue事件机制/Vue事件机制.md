@@ -36,7 +36,7 @@ on.fn = fn 这行代码的作用是将传入的回调函数 fn 保存到 on 函�
 ```js
 Vue.prototype.$emit = function (event: string): Component {
   const vm: Component = this;
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     const lowerCaseEvent = event.toLowerCase();
     if (lowerCaseEvent !== event && vm._events[lowerCaseEvent]) {
       tip(

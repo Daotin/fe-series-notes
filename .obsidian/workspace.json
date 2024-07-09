@@ -4,30 +4,28 @@
     "type": "split",
     "children": [
       {
-        "id": "915cfa87b52ee58c",
+        "id": "ca7ebbbdc8513ede",
         "type": "tabs",
         "children": [
           {
-            "id": "6953d86a2819d9c4",
+            "id": "25a3a4dc66387721",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+                "file": "docs/vue3原理剖析/index.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "029a92288f8233ee",
+            "id": "dc590ca2b7182344",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "docs/webpack通关秘籍/vue-cli默认构建配置优化.md",
-                "mode": "source",
-                "source": false
+                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf"
               }
             }
           }
@@ -98,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/webpack通关秘籍/vue-cli默认构建配置优化.md",
+                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -115,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/webpack通关秘籍/vue-cli默认构建配置优化.md",
+                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/webpack通关秘籍/vue-cli默认构建配置优化.md"
+                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf"
               }
             }
           }
@@ -160,10 +158,12 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "029a92288f8233ee",
+  "active": "dc590ca2b7182344",
   "lastOpenFiles": [
-    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
+    "docs/vue3原理剖析/index.md",
+    "docs/vue3原理剖析/Vue.js设计与实现.pdf",
     "docs/webpack通关秘籍/vue-cli默认构建配置优化.md",
+    "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
     "docs/webpack通关秘籍/file/全量配置模板/webpack.config3.js",
     "docs/webpack通关秘籍/file/全量配置模板/webpack.config2.js",
     "docs/webpack通关秘籍/file/全量配置模板/webpack.config.js",
@@ -173,7 +173,6 @@
     "docs/webpack通关秘籍/file/webpack.config2.js",
     "docs/webpack通关秘籍/file/webpack.config.js",
     "docs/webpack通关秘籍/file/webpack5-prod.js",
-    "docs/webpack通关秘籍/file/webpack4-prod.js",
     "docs/webpack通关秘籍/webpack常用配置.md",
     "Obsidian使用技巧.md",
     "docs/webpack通关秘籍/images/img-20240529190535.png",
@@ -205,7 +204,6 @@
     "node_modules/shebang-regex/readme.md",
     "node_modules/shebang-command/readme.md",
     "node_modules/isexe/README.md",
-    "docs/TypeScript通关秘籍/index.md",
-    "docs/前端进阶训练营/一、浏览器工作原理.md"
+    "docs/TypeScript通关秘籍/index.md"
   ]
 }
