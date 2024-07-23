@@ -11,10 +11,10 @@ npm i axios
 2、新增 utils/request.ts 文件
 
 ```ts
-import axios, { type AxiosRequestConfig, type AxiosInstance } from "axios";
-import { baseURL } from "@/configs/domain";
-import { TokenName } from "@/configs/const";
-import { localMng } from "@/utils/storage-mng";
+import axios, { type AxiosRequestConfig, type AxiosInstance } from 'axios';
+import { baseURL } from '@/configs/domain';
+import { TokenName } from '@/configs/const';
+import { localMng } from '@/utils/storage-mng';
 
 class Request {
   private baseConfig: AxiosRequestConfig = {
@@ -56,7 +56,7 @@ class Request {
         return config;
       },
       (err) => {
-        window.$message.error("请求失败");
+        window.$message.error('请求失败');
         return Promise.reject(err);
       }
     );
@@ -71,18 +71,18 @@ class Request {
           case 200:
             return Promise.resolve(body || res.data);
           case 401:
-            window.$message.warning(message || "无权限");
+            window.$message.warning(message || '无权限');
             return Promise.reject(res.data);
           default:
-            window.$message.error(message || "响应失败");
+            window.$message.error(message || '响应失败');
             return Promise.reject(res.data);
         }
       },
       (err) => {
         if (axios.isCancel(err)) {
-          window.$message.error("响应取消");
+          window.$message.error('响应取消');
         } else {
-          window.$message.error("响应失败");
+          window.$message.error('响应失败');
         }
         return Promise.reject(err);
       }
@@ -96,61 +96,39 @@ class Request {
   };
 
   // get请求
-  public get = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> =>
-    this.instance({ url, method: "get", params: data, ...config });
+  public get = (url: string, data = {}, config: AxiosRequestConfig<any> = {}): Promise<any> =>
+    this.instance({ url, method: 'get', params: data, ...config });
 
   // post请求
-  public post = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> => this.instance({ url, method: "post", data, ...config });
+  public post = (url: string, data = {}, config: AxiosRequestConfig<any> = {}): Promise<any> =>
+    this.instance({ url, method: 'post', data, ...config });
 
   // 不经过统一的axios实例的post请求
-  public getOnly = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> =>
+  public getOnly = (url: string, data = {}, config: AxiosRequestConfig<any> = {}): Promise<any> =>
     axios({
       ...this.baseConfig,
       url,
-      method: "get",
+      method: 'get',
       params: data,
       ...config,
     });
 
   // 不经过统一的axios实例的get请求
-  public postOnly = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> =>
+  public postOnly = (url: string, data = {}, config: AxiosRequestConfig<any> = {}): Promise<any> =>
     axios({
       ...this.baseConfig,
       url,
-      method: "post",
+      method: 'post',
       data,
       ...config,
     });
 
   // delete请求
-  public deleteBody = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> => this.instance({ url, method: "delete", data, ...config });
+  public deleteBody = (url: string, data = {}, config: AxiosRequestConfig<any> = {}): Promise<any> =>
+    this.instance({ url, method: 'delete', data, ...config });
 
-  public deleteParam = (
-    url: string,
-    data = {},
-    config: AxiosRequestConfig<any> = {}
-  ): Promise<any> =>
-    this.instance({ url, method: "delete", params: data, ...config });
+  public deleteParam = (url: string, data = {}, config: AxiosRequestConfig<any> = {}): Promise<any> =>
+    this.instance({ url, method: 'delete', params: data, ...config });
 }
 
 export default new Request();
@@ -159,11 +137,11 @@ export default new Request();
 3、使用方式
 
 ```ts
-import request from "@/utils/request";
+import request from '@/utils/request';
 
 // 登录
-export const apiGetUserInfo = () => request.post("/sys/user/info");
-export const apiGetMenuList = () => request.post("/sys/menus");
+export const apiGetUserInfo = () => request.post('/sys/user/info');
+export const apiGetMenuList = () => request.post('/sys/menus');
 ```
 
 ## 配置说明
@@ -209,11 +187,11 @@ axios.defaults.timeout = 20000;
 上面我们使封着的一个**类**的形式，或者采用另一种**导出实例**的方式进行封装，也是可以的：
 
 ```ts
-import axios from "axios";
+import axios from 'axios';
 
 // 创建请求实例
 const instance = axios.create({
-  baseURL: "/api",
+  baseURL: '/api',
   // 指定请求超时的毫秒数
   timeout: 20000,
   // 表示跨域请求时是否需要使用凭证
@@ -266,7 +244,7 @@ instance.interceptors.response.use(
  */
 export function post(url, data = {}, params = {}) {
   return instance({
-    method: "post",
+    method: 'post',
     url,
     data,
     params,
@@ -279,7 +257,7 @@ export function post(url, data = {}, params = {}) {
  */
 export function get(url, params = {}) {
   return instance({
-    method: "get",
+    method: 'get',
     url,
     params,
   });
@@ -292,7 +270,7 @@ export function get(url, params = {}) {
  */
 export function put(url, data = {}, params = {}) {
   return instance({
-    method: "put",
+    method: 'put',
     url,
     params,
     data,
@@ -305,7 +283,7 @@ export function put(url, data = {}, params = {}) {
  */
 export function _delete(url, params = {}) {
   return instance({
-    method: "delete",
+    method: 'delete',
     url,
     params,
   });
@@ -327,14 +305,14 @@ export default instance;
 取消重复请求具体代码如下：
 
 ```ts
-import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
-import { baseURL } from "@/config/domain";
-import { TokenName } from "@/config/const";
-import { useAppStoreWithOut } from "@/store";
-import { usePermission } from "@/hooks";
-import router from "@/router";
-import { localMng } from "@/utils/storage-mng";
-import md5 from "md5";
+import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
+import { baseURL } from '@/config/domain';
+import { TokenName } from '@/config/const';
+import { useAppStoreWithOut } from '@/store';
+import { usePermission } from '@/hooks';
+import router from '@/router';
+import { localMng } from '@/utils/storage-mng';
+import md5 from 'md5';
 
 const appStore = useAppStoreWithOut();
 
@@ -362,7 +340,7 @@ class Request {
         return config;
       },
       (err) => {
-        window.$message.error("请求失败");
+        window.$message.error('请求失败');
         return Promise.reject(err);
       }
     );
@@ -381,17 +359,17 @@ class Request {
 
             return Promise.resolve(body || res.data);
           case 401:
-            window.$message.warning(message || "无权限");
+            window.$message.warning(message || '无权限');
             appStore.logout(false);
             return Promise.reject(res.data);
           default:
-            window.$message.error(message || "响应失败");
+            window.$message.error(message || '响应失败');
             return Promise.reject(res.data);
         }
       },
       (err) => {
         if (!axios.isCancel(err)) {
-          window.$message.error("响应失败");
+          window.$message.error('响应失败');
         }
         return Promise.reject(err);
       }
@@ -412,11 +390,8 @@ class Request {
       // 如果没有获取到请求的相关配置信息，根据时间戳生成
       return md5(+new Date());
     }
-    const data =
-      typeof config.data === "string"
-        ? config.data
-        : JSON.stringify(config.data);
-    return md5(config.url + "&" + config.method + "&" + data);
+    const data = typeof config.data === 'string' ? config.data : JSON.stringify(config.data);
+    return md5(config.url + '&' + config.method + '&' + data);
   };
 
   //...
@@ -458,7 +433,7 @@ key 为 getRequestKey 返回值，value 为对应的 new AbortController()实例
 store 中增加：
 
 ```ts
-export const useAppStore = defineStore("app", {
+export const useAppStore = defineStore('app', {
   state: (): IState => ({
     requests: {}, // 存储每个请求。形式：{ md5: controller }
   }),
@@ -466,14 +441,14 @@ export const useAppStore = defineStore("app", {
     // 增加请求controller
     addRequest(key, controller) {
       this.requests[key] = controller;
-      console.log("this.requests==>", this.requests);
+      console.log('this.requests==>', this.requests);
     },
     // 取消所有请求
     requestAbort() {
       let controllers = Object.values(this.requests);
       controllers.forEach((controller) => controller.abort());
       this.requests = {};
-      console.log("request abort!");
+      console.log('request abort!');
     },
   },
 });
@@ -486,9 +461,9 @@ export const useAppStoreWithOut = () => useAppStore(store);
 ```ts
 // 导航守卫
 router.beforeEach(async (to) => {
-  console.log("=======router.beforeEach=========");
+  console.log('=======router.beforeEach=========');
   const appStore = useAppStoreWithOut();
-  const title = (to.meta && (to.meta.title as string)) || "";
+  const title = (to.meta && (to.meta.title as string)) || '';
   if (title) {
     document.title = title;
   }
@@ -535,7 +510,7 @@ router.beforeEach(async (to) => {
 store 中增加：
 
 ```ts
-export const useAppStore = defineStore("app", {
+export const useAppStore = defineStore('app', {
   state: (): IState => ({
     abortDupRequest: [], // ['/api/device/page']
   }),
@@ -573,7 +548,7 @@ class Request {
         return config;
       },
       (err) => {
-        window.$message.error("请求失败");
+        window.$message.error('请求失败');
         return Promise.reject(err);
       }
     );
@@ -582,3 +557,20 @@ class Request {
   //...
 }
 ```
+
+#### 重复请求更好的实现方式 <Badge type="tip" text="2024.7.23" />
+
+之前取消重复请求会有一些问题，比如：
+
+- 如果有轮询的接口请求，就不能使用
+- 如果 A 组件调用 B，C 组件，但是 B，C 组件调用了相同的接口，就会有一个组件得不到数据...
+
+所以，更好的解决方案是：
+
+**延续前面的思路，仍然是拦截相同请求，但这次我们不直接把请求挂掉，而是对于相同的请求我们先给它挂起，等到最先发出去的请求拿到结果回来之后，把成功或失败的结果共享给后面到来的相同请求。**
+
+具体可以参考这篇文章的方案三：https://juejin.cn/post/7341840038964363283
+
+其实，还有更方便的办法，就是使用现成的请求库，比如[VueRequest](https://en.attojs.com/)，可以使用里面的「缓存」功能，来达到取消重复请求的目的。
+
+这种是最方便的。

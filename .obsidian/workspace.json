@@ -4,33 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "ca7ebbbdc8513ede",
+        "id": "eaa68503f43961b6",
         "type": "tabs",
         "children": [
           {
-            "id": "25a3a4dc66387721",
+            "id": "145aac9e61e20cd8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/vue3原理剖析/index.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "dc590ca2b7182344",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf"
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -59,7 +44,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "externals",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -96,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf",
+                "file": "docs/大厂晋升指南/学习方法.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -113,7 +98,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf",
+                "file": "docs/大厂晋升指南/学习方法.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +121,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/vue3原理剖析/Vue.js设计与实现.pdf"
+                "file": "docs/大厂晋升指南/学习方法.md"
               }
             }
           }
@@ -158,9 +143,18 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "dc590ca2b7182344",
+  "active": "972a9134f92587d1",
   "lastOpenFiles": [
+    "docs/重学前端/JavaScript篇.md",
+    "docs/重学前端/前端的学习路线与方法.md",
+    "Obsidian使用技巧.md",
+    "CHANGELOG.md",
+    "docs/index.md",
+    "docs/vue3原理剖析/Vuejs设计与实现.md",
     "docs/vue3原理剖析/index.md",
+    "2024-07-09.md",
+    "未命名.canvas",
+    "docs/vue3原理剖析/test.md",
     "docs/vue3原理剖析/Vue.js设计与实现.pdf",
     "docs/webpack通关秘籍/vue-cli默认构建配置优化.md",
     "docs/webpack通关秘籍/webpack打包速度和体积优化.md",
@@ -174,7 +168,6 @@
     "docs/webpack通关秘籍/file/webpack.config.js",
     "docs/webpack通关秘籍/file/webpack5-prod.js",
     "docs/webpack通关秘籍/webpack常用配置.md",
-    "Obsidian使用技巧.md",
     "docs/webpack通关秘籍/images/img-20240529190535.png",
     "docs/webpack通关秘籍/images/img-20240529190532.png",
     "docs/webpack通关秘籍/images/img-20240528160554.png",
@@ -198,12 +191,6 @@
     "node_modules/cross-env/README.md",
     "node_modules/cross-env/CHANGELOG.md",
     "node_modules/cross-spawn/CHANGELOG.md",
-    "node_modules/which/README.md",
-    "node_modules/which/CHANGELOG.md",
-    "node_modules/path-key/readme.md",
-    "node_modules/shebang-regex/readme.md",
-    "node_modules/shebang-command/readme.md",
-    "node_modules/isexe/README.md",
-    "docs/TypeScript通关秘籍/index.md"
+    "node_modules/which/README.md"
   ]
 }
