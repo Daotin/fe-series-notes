@@ -1,3 +1,7 @@
+::: tip
+更多关于 tailwindcss 的介绍，用法，性能等，参考：https://mp.weixin.qq.com/s/C9-611RHvUOhsAJi9J0bYw
+:::
+
 # 引入 TailWindCSS
 
 1、安装插件
@@ -31,7 +35,7 @@ module.exports = {
 4、在 main.ts 中引入 main.less 文件
 
 ```js
-import "./assets/main.less";
+import './assets/main.less';
 ```
 
 5、通过`npx tailwindcss init`，生成 tailwind 配置文件：
@@ -39,7 +43,7 @@ import "./assets/main.less";
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,vue,jsx}"],
+  content: ['./src/**/*.{html,js,vue,jsx}'],
   theme: {
     extend: {},
   },
@@ -245,16 +249,16 @@ module.exports = {
 
 ```js
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
-const plugin = require("tailwindcss/plugin");
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
 /**
  * 生成 tailwindcss 的 属性值
  * @param {number} n 生成的个数
  * @param {number} per 倍率
  * @param {string} unit 单位
  */
-function generateValue(n = 100, per = 5, unit = "px") {
+function generateValue(n = 100, per = 5, unit = 'px') {
   let obj = {};
   for (let i = 1; i <= n; i++) {
     obj[i] = `${i * per}${unit}`;
@@ -266,8 +270,8 @@ function generateValue(n = 100, per = 5, unit = "px") {
  * 参考：https://juejin.cn/post/7074754321279090718
  */
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.vue", "./src/**/*.js"],
-  mode: "jit",
+  purge: ['./src/**/*.html', './src/**/*.vue', './src/**/*.js'],
+  mode: 'jit',
   content: [],
   theme: {
     /**
@@ -284,15 +288,15 @@ module.exports = {
      * theme函数：如果在定制 theme 选项中的某个属性时，希望访问当前 theme 选项的其他属性的基础类，可以使用函数的方式（最后返回表示基础类的对象）
      * 注意：该函数只能用于 theme 选项下的一级属性，而不能直接用于设置次级属性
      */
-    backgroundColor: (theme) => theme("colors"),
+    backgroundColor: (theme) => theme('colors'),
     /**
      * tabSize给plugin中的matchUtilities使用
      */
     tabSize: {
-      1: "1",
-      2: "2",
-      4: "4",
-      8: "8",
+      1: '1',
+      2: '2',
+      4: '4',
+      8: '8',
     },
     /**
      * 在 theme 属性的 extend 属性下添加的基础类会以扩展添加新值的方式来添加自定义基础类（仍保留默认的基础类）
@@ -301,26 +305,26 @@ module.exports = {
       // spacing使用：padding, margin, width, height, maxHeight, gap, inset, space, and translate
       spacing: {
         ...generateValue(),
-        sm: "8px",
-        md: "12px",
-        lg: "16px",
-        xl: "24px",
+        sm: '8px',
+        md: '12px',
+        lg: '16px',
+        xl: '24px',
       },
       // 使用示例：class="bg-gray text-blue"
       // 如果希望在 HTML 页面使用一次自定义的任意颜色，可以通过 [color] 的方式来实现: class="bg-[#1da1f2]"
       colors: {
         ...colors,
-        blue: "#1890ff",
-        purple: "#a37ae8",
-        orange: "#fa8564",
-        green: "#2bd99f",
-        yellow: "#ffd85c",
+        blue: '#1890ff',
+        purple: '#a37ae8',
+        orange: '#fa8564',
+        green: '#2bd99f',
+        yellow: '#ffd85c',
         // 使用示例：class="bg-gray-333"
         gray: {
-          DEFAULT: "#ccc", // 不带有后缀时，其默认的样式
-          333: "#333",
-          666: "#666",
-          999: "#999",
+          DEFAULT: '#ccc', // 不带有后缀时，其默认的样式
+          333: '#333',
+          666: '#666',
+          999: '#999',
         },
       },
       // 使用示例：class="rounded-5"
@@ -329,7 +333,7 @@ module.exports = {
        * 如果希望获取默认基础类的值，可以通过导入 tailwindcss/defaultTheme 来获取
        */
       fontFamily: {
-        sans: ["Lato", ...defaultTheme.fontFamily.sans],
+        sans: ['Lato', ...defaultTheme.fontFamily.sans],
       },
     },
   },
@@ -344,53 +348,44 @@ module.exports = {
    * 参考：https://juejin.cn/post/7074754321279090718#heading-6
    */
   plugins: [
-    plugin(function ({
-      addBase,
-      addUtilities,
-      matchUtilities,
-      theme,
-      addComponents,
-      e,
-      prefix,
-      config,
-    }) {
+    plugin(function ({ addBase, addUtilities, matchUtilities, theme, addComponents, e, prefix, config }) {
       // 添加基础类，并将（重置）样式添加到 base 容器
       // 由于重置样式 reset 一般匹配的是一类元素，例如 div、h1 等，为它们设置预设样式，以便在不同的浏览器中具有相同的初始样式
       addBase({
-        h1: { fontSize: theme("fontSize.2xl") },
-        h2: { fontSize: theme("fontSize.xl") },
-        h3: { fontSize: theme("fontSize.lg") },
+        h1: { fontSize: theme('fontSize.2xl') },
+        h2: { fontSize: theme('fontSize.xl') },
+        h3: { fontSize: theme('fontSize.lg') },
       });
 
       // 样式添加到 components 容器
       // 在 components 容器中添加的基础类，它们的样式都更复杂，一般用于设置一些具体的视觉元素的，如按钮、表单等
       addComponents({
-        ".btn": {
-          padding: ".5rem 1rem",
-          borderRadius: ".25rem",
-          fontWeight: "600",
+        '.btn': {
+          padding: '.5rem 1rem',
+          borderRadius: '.25rem',
+          fontWeight: '600',
         },
-        ".btn-blue": {
-          backgroundColor: "#3490dc",
-          color: "#fff",
-          "&:hover": {
-            backgroundColor: "#2779bd",
+        '.btn-blue': {
+          backgroundColor: '#3490dc',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: '#2779bd',
           },
         },
-        ".btn-red": {
-          backgroundColor: "#e3342f",
-          color: "#fff",
-          "&:hover": {
-            backgroundColor: "#cc1f1a",
+        '.btn-red': {
+          backgroundColor: '#e3342f',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: '#cc1f1a',
           },
         },
       });
 
       // 添加静态自定义样式
       addUtilities({
-        ".daotin": {
-          background: "yellow",
-          color: "blue",
+        '.daotin': {
+          background: 'yellow',
+          color: 'blue',
         },
       });
       // 添加动态自定义样式（乐意在 HTML 元素上使用时支持使用任意值，比如：tab-[13]，需要开启jit模式）
@@ -400,7 +395,7 @@ module.exports = {
             tabSize: value,
           }),
         },
-        { values: theme("tabSize") }
+        { values: theme('tabSize') }
       );
     }),
   ],
