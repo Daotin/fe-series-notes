@@ -8,18 +8,18 @@
 
 执行代码的时候，缺什么就到变量环境去找。
 
-主要是理解js代码是「**先编译，再执行**」的。
+主要是理解 js 代码是「**先编译，再执行**」的。
 
 ![](images/img-20240501210580.png)
 
-
-执行上下文的范围分3种：
+执行上下文的范围分 3 种：
 
 - 全局执行上下文
 - 函数体执行上下文
-- eval执行上下文
+- eval 执行上下文
 
 ## 调用栈
+
 > 调用栈就是用来管理函数调用关系的一种数据结构。
 
 当有多个执行上下文的时候，通过栈（后进先出）的结构，进行管理和调用。
@@ -27,50 +27,49 @@
 类似下面这样的结构，当函数执行完后，就会从栈顶弹出：
 
 ```js
-var a = 2
-function add(b,c){
-  return b+c
+var a = 2;
+function add(b, c) {
+  return b + c;
 }
-function addAll(b,c){
-	var d = 10
-	result = add(b,c)
-	return  a+result+d
+function addAll(b, c) {
+  var d = 10;
+  result = add(b, c);
+  return a + result + d;
 }
-addAll(3,6)
+addAll(3, 6);
 ```
 
 ![](images/img-20240501210580-1.png)
 
-
 ## 块级作用域
 
-由于变量提升，导致很多意料之外的结果，所以引入了let和const，也就有了块级作用域。
+由于变量提升，导致很多意料之外的结果，所以引入了 let 和 const，也就有了块级作用域。
 
-那么，let/const是如何影响执行上下文的？
+那么，let/const 是如何影响执行上下文的？
 
 ```js
-function foo(){
-    var a = 1
-    let b = 2
-    {
-      let b = 3
-      var c = 4
-      let d = 5
-      console.log(a)
-      console.log(b)
-    }
-    console.log(b) 
-    console.log(c)
-    console.log(d)
-}   
-foo()
+function foo() {
+  var a = 1;
+  let b = 2;
+  {
+    let b = 3;
+    var c = 4;
+    let d = 5;
+    console.log(a);
+    console.log(b);
+  }
+  console.log(b);
+  console.log(c);
+  console.log(d);
+}
+foo();
 ```
 
-a,c会被提取到「变量环境」，但是let定义的变量不会，而是放到之前一直没提到的「词法环境」
+a,c 会被提取到「变量环境」，但是 let 定义的变量不会，而是放到之前一直没提到的「词法环境」
 
-> 并且，let和const定义的变量，不会变量提升。
+> 并且，let 和 const 定义的变量，不会变量提升。
 
-而且，当执行到let b = 3的时候，作用域块中通过 let 声明的变量，会被存放在词法环境的一个单独的区域中。
+而且，当执行到 let b = 3 的时候，作用域块中通过 let 声明的变量，会被存放在词法环境的一个单独的区域中。
 
 ![](images/img-20240501220511.png)
 
@@ -82,23 +81,41 @@ a,c会被提取到「变量环境」，但是let定义的变量不会，而是�
 
 因此，块级作用域就是通过词法环境的栈结构来实现的，而变量提升是通过变量环境来实现，通过这两者的结合，JavaScript 引擎也就同时**支持了变量提升和块级作用域**了。
 
+:::warning
+注意，let 和 const 会被变量提升，但是不会被初始化为`undefined`，而是初始化为`uninitailized`，当访问 uninitailized 的变量的时候，就会报错：ReferenceError: Cannot access 'xxx' before initialization
+:::
+
+举例：
+
+```js
+let myname = '极客时间';
+{
+  console.log(myname); // referenceError: Cannot access 'myname' before initialization
+  let myname = '极客邦';
+}
+```
+
+如果说 let 和 const 不存在变量提升，那么按照从词法环境到变量环境的查询顺序，最后打印的会是“极客时间”，但是结果不是，所以显然是有提升的，
+
+但是，如果提升为 undefined，那么按照从词法环境到变量环境的查询顺序，打印的是 undefined，但是实际上报错，所以，其实会变量提升，只不是不是初始化为 undefined，而是 uninitailized，当访问 uninitailized 的变量的时候，就会报错，这样就解释得通了。
+
 ## 作用域链
 
 下面代码打印什么？是按照调用栈的顺序来查找变量的吗？然后打印“极客邦”？
+
 ```js
 function bar() {
-    console.log(myName)
+  console.log(myName);
 }
 function foo() {
-    var myName = "极客邦"
-    bar()
+  var myName = '极客邦';
+  bar();
 }
-var myName = "极客时间"
-foo()
+var myName = '极客时间';
+foo();
 ```
 
 ![](images/img-20240501220563.png)
-
 
 非也。打印的是“极客时间”。why？这就涉及到作用域链了。
 
@@ -118,39 +135,46 @@ foo()
 
 静态的意思是：词法作用域是代码编译阶段就决定好的，和函数是怎么调用的没有关系。
 
-
 > 上面是全局作用域和函数级作用域来分析了作用域链，那块级作用域中变量是如何查找的？
 
-
 示例：
+
 ```js
 function bar() {
-    var myName = "极客世界"
-    let test1 = 100
-    if (1) {
-        let myName = "Chrome浏览器"
-        console.log(test)
-    }
+  var myName = '极客世界';
+  let test1 = 100;
+  if (1) {
+    let myName = 'Chrome浏览器';
+    console.log(test);
+  }
 }
 function foo() {
-    var myName = "极客邦"
-    let test = 2
-    {
-        let test = 3
-        bar()
-    }
+  var myName = '极客邦';
+  let test = 2;
+  {
+    let test = 3;
+    bar();
+  }
 }
-var myName = "极客时间"
-let myAge = 10
-let test = 1
-foo()
+var myName = '极客时间';
+let myAge = 10;
+let test = 1;
+foo();
 ```
-
 
 查找顺序如下：
 ![](images/img-20240502100577.png)
 
-按照1,2,3,4,5的顺序进行查找，最后打印的结果不是3，而是1。
+按照 1,2,3,4,5 的顺序进行查找，最后打印的结果不是 3，而是 1。
+
+:::tip ❓ 有点迷糊了，调用栈和作用域链有什么区别和联系？
+
+1. 调用栈主要用于跟踪程序的执行顺序,而作用域链用于确定变量的访问权限。
+2. 调用栈是一个动态的过程,随着函数的调用和返回而变化。而作用域链在函数定义时就已经确定,不会随函数调用而改变。
+3. 它们之间的主要联系体现在执行上下文中。每次函数调用都会创建一个新的执行上下文,包含了当前的调用栈信息和该函数的作用域链。
+4. 在变量查找过程中,JavaScript 引擎首先在当前执行上下文(调用栈顶部)中查找变量,如果找不到,则沿着作用域链继续查找。
+
+:::
 
 ### 闭包
 
@@ -158,34 +182,110 @@ foo()
 
 闭包的回收：如果引用闭包的函数是一个全局变量，那么闭包会一直存在直到页面关闭；但如果这个闭包以后不再使用的话，就会造成内存泄漏。如果引用闭包的函数是个局部变量，等函数销毁后，在下次 JavaScript 引擎执行垃圾回收时，判断闭包这块内容如果已经不再被使用了，那么 JavaScript 引擎的垃圾回收器就会回收这块内存。
 
+> ❓ 如何理解“闭包的实现依赖于作用域链,而闭包的执行则依赖于调用栈”？
+
+1. 闭包的实现依赖于作用域链：
+
+   - 当一个函数被创建时，它会捕获其词法环境，这个环境包含了函数定义时刻的作用域链。
+   - 这使得内部函数可以访问外部函数的变量，即使外部函数已经执行完毕。
+   - 作用域链在这里起到了"记忆"的作用，保存了闭包需要的外部变量信息。
+
+2. 闭包的执行依赖于调用栈：
+   - 虽然闭包保留了创建时的作用域链，但它的执行还是要遵循普通函数的规则。
+   - 当闭包被调用时，它会被推入调用栈，创建新的执行上下文。
+   - 调用栈负责管理闭包函数的执行，包括参数传递、返回值处理等。
+
+举个例子来说明：
+
+```javascript
+function createCounter() {
+  let count = 0;
+  return function () {
+    return ++count;
+  };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+```
+
+在这个例子中：
+
+- 闭包的实现依赖作用域链：内部函数能够访问 `count` 变量，是因为它的作用域链中包含了 `createCounter` 函数的作用域。
+
+- 闭包的执行依赖调用栈：每次调用 `counter()` 时，这个闭包函数都会被推入调用栈，执行完毕后弹出。
+
+这种机制使得闭包既能保持对创建时环境的访问（通过作用域链），又能作为普通函数被正常调用和管理（通过调用栈）。这就是为什么闭包如此强大 —— 它结合了两种机制的优点，既能"记住"创建时的环境，又能在需要时正常执行。
+
+> ❓ 闭包存在的意义和实际应用场景是什么？
+
+在 Vue 中，Computed，Methods，生命周期等，都是闭包，比如：
+
+```js
+export default {
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  computed: {
+    doubleCount() {
+      return this.count * 2;
+    },
+  },
+};
+```
+
+doubleCount 是一个闭包，为了更好地理解，让我们看一下 Vue 可能如何在内部处理计算属性：
+
+```js
+function createComputedGetter(key) {
+  return function computedGetter() {
+    const vm = this;
+    const computed = vm.$options.computed[key];
+    // 在这里，computed 函数（即我们定义的 doubleCount）
+    // 作为闭包被调用，它可以访问 vm（组件实例）
+    return computed.call(vm);
+  };
+}
+
+// 在组件初始化时：
+Object.defineProperty(vm, 'doubleCount', {
+  get: createComputedGetter('doubleCount'),
+  enumerable: true,
+  configurable: true,
+});
+```
+
+在这个简化的实现中，我们可以看到：
+
+createComputedGetter 返回一个函数（闭包）。这个闭包可以访问组件实例 (vm)。当计算属性被访问时，这个闭包被调用，执行我们定义的 doubleCount 函数。
 
 ## this
 
 首先明确一点，作用域链和 this 是两套不同的系统，它们之间基本没太多联系。
 
-this其实也是执行上下文中的一部分，而且因为执行上下文分为3种，所以this也分为三种。全局执行上下文中的 this、函数中的 this 和 eval 中的 this。
+this 其实也是执行上下文中的一部分，而且因为执行上下文分为 3 种，所以 this 也分为三种。全局执行上下文中的 this、函数中的 this 和 eval 中的 this。
 
 ![](images/img-20240502120564.png)
-
-
 
 - 全局执行上下文中的 this 是指向 window 对象
 - 在默认情况下调用一个函数，其执行上下文中的 this 也是指向 window 对象
 - 使用对象来调用其内部的一个方法，该方法的 this 是指向对象本身
 
-如何改变this的指向？使用函数的call，apply，bind属性。
-
+如何改变 this 的指向？使用函数的 call，apply，bind 属性。
 
 ## 总结
 
-1、因为`执行上下文`的影响，js会先编译，在执行，所以会有变量提升。
+1、因为`执行上下文`的影响，js 会先编译，在执行，所以会有变量提升。
 
 2、一段代码里面不止一个执行上下文，如何管理的？就是`调用栈`。
 
-3、由于js的缺陷，没有`块级作用域`，所以引入let，const，于是引入「`词法环境`」，于是在一个执行上下文的查找顺序是先查词法环境，再查变量环境。注意是一个执行上下文环境。
+3、由于 js 的缺陷，没有`块级作用域`，所以引入 let，const，于是引入「`词法环境`」，于是在一个执行上下文的查找顺序是先查词法环境，再查变量环境。注意是一个执行上下文环境。
 
 4、如果当前执行上下文找不到，就会沿着`作用域链`去找，怎么找？这就涉及到`outer`和`词法作用域`了。
 
 5、在词法作用域的理念中，会有一个很特殊的东西，叫「`闭包`」的概念。
 
-6、然而，当一个对象的属性是方法的时候，调用的该方法去访问属性A，根据作用域链，访问的不是对象的属性A，而是其他的执行上下文的A，这就和常识违背了，因为在对象内部的方法中使用对象内部的属性是一个非常普遍的需求，于是就引入了`this`的概念和作用域链是两个完全无关的东西。虽然可以通过`对象名.A`的方式使用，但是增加代码的冗余性和可维护性。
+6、然而，当一个对象的属性是方法的时候，调用的该方法去访问属性 A，根据作用域链，访问的不是对象的属性 A，而是其他的执行上下文的 A，这就和常识违背了，因为在对象内部的方法中使用对象内部的属性是一个非常普遍的需求，于是就引入了`this`的概念和作用域链是两个完全无关的东西。虽然可以通过`对象名.A`的方式使用，但是增加代码的冗余性和可维护性。
