@@ -1,16 +1,21 @@
 {
-  // 使用 IntelliSense 了解相关属性。 
+  // 使用 IntelliSense 了解相关属性。
   // 悬停以查看现有属性的描述。
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "node",
+      "program": "${workspaceFolder}/docs/vue2原理剖析/响应式原理/observer2.js",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}\\docs\\.vitepress\\sidebar\\frontend.js"
     }
   ]
