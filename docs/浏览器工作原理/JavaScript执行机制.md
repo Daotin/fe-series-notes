@@ -180,87 +180,131 @@ foo();
 
 定义：在 JavaScript 中，根据**词法作用域**的规则，内部函数总是可以访问其外部函数中声明的变量，当通过调用一个外部函数返回一个内部函数后，即使该外部函数已经执行结束了，但是内部函数引用外部函数的变量依然保存在内存中，我们就把这些变量的集合称为闭包。比如外部函数是 foo，那么这些变量的集合就称为 foo 函数的闭包。
 
-闭包的回收：如果引用闭包的函数是一个全局变量，那么闭包会一直存在直到页面关闭；但如果这个闭包以后不再使用的话，就会造成内存泄漏。如果引用闭包的函数是个局部变量，等函数销毁后，在下次 JavaScript 引擎执行垃圾回收时，判断闭包这块内容如果已经不再被使用了，那么 JavaScript 引擎的垃圾回收器就会回收这块内存。
+闭包危害：
 
-> ❓ 如何理解“闭包的实现依赖于作用域链,而闭包的执行则依赖于调用栈”？
+- 如果引用闭包的函数是一个全局变量，那么闭包会一直存在直到页面关闭；但如果这个闭包以后不再使用的话，就会造成内存泄漏。
+- 如果引用闭包的函数是个局部变量，等函数销毁后，在下次 JavaScript 引擎执行垃圾回收时，就会回收这块内存。
 
-1. 闭包的实现依赖于作用域链：
+#### 闭包的应用场景
 
-   - 当一个函数被创建时，它会捕获其词法环境，这个环境包含了函数定义时刻的作用域链。
-   - 这使得内部函数可以访问外部函数的变量，即使外部函数已经执行完毕。
-   - 作用域链在这里起到了"记忆"的作用，保存了闭包需要的外部变量信息。
+闭包在实际开发中有广泛的应用，主要用于以下几种场景：
 
-2. 闭包的执行依赖于调用栈：
-   - 虽然闭包保留了创建时的作用域链，但它的执行还是要遵循普通函数的规则。
-   - 当闭包被调用时，它会被推入调用栈，创建新的执行上下文。
-   - 调用栈负责管理闭包函数的执行，包括参数传递、返回值处理等。
+1. **数据封装和模块化**
 
-举个例子来说明：
+闭包可以用来创建私有变量和方法，从而实现数据的封装。在 JavaScript 中，没有传统意义上的私有属性，通过闭包可以模拟私有属性。
 
 ```javascript
 function createCounter() {
-  let count = 0;
-  return function () {
-    return ++count;
+  let count = 0; // 私有变量
+  return {
+    increment: function () {
+      count++;
+      console.log(count);
+    },
+    decrement: function () {
+      count--;
+      console.log(count);
+    },
+    getCount: function () {
+      return count;
+    },
   };
 }
 
 const counter = createCounter();
-console.log(counter()); // 1
-console.log(counter()); // 2
+counter.increment(); // 1
+counter.increment(); // 2
+console.log(counter.getCount()); // 2
+console.log(counter.count); // undefined
 ```
 
-在这个例子中：
+在这个例子中，`count` 变量无法直接从外部访问，只能通过 `increment`、`decrement` 和 `getCount` 方法访问，这就实现了数据的封装。
 
-- 闭包的实现依赖作用域链：内部函数能够访问 `count` 变量，是因为它的作用域链中包含了 `createCounter` 函数的作用域。
+2. **延迟执行和回调函数**
 
-- 闭包的执行依赖调用栈：每次调用 `counter()` 时，这个闭包函数都会被推入调用栈，执行完毕后弹出。
+闭包常用于延迟执行函数或在异步操作（如事件处理、定时器、AJAX 请求等）中保存函数执行时的上下文环境。
 
-这种机制使得闭包既能保持对创建时环境的访问（通过作用域链），又能作为普通函数被正常调用和管理（通过调用栈）。这就是为什么闭包如此强大 —— 它结合了两种机制的优点，既能"记住"创建时的环境，又能在需要时正常执行。
+```javascript
+function delayedGreeting(name) {
+  setTimeout(function () {
+    console.log(`Hello, ${name}!`);
+  }, 1000);
+}
 
-> ❓ 闭包存在的意义和实际应用场景是什么？
-
-在 Vue 中，Computed，Methods，生命周期等，都是闭包，比如：
-
-```js
-export default {
-  data() {
-    return {
-      count: 0,
-    };
-  },
-  computed: {
-    doubleCount() {
-      return this.count * 2;
-    },
-  },
-};
+delayedGreeting('Alice'); // 1秒后输出 "Hello, Alice!"
 ```
 
-doubleCount 是一个闭包，为了更好地理解，让我们看一下 Vue 可能如何在内部处理计算属性：
+在这个例子中，匿名函数在 `setTimeout` 执行时仍然能够访问到 `name` 变量，这就是闭包的作用。
 
-```js
-function createComputedGetter(key) {
-  return function computedGetter() {
-    const vm = this;
-    const computed = vm.$options.computed[key];
-    // 在这里，computed 函数（即我们定义的 doubleCount）
-    // 作为闭包被调用，它可以访问 vm（组件实例）
-    return computed.call(vm);
+3. **函数柯里化**
+
+函数柯里化是一种将多参数函数转换为一系列单参数函数的技术。闭包在实现函数柯里化时非常有用。
+
+```javascript
+function multiply(a) {
+  return function (b) {
+    return a * b;
   };
 }
 
-// 在组件初始化时：
-Object.defineProperty(vm, 'doubleCount', {
-  get: createComputedGetter('doubleCount'),
-  enumerable: true,
-  configurable: true,
-});
+const double = multiply(2);
+console.log(double(5)); // 10
+console.log(multiply(3)(4)); // 12
 ```
 
-在这个简化的实现中，我们可以看到：
+在这个例子中，`multiply` 函数返回一个闭包，闭包记住了 `a` 的值，从而实现了函数柯里化。
 
-createComputedGetter 返回一个函数（闭包）。这个闭包可以访问组件实例 (vm)。当计算属性被访问时，这个闭包被调用，执行我们定义的 doubleCount 函数。
+> 如何利用闭包的柯里化，实现 sum(1)(2).value()、sum(1,2).value()都要输出 3？
+
+```js
+function sum(...args) {
+  // 内部累加器函数
+  const add = (...newArgs) => {
+    // 累加新传入的参数
+    args = args.concat(newArgs);
+    // 返回add函数本身，实现链式调用
+    return add;
+  };
+
+  // 给add函数附加value方法
+  add.value = () => args.reduce((acc, curr) => acc + curr, 0);
+
+  // 第一次调用sum时返回add函数
+  return add(...args);
+}
+
+// 示例用法
+console.log(sum(1)(2).value()); // 3
+console.log(sum(1, 2).value()); // 3
+console.log(sum(1)(2)(3).value()); // 6
+console.log(sum(1, 2, 3).value()); // 6
+```
+
+4. **保持函数的执行上下文**
+
+在某些场景下，闭包可以用来保持函数的执行上下文，避免变量值被意外修改。
+
+```javascript
+function createCallbacks() {
+  let callbacks = [];
+  for (var i = 0; i < 5; i++) {
+    callbacks.push(
+      (function (i) {
+        return function () {
+          console.log(i);
+        };
+      })(i)
+    );
+  }
+  return callbacks;
+}
+
+const callbacks = createCallbacks();
+callbacks[0](); // 0
+callbacks[1](); // 1
+```
+
+在这个例子中，立即执行的函数表达式（IIFE）创建了一个闭包，使得每个回调函数都能记住其对应的 `i` 值。
 
 ## this
 
