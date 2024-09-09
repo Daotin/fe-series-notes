@@ -100,8 +100,8 @@ module.exports = {
   htmlWhitespaceSensitivity: 'ignore',
   // 在Vue文件中的<script>和<style>标签内缩进代码
   vueIndentScriptAndStyle: false,
-  // 使用换行符（LF）作为行结束符
-  endOfLine: 'lf',
+  // 自动检测并使用文件中已有的行尾样式，作为行结束符
+  endOfLine: 'auto',
   // 自动格式化嵌入的代码块
   embeddedLanguageFormatting: 'auto',
   // 每行单个HTML属性
