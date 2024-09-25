@@ -23,7 +23,7 @@ class Request {
     timeout: 20000,
   };
 
-  private instance: AxiosInstance = axios.create(this.baseConfig);
+  private instance!: AxiosInstance;
 
   public constructor() {
     const token = localMng.getItem(TokenName);
