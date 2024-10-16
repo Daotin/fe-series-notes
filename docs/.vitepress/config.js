@@ -14,6 +14,9 @@ export default defineConfig({
   markdown: {
     theme: 'github-dark',
     // lineNumbers: true,
+    config: (md) => {
+      md.use(require('markdown-it-task-lists'));
+    },
   },
 
   ignoreDeadLinks: true, // 忽略死链接
@@ -22,7 +25,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/logo.jpg',
-    siteTitle: "前端队长の博客",
+    siteTitle: '前端队长の博客',
 
     // 本地搜索
     search: {
@@ -258,7 +261,7 @@ export default defineConfig({
             },
           ],
         },
-      ]
+      ],
       // '/browser-principle/': createSideBar('browser-principle'),
     },
 
