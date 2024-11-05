@@ -88,6 +88,10 @@ export default defineConfig({
         text: '👨‍💻 技术专栏',
         items: [
           {
+            text: 'Nest学习笔记',
+            link: '/Nest学习笔记/',
+          },
+          {
             text: 'TypeScript通关秘籍',
             link: '/TypeScript通关秘籍/',
           },
