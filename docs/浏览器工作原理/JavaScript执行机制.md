@@ -193,48 +193,37 @@ foo();
 
 闭包可以用来创建私有变量和方法，从而实现数据的封装。在 JavaScript 中，没有传统意义上的私有属性，通过闭包可以模拟私有属性。
 
-```javascript
-function createCounter() {
-  let count = 0; // 私有变量
-  return {
-    increment: function () {
-      count++;
-      console.log(count);
-    },
-    decrement: function () {
-      count--;
-      console.log(count);
-    },
-    getCount: function () {
-      return count;
-    },
-  };
-}
+比如经典的**防抖节流**代码：https://daotin.github.io/posts/2020/01/07/%E9%98%B2%E6%8A%96vs%E8%8A%82%E6%B5%81.html
 
-const counter = createCounter();
-counter.increment(); // 1
-counter.increment(); // 2
-console.log(counter.getCount()); // 2
-console.log(counter.count); // undefined
-```
+2. **for 循环正确打印 i 值**
 
-在这个例子中，`count` 变量无法直接从外部访问，只能通过 `increment`、`decrement` 和 `getCount` 方法访问，这就实现了数据的封装。
+在以下代码中，由于 var 声明的变量是函数作用域，所有的异步操作共享同一个 i，最终会打印同一个值（循环结束后的值）：
 
-2. **延迟执行和回调函数**
-
-闭包常用于延迟执行函数或在异步操作（如事件处理、定时器、AJAX 请求等）中保存函数执行时的上下文环境。
-
-```javascript
-function delayedGreeting(name) {
+```js
+for (var i = 0; i < 5; i++) {
   setTimeout(function () {
-    console.log(`Hello, ${name}!`);
+    console.log(i); // 5, 5, 5, 5, 5
   }, 1000);
 }
-
-delayedGreeting('Alice'); // 1秒后输出 "Hello, Alice!"
 ```
 
-在这个例子中，匿名函数在 `setTimeout` 执行时仍然能够访问到 `name` 变量，这就是闭包的作用。
+但是，我们可以使用闭包的特性，使用一个自执行函数（IIFE）创建一个闭包，确保每次循环的 i 值独立：
+
+```js
+for (var i = 0; i < 5; i++) {
+  (function (i) {
+    setTimeout(function () {
+      console.log(i); // 0, 1, 2, 3, 4
+    }, 1000);
+  })(i);
+}
+```
+
+> 一个函数返回另一个函数才是闭包，为什么 IIFE 这种是闭包？
+
+严格来说，闭包是指一个函数返回另一个函数，并且这个返回的函数可以访问外部函数的变量。而在案例中，虽然没有显式地返回函数，但它使用了 IIFE，这仍然满足闭包的定义：**在函数内部创建了一个可访问外部变量 i 的函数**。
+
+在案例中，`(function(i) { ... })(i)` 就是创建了一个闭包，每次循环都会创建一个新的闭包，传递当前的 i 值给它。而 setTimeout 内的匿名函数是访问 i 的内部函数，外部函数执行完了，但是 setTimeout 里面的内部函数，依然可以访问 i，这就是闭包。
 
 3. **函数柯里化**
 
@@ -279,32 +268,6 @@ console.log(sum(1, 2).value()); // 3
 console.log(sum(1)(2)(3).value()); // 6
 console.log(sum(1, 2, 3).value()); // 6
 ```
-
-4. **保持函数的执行上下文**
-
-在某些场景下，闭包可以用来保持函数的执行上下文，避免变量值被意外修改。
-
-```javascript
-function createCallbacks() {
-  let callbacks = [];
-  for (var i = 0; i < 5; i++) {
-    callbacks.push(
-      (function (i) {
-        return function () {
-          console.log(i);
-        };
-      })(i)
-    );
-  }
-  return callbacks;
-}
-
-const callbacks = createCallbacks();
-callbacks[0](); // 0
-callbacks[1](); // 1
-```
-
-在这个例子中，立即执行的函数表达式（IIFE）创建了一个闭包，使得每个回调函数都能记住其对应的 `i` 值。
 
 ## this
 
