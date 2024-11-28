@@ -281,6 +281,35 @@ this 其实也是执行上下文中的一部分，而且因为执行上下文分
 - 在默认情况下调用一个函数，其执行上下文中的 this 也是指向 window 对象
 - 使用对象来调用其内部的一个方法，该方法的 this 是指向对象本身
 
+下面这个代码打印什么？
+
+```js
+var a = 1;
+var obj = {
+  a: 2,
+  getA: function () {
+    return this.a;
+  },
+};
+console.log(obj.getA());
+```
+
+> 为什么将普通函数改成箭头函数会导致 this 的值变成 1?
+
+这是因为箭头函数和普通函数对`this`的处理方式不同：
+
+1. 普通函数的`this`是动态的，取决于函数如何被调用。当通过`obj.getA()`调用时，`this`指向`obj`对象。
+2. 箭头函数的`this`是词法作用域的，它继承自定义时所在的上下文。在全局作用域定义的箭头函数中，`this`指向全局对象（在严格模式下是`undefined`）。
+
+> 为什么箭头函数的情况下，var a 改成 let a 时，this.a 就是 undefined？
+
+因为箭头函数时， this 指向全局对象，但 let a 没有创建全局对象的属性。类似于：
+
+```js
+let b = 123;
+console.log(this.b); // undefined
+```
+
 如何改变 this 的指向？使用函数的 call，apply，bind 属性。
 
 ## 总结
