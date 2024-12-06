@@ -226,12 +226,12 @@ location ~* ^/444/AAA.*\.html$ {
 
 - `location = /aaa` 是精确匹配 /aaa 的路由。
 - `location /bbb` 是前缀匹配 /bbb 的路由。
-- `location ~ /ccc.*.html` 是正则匹配。可以再加个 * 表示不区分大小写 location ~* /ccc.*.html
+- `location ~ /ccc.*.html` 是正则匹配。可以再加个 _ 表示不区分大小写 location ~_ /ccc.\*.html
 - `location ^~ /ddd` 是前缀匹配，但是优先级更高。
 
 这 4 种语法的优先级是这样的：
 
-精确匹配（=） > 高优先级前缀匹配（^~） > 正则匹配（～ ~*） > 普通前缀匹配
+精确匹配（=） > 高优先级前缀匹配（^~） > 正则匹配（～ ~\*） > 普通前缀匹配
 
 更多参考：[https://z.itpub.net/article/detail/03489CAF30DD7EB79B9E239E941FA82D](https://z.itpub.net/article/detail/03489CAF30DD7EB79B9E239E941FA82D)
 
@@ -341,30 +341,34 @@ Nginx 设置缓存有两种方式：
 - `proxy_cache_path` 和 `proxy_cache`
 - `Cache-Control` 和 `Pragma`
 
-**一般来说，由服务器设置缓存即可，nginx 代理缓存可以不设置。**
-
 > 参考：[https://www.cnblogs.com/itzgr/p/13321980.html](https://www.cnblogs.com/itzgr/p/13321980.html)
+
+**SPA 最佳实践**
+
+1、nginx 缓存前端打包的静态资源：`index.html`不缓存，确保用户获取的是最新版本。CSS、JS、图片等资源，使用长期缓存，或者不设置缓存（因为都有 hash，所以不会导致用户加载旧版本）
+
+2、接口的内容是否缓存，由后端管理。
 
 ### 跨域配置
 
 ```html
 <script>
   let myHeaders = new Headers({
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   });
 
-  fetch("http://101.200.146.230:4444/test.json", {
-    method: "GET",
+  fetch('http://101.200.146.230:4444/test.json', {
+    method: 'GET',
     headers: myHeaders,
-    mode: "cors",
+    mode: 'cors',
   })
     .then((response) => {
-      console.log("response.json==>", response.json());
+      console.log('response.json==>', response.json());
       return response.json();
     })
-    .then((data) => console.log("test.json ==>", data))
-    .catch((err) => console.log("fetch失败", err));
+    .then((data) => console.log('test.json ==>', data))
+    .catch((err) => console.log('fetch失败', err));
 </script>
 ```
 
@@ -387,7 +391,7 @@ Nginx 设置缓存有两种方式：
 
 ::: info 💡 为什么要发起预检请求 ？
 
-[《关于 preflight request》](https://blog.csdn.net/mym940725/article/details/79506994 "《关于preflight request》") 解释的比较清楚，目前浏览器限制跨域的方式主要有两种
+[《关于 preflight request》](https://blog.csdn.net/mym940725/article/details/79506994 '《关于preflight request》') 解释的比较清楚，目前浏览器限制跨域的方式主要有两种
 
 1. 浏览器限制发起跨域请求
 2. 跨域请求可以正常发起，但是返回的结果被浏览器拦截
@@ -396,7 +400,7 @@ Nginx 设置缓存有两种方式：
 
 参考资料：
 
-- [https://blog.csdn.net/zimuKobby/article/details/108389410](https://blog.csdn.net/zimuKobby/article/details/108389410 "https://blog.csdn.net/zimuKobby/article/details/108389410")
+- [https://blog.csdn.net/zimuKobby/article/details/108389410](https://blog.csdn.net/zimuKobby/article/details/108389410 'https://blog.csdn.net/zimuKobby/article/details/108389410')
 - [nginx 优化跨域的 OPTIONS 请求](https://www.imqianduan.com/nginx/preflight-options.html)
 
 :::
@@ -463,7 +467,7 @@ server {
 
 总结：
 
-正向代理与反向代理：[https://juejin.cn/post/7095321237122990116](https://juejin.cn/post/7095321237122990116 "https://juejin.cn/post/7095321237122990116")
+正向代理与反向代理：[https://juejin.cn/post/7095321237122990116](https://juejin.cn/post/7095321237122990116 'https://juejin.cn/post/7095321237122990116')
 
 正向代理是**代理客户端**，为客户端收发请求，使真实客户端对服务器不可见。
 
@@ -1072,7 +1076,7 @@ http {
 #### 参考文档
 
 - nginx 中文文档：[https://docshome.gitbook.io/nginx-docs/](https://docshome.gitbook.io/nginx-docs/)
-- location 匹配规则：[https://www.cnblogs.com/woshimrf/p/nginx-config-location.html](https://www.cnblogs.com/woshimrf/p/nginx-config-location.html "https://www.cnblogs.com/woshimrf/p/nginx-config-location.html")
+- location 匹配规则：[https://www.cnblogs.com/woshimrf/p/nginx-config-location.html](https://www.cnblogs.com/woshimrf/p/nginx-config-location.html 'https://www.cnblogs.com/woshimrf/p/nginx-config-location.html')
 - [结合 Docker，快速掌握 Nginx 2 大核心用法——神光](https://mp.weixin.qq.com/s/DAIbd01AlHWnAna7WFMjig)
 
 ### TY-Store 示例
@@ -1228,9 +1232,9 @@ http {
 
 ## Nginx 可视化配置
 
-工具：[https://github.com/digitalocean/nginxconfig.io](https://github.com/digitalocean/nginxconfig.io "https://github.com/digitalocean/nginxconfig.io")
+工具：[https://github.com/digitalocean/nginxconfig.io](https://github.com/digitalocean/nginxconfig.io 'https://github.com/digitalocean/nginxconfig.io')
 
 ## 进阶学习资料
 
 - [一个前端必会的 Nginx 免费教程 (共 11 集)](https://jspang.com/article/39)
-- 极客时间：[Nginx 核心知识 150 讲](https://time.geekbang.org/course/intro/100020301?tab=intro "Nginx 核心知识 150 讲")
+- 极客时间：[Nginx 核心知识 150 讲](https://time.geekbang.org/course/intro/100020301?tab=intro 'Nginx 核心知识 150 讲')
