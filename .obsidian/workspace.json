@@ -11,8 +11,14 @@
             "id": "89f8fd08f86ca9d0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "docs/AI+前端/AI+前端.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "AI+前端"
             }
           }
         ]
@@ -35,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
             }
           },
           {
@@ -50,7 +58,9 @@
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
             }
           },
           {
@@ -58,7 +68,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
             }
           }
         ]
@@ -81,15 +93,17 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/大厂晋升指南/学习方法.md",
+                "file": "docs/AI+前端/AI+前端.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              }
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "AI+前端 的反向链接列表"
             }
           },
           {
@@ -98,10 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/大厂晋升指南/学习方法.md",
+                "file": "docs/AI+前端/AI+前端.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "AI+前端 的出链列表"
             }
           },
           {
@@ -112,7 +128,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
             }
           },
           {
@@ -121,16 +139,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/大厂晋升指南/学习方法.md"
-              }
+                "file": "docs/AI+前端/AI+前端.md"
+              },
+              "icon": "lucide-list",
+              "title": "AI+前端 的大纲"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 237.5
+    "width": 238.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -143,8 +162,10 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "972a9134f92587d1",
+  "active": "7e6c1fd667903e53",
   "lastOpenFiles": [
+    "docs/AI+前端/AI+前端.md",
+    "docs/AI+前端",
     "docs/重学前端/JavaScript篇.md",
     "docs/重学前端/前端的学习路线与方法.md",
     "Obsidian使用技巧.md",
@@ -166,7 +187,6 @@
     "docs/webpack通关秘籍/file/webpack.config3.js",
     "docs/webpack通关秘籍/file/webpack.config2.js",
     "docs/webpack通关秘籍/file/webpack.config.js",
-    "docs/webpack通关秘籍/file/webpack5-prod.js",
     "docs/webpack通关秘籍/webpack常用配置.md",
     "docs/webpack通关秘籍/images/img-20240529190535.png",
     "docs/webpack通关秘籍/images/img-20240529190532.png",
@@ -190,7 +210,6 @@
     "node_modules/cross-spawn/README.md",
     "node_modules/cross-env/README.md",
     "node_modules/cross-env/CHANGELOG.md",
-    "node_modules/cross-spawn/CHANGELOG.md",
-    "node_modules/which/README.md"
+    "node_modules/cross-spawn/CHANGELOG.md"
   ]
 }
