@@ -1725,3 +1725,5 @@ vscode — 终端 — 运行任务 — 监视 tsconfig.json 即可。
 7、[深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
 
 8、[TypeScript 代码整洁之道](https://github.com/pipiliang/clean-code-typescript)
+
+9、[「1.9W 字总结」一份通俗易懂的 TS 教程，入门 + 实战！](https://juejin.cn/post/7068081327857205261)

@@ -11,14 +11,10 @@
             "id": "89f8fd08f86ca9d0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/AI+前端/AI+前端.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "AI+前端"
+              "title": "新标签页"
             }
           }
         ]
@@ -93,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/AI+前端/AI+前端.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -103,7 +98,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "AI+前端 的反向链接列表"
+              "title": "反向链接"
             }
           },
           {
@@ -112,12 +107,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/AI+前端/AI+前端.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "AI+前端 的出链列表"
+              "title": "出链"
             }
           },
           {
@@ -162,8 +156,27 @@
       "oz-clear-unused-images:Clear Unused Images": false
     }
   },
-  "active": "7e6c1fd667903e53",
+  "active": "972a9134f92587d1",
   "lastOpenFiles": [
+    "docs/个人成长/20-如何学习一门知识(大圣).md",
+    "docs/个人成长/images/Untitled 8.png",
+    "docs/个人成长/images/Untitled 7.png",
+    "docs/个人成长/images/Untitled 6.png",
+    "docs/个人成长/images/Untitled 5.png",
+    "docs/个人成长/images/Untitled 4.png",
+    "docs/个人成长/images/Untitled 9.png",
+    "docs/个人成长/images/Untitled 3.png",
+    "docs/个人成长/images",
+    "docs/个人成长/20-如何学习一门知识-大圣.md",
+    "docs/个人成长/10-如何学习一门技术.md",
+    "docs/个人成长/如何学习一门知识-大圣 9c7f80467cb041e9a6ec561b4a51d4cc.md",
+    "docs/个人成长/如何学习一门技术 57924471866c42829ea7ab82fc739e7e.md",
+    "docs/个人成长/1-前端敏捷学习法.md",
+    "docs/个人成长/1-前端学习方法.md",
+    "docs/个人成长",
+    "docs/代码质量/10-前端监控.md",
+    "docs/代码质量/1-单元测试.md",
+    "docs/代码质量",
     "docs/AI+前端/AI+前端.md",
     "docs/AI+前端",
     "docs/重学前端/JavaScript篇.md",
@@ -184,32 +197,13 @@
     "docs/webpack通关秘籍/file/全量配置模板/webpack.config.js",
     "docs/webpack通关秘籍/file/全量配置模板",
     "docs/webpack通关秘籍/file/新建文件夹",
-    "docs/webpack通关秘籍/file/webpack.config3.js",
-    "docs/webpack通关秘籍/file/webpack.config2.js",
-    "docs/webpack通关秘籍/file/webpack.config.js",
     "docs/webpack通关秘籍/webpack常用配置.md",
     "docs/webpack通关秘籍/images/img-20240529190535.png",
     "docs/webpack通关秘籍/images/img-20240529190532.png",
     "docs/webpack通关秘籍/images/img-20240528160554.png",
-    "docs/webpack通关秘籍/images/img-20240528090589.png",
     "docs/webpack通关秘籍/webpack编写loader和plugin.md",
     "docs/webpack通关秘籍/webpack5新特性.md",
     "docs/webpack通关秘籍/webpack构建原理.md",
-    "docs/webpack通关秘籍/images/img-20240526150559.png",
-    "docs/webpack通关秘籍/index.md",
-    "docs/webpack通关秘籍/学什么.md",
-    "docs/webpack通关秘籍/images/img-20240525170599.png",
-    "docs/webpack通关秘籍/images/img-20240525150533.png",
-    "docs/webpack通关秘籍/images/img-20240525150503.png",
-    "docs/webpack通关秘籍/images/img-20240525150546.png",
-    "docs/webpack通关秘籍/images/img-20240525150597.png",
-    "docs/engineer/vue3-template/format.md",
-    "docs/10x程序员工作法/index.md",
-    "docs/engineer/vue3-component/优先使用webp图片.md",
-    "docs/性能优化/BlueLink项目打包体积优化.md",
-    "node_modules/cross-spawn/README.md",
-    "node_modules/cross-env/README.md",
-    "node_modules/cross-env/CHANGELOG.md",
-    "node_modules/cross-spawn/CHANGELOG.md"
+    "docs/webpack通关秘籍/index.md"
   ]
 }

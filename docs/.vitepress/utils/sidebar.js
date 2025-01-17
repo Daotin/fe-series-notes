@@ -7,6 +7,12 @@
  * xxx:序号
  * yyy:sidebar显示的文件名
  * zzz(可选)：表示分组，未填会显示默认分组
+ *
+ * 示例：
+ * 10-测试1.md
+ * 2-测试2.md
+ * 300-测试3.md
+ * 6-测试6-分组1.md
  */
 
 const DefaultGroupName = '默认分组';
@@ -85,7 +91,7 @@ export function createSideBar(commonPath) {
           };
         }),
       };
-      // console.log('⭐obj==>', obj);
+      console.log('⭐obj==>', obj);
       sideBars.push(obj);
     }
   }

@@ -20,7 +20,7 @@ git commit -m 'deploy'
 # if you are deploying to https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 # just a example, please change the follow line with your github account!!!
- git push -f https://github.com/Daotin/blog.git main:gh-pages
+ git push -f https://github.com/Daotin/fe-series-notes.git main:gh-pages
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
