@@ -10,8 +10,8 @@
     "docs:serve": "vitepress serve docs --port 3001"
   },
   "engines": {
-    "yarn": "^1.22.19",
-    "npm": "please-use-yarn"
+    "node": ">=16.0.0",
+    "yarn": ">=1.22.0"
   },
   "devDependencies": {
     "flexsearch": "^0.7.31",

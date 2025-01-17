@@ -125,19 +125,19 @@ export default defineConfig({
           },
         ],
       },
-      {
-        text: '📚 个人成长',
-        items: [
-          {
-            text: '📖 个人成长',
-            link: '/个人成长/',
-          },
-          {
-            text: '📝 博客',
-            link: 'https://daotin.github.io/',
-          },
-        ],
-      },
+      // {
+      //   text: '📚 个人成长',
+      //   items: [
+      //     {
+      //       text: '📖 个人成长',
+      //       link: '/个人成长/',
+      //     },
+      //     {
+      //       text: '📝 博客',
+      //       link: 'https://daotin.github.io/',
+      //     },
+      //   ],
+      // },
       {
         text: '🌐 Blog',
         link: 'https://daotin.github.io/',
@@ -279,7 +279,7 @@ export default defineConfig({
           ],
         },
       ],
-      '/个人成长/': createSideBar('个人成长'),
+      // '/个人成长/': createSideBar('个人成长'),
     },
 
     // 目录显示
