@@ -4,9 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "preinstall": "npx only-allow yarn",
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "docs:serve": "vitepress serve docs --port 3001"
+  },
+  "engines": {
+    "yarn": "^1.22.19",
+    "npm": "please-use-yarn"
   },
   "devDependencies": {
     "flexsearch": "^0.7.31",
